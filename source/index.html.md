@@ -91,7 +91,7 @@ api.kittens.get()
 
 ```shell
 curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeowtest"
+  -H "Authorization: meowmeowmeowte"
 ```
 
 ```javascript
