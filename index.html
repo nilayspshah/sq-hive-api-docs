@@ -291,7 +291,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -303,6 +303,8 @@
         <div class="lang-selector">
               <a href="#" data-language-name="ruby">Ruby</a>
               <a href="#" data-language-name="python">Python</a>
+              <a href="#" data-language-name="java">Java</a>
+              <a href="#" data-language-name="javascript">Javascript</a>
         </div>
       <ul id="toc" class="toc-list-h1">
           <li>
@@ -326,10 +328,10 @@
             <a href="#authentication-2" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#instrument-update-messages" class="toc-h1 toc-link" data-title="Instrument Update Messages">Instrument Update Messages</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#get-instrument-update-messages" class="toc-h2 toc-link" data-title="Get Instrument Update Messages">Get Instrument Update Messages</a>
                   </li>
                   <li>
                     <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
@@ -423,7 +425,7 @@ curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='instrument-update-messages'>Instrument Update Messages</h1><h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -431,7 +433,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/api/v1/sqhive/instrumentUpdates"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeowte"</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
 
@@ -441,26 +443,102 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113564166804304"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amber Enterprises India Ltd"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Restructuring"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intimation on pronouncement of the order dated 11 June 2024 (uploaded on website of Hon''ble NCLT on 13 June 2024) under first motion application bearing Company Application No. (CAA)67(MB)2024 ...."</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"540902"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amber Enterprises India Ltd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AMBER"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE371P01015"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/4PRQX"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORPORATE_ANNOUNCEMENT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292418</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292420</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113559821504865"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amber Enterprises India Ltd"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Restructuring"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intimation on pronouncement of the order dated 11 June 2024 (uploaded on website of Hon''ble NCLT on 13 June 2024) under first motion application bearing Company Application No. (CAA)67(MB)2024 ...."</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"540902"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amber Enterprises India Ltd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AMBER"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE371P01015"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/SIKoq"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORPORATE_ANNOUNCEMENT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292417</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292419</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113551676169507"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore investment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543396"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYTM"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE982J01020"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/e31EG"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERAL_NEWS"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292415</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292417</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scrape_moneycontrol_news_business_companies"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"pageable"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"empty"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sorted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unsorted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pageNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"paged"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unpaged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">347207</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">115736</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"empty"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sorted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unsorted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"first"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"numberOfElements"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"empty"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all instrument updates fittng your query description. Results are returned in paginated formate.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/api/v1/sqhive/instrumentUpdates</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -470,14 +548,39 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>pageNo</td>
+<td>0</td>
+<td>change pageNo for next set of results fitting your query description</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>pageSize</td>
+<td>200</td>
+<td>No of results to be returned in a single page. You can fetch more results by calling for the next <code>pageNo</code>. Maximum value of <code>pageSize</code> is 1000</td>
+</tr>
+<tr>
+<td>sortDirection</td>
+<td>DESC</td>
+<td>Direction for the sorting of messages wth respect to the time when the message was created. <code>DESC</code> will return the results with the latest update messages at the top. Possible values (<code>ASC</code>, <code>DESC</code>)</td>
+</tr>
+<tr>
+<td>fromTime</td>
+<td>-</td>
+<td>Used when you need updates within a time range. <code>toTime</code> query must also be present if <code>fromTime</code> is mentioned</td>
+</tr>
+<tr>
+<td>toTime</td>
+<td>-</td>
+<td>Used when you need updates within a time range. <code>fromTime</code> query must also be present if <code>toTime</code> is mentioned</td>
+</tr>
+<tr>
+<td>messageId</td>
+<td>-</td>
+<td>Used to fetch all messages created after a <code>messageId</code>. Useful when you have processed messages uptil a certain message and now need to process messages after it. <code>expression</code> query parameter is control this behaviour. If <code>expression</code> value is not passed, By default all messages after a message are returned i.e. <code>expression</code> will be considered to be GT.</td>
+</tr>
+<tr>
+<td>expression</td>
+<td>-</td>
+<td>Used in conjuction with <code>messageId</code>. Controls the behviour of wether you want to get messages created after a given <code>messageId</code> or before. Possible values: (<code>GT</code>,<code>GOE</code>,<code>LT</code>,<code>LOE</code>,<code>EQ</code>); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of <code>expression</code> is passed without <code>messageId</code> , it will be ignored.</td>
 </tr>
 </tbody></table>
 
@@ -572,6 +675,8 @@ Remember — a happy kitten is an authenticated kitten!
           <div class="lang-selector">
                 <a href="#" data-language-name="ruby">Ruby</a>
                 <a href="#" data-language-name="python">Python</a>
+                <a href="#" data-language-name="java">Java</a>
+                <a href="#" data-language-name="javascript">Javascript</a>
           </div>
       </div>
     </div>
