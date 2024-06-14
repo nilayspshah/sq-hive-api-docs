@@ -1,5 +1,5 @@
 ---
-title: Sample API v1
+title: SQ Hive API Documentation
 language_tabs:
   - ruby: Ruby
   - python: Python
@@ -26,7 +26,9 @@ generator: widdershins v4.0.1
 
 Base URLs:
 
-* <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a>
+Staging: * <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a>
+
+Live: * <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a>
 
 # Authentication
 
@@ -56,16 +58,11 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the SQ Hive API
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
 # Authentication
 
@@ -126,7 +123,7 @@ api.kittens.get()
 ```
 
 ```shell
-curl "http://scoutquest-backend-service-staging.fundsmap.com/api/v1/sqhive/instrumentUpdates" \
+curl "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates" \
   -H "Authorization: meowmeowmeowte"
 ```
 
@@ -141,7 +138,7 @@ let kittens = api.kittens.get();
 
 ```json
 {
-    "content": [
+    "instrumentUpdateMessages": [
         {
             "id": "589113564166804304",
             "title": "Amber Enterprises India Ltd",
@@ -206,31 +203,9 @@ let kittens = api.kittens.get();
             "filterCategoryId": "scrape_moneycontrol_news_business_companies"
         }
     ],
-    "pageable": {
-        "sort": {
-            "empty": false,
-            "sorted": true,
-            "unsorted": false
-        },
-        "offset": 0,
-        "pageNumber": 0,
-        "pageSize": 3,
-        "paged": true,
-        "unpaged": false
-    },
-    "last": false,
-    "totalElements": 347207,
-    "totalPages": 115736,
-    "size": 3,
-    "number": 0,
-    "sort": {
-        "empty": false,
-        "sorted": true,
-        "unsorted": false
-    },
-    "first": true,
-    "numberOfElements": 3,
-    "empty": false
+     "total-items": 9984,
+     "current-page": 0,
+    "total-pages": 3328
 }
 ```
 
@@ -238,7 +213,7 @@ This endpoint retrieves all instrument updates fittng your query description. Re
 
 ### HTTP Request
 
-`GET http://scoutquest-backend-service-staging.fundsmap.com/api/v1/sqhive/instrumentUpdates`
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates`
 
 ### Query Parameters
 
@@ -257,106 +232,31 @@ expression | - | Used in conjuction with `messageId`. Controls the behviour of w
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-## Get a Specific Kitten
+### Response Object
+The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used 
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
+#### Instrument Update Messages
+Field | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+id | ID of the instrument update message
+title | Can be thought of as the heading, In most cases gives the Long Name of the company
+description | Can be thought of as the sub-heading. In most cases it gives the type of the update
+content | This field has the details about the update
+scripDetails.bseScripCode | Gives BSE scrip code of the company if present, else null
+scripDetails.scripName | Gives the long scrip name 
+scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
+scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
+scripDetails.isin | Gives ISIN the company
+linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
+updateType | Type of the Update. Possible values: TODO
+creationTime | Creation time of the update in epoch format
+lastUpdateTime | TODO Remove
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: TODO
+filterCategoryId | TODO Remove
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
+#### Pagination Related fields
+Field | Description
 --------- | -----------
-ID | The ID of the kitten to delete
+currentPage | Current Page No, starts with 0
+totalItems | Total items(instrumentUpdateMessages) available for the given query 
+totalPages | Total pages for the available result
