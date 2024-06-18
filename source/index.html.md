@@ -316,7 +316,7 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ### Update Type : BULK_BLOCK 
 
 > Example for Update Type : BULK_BLOCK:
-```
+```json
 {
             "id": "590882329969555364",
             "title": "Shriram Finance Limited",
@@ -338,10 +338,10 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
         }
 ```  
 
-### Update Type : ANALYTICAL_UPDATE 
+### Update Type : CORPORATE_ANNOUNCEMENT 
 
-> Example for Update Type : ANALYTICAL_UPDATE:
-```
+> Example for Update Type : CORPORATE_ANNOUNCEMENT
+```json
 {
             "id": "590882329969555364",
             "title": "Shriram Finance Limited",
@@ -363,3 +363,76 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
         }
 ```  
 
+### Update Type : ANALYST_VIEWS 
+
+> Example for Update Type : ANALYST_VIEWS
+```json
+{}
+```  
+
+### Update Type : CONCALL_HIGHLIGHTS 
+
+> Example for Update Type : CONCALL_HIGHLIGHTS
+```json
+{}
+```  
+
+### Update Type : CONCALL_SUMMARY 
+
+> Example for Update Type : CONCALL_SUMMARY
+```json
+{}
+```  
+
+### Update Type : FUTURE_OUTLOOK 
+
+> Example for Update Type : FUTURE_OUTLOOK
+```json
+{}
+```  
+
+### Update Type : GENERAL_NEWS 
+
+> Example for Update Type : GENERAL_NEWS
+```json
+ {
+            "id": "590874291145537518",
+            "title": "M&M",
+            "description": "Video feed - CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
+            "content": "CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
+            "scripDetails": {
+                "bseScripCode": "509196",
+                "scripName": "M&M",
+                "bseTickr": "MMRUBBR-B",
+                "nseTickr": null,
+                "isin": "INE159E01026"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/d1d04"
+            },
+            "updateType": "GENERAL_NEWS",
+            "creationTime": 1718712208,
+            "filterCategory": "MEDIA_COVERAGE"
+        },
+```  
+
+### Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT 
+
+> Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
+```json
+ {}
+```  
+
+### Update Type : TECHNICAL_ANALYSIS 
+
+> Example for Update Type : TECHNICAL_ANALYSIS
+```json
+ {}
+```  
+
+### Update Type : TWEET 
+
+> Example for Update Type : TWEET
+```json
+ {}
+```  
