@@ -299,7 +299,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1e815a84.png" class="logo" alt="" />
+      <img src="images/logo-108e5a75.png" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="ruby">Ruby</a>
               <a href="#" data-language-name="python">Python</a>
@@ -309,6 +309,11 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#sample-api" class="toc-h1 toc-link" data-title="SQ Hive API Documentation">SQ Hive API Documentation</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#base-urls" class="toc-h2 toc-link" data-title="Base URLs:">Base URLs:</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#sq-hive" class="toc-h1 toc-link" data-title="SQ Hive">SQ Hive</a>
@@ -353,12 +358,10 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
+<h2 id='base-urls'>Base URLs:</h2>
+<p>Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a></p>
 
-<p>Base URLs:</p>
-
-<p>Staging: * <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a></p>
-
-<p>Live: * <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
+<p>Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
 <h1 id='sq-hive'>SQ Hive</h1><h2 id='introduction'>Introduction</h2>
 <p>SQ Hive allows developers to access to capital market stock specific news at lightening speed via Webhooks and API. </p>
 <h2 id='characteristics'>Characteristics</h2>
@@ -490,7 +493,7 @@ You must replace <code>yourapikeyhere</code> with your personal API key.
             </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113551676169507"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore investment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543396"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
@@ -565,86 +568,31 @@ Remember — a happy kitten is an authenticated kitten!
 </aside>
 <h3 id='response-object'>Response Object</h3>
 <p>The update will have 4 main components - <code>title</code>, <code>description</code>, <code>content</code>, <code>linkDetail.shortLink</code> which can be used </p>
-<h4 id='instrument-update-messages'>Instrument Update Messages</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>ID of the instrument update message</td>
-</tr>
-<tr>
-<td>title</td>
-<td>Can be thought of as the heading, In most cases gives the Long Name of the company</td>
-</tr>
-<tr>
-<td>description</td>
-<td>Can be thought of as the sub-heading. In most cases it gives the type of the update</td>
-</tr>
-<tr>
-<td>content</td>
-<td>This field has the details about the update</td>
-</tr>
-<tr>
-<td>scripDetails.bseScripCode</td>
-<td>Gives BSE scrip code of the company if present, else null</td>
-</tr>
-<tr>
-<td>scripDetails.scripName</td>
-<td>Gives the long scrip name</td>
-</tr>
-<tr>
-<td>scripDetails.bseTickr</td>
-<td>Gives BSE Tickr of the company if present, else null</td>
-</tr>
-<tr>
-<td>scripDetails.nseTickr</td>
-<td>Gives NSE Tickr of the company if present, else null</td>
-</tr>
-<tr>
-<td>scripDetails.isin</td>
-<td>Gives ISIN the company</td>
-</tr>
-<tr>
-<td>linkDetail.shortLink</td>
-<td>Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish</td>
-</tr>
-<tr>
-<td>updateType</td>
-<td>Type of the Update. Possible values: TODO</td>
-</tr>
-<tr>
-<td>creationTime</td>
-<td>Creation time of the update in epoch format</td>
-</tr>
-<tr>
-<td>filterCategory</td>
-<td>This field can be used to filter out certain kinds of update. Possible Values: TODO</td>
-</tr>
-</tbody></table>
-<h4 id='pagination-related-fields'>Pagination Related fields</h4>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>currentPage</td>
-<td>Current Page No, starts with 0</td>
-</tr>
-<tr>
-<td>totalItems</td>
-<td>Total items(instrumentUpdateMessages) available for the given query</td>
-</tr>
-<tr>
-<td>totalPages</td>
-<td>Total pages for the available result</td>
-</tr>
-</tbody></table>
+
+<ul>
+<li><p>Instrument Update Message Related Fields
+Field | Description
+--------- | -----------
+id | ID of the instrument update message
+title | Can be thought of as the heading, In most cases gives the Long Name of the company
+description | Can be thought of as the sub-heading. In most cases it gives the type of the update
+content | This field has the details about the update
+scripDetails.bseScripCode | Gives BSE scrip code of the company if present, else null
+scripDetails.scripName | Gives the long scrip name 
+scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
+scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
+scripDetails.isin | Gives ISIN the company
+linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
+updateType | Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>.
+creationTime | Creation time of the update in epoch format
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code></p></li>
+<li><p>Pagination Related fields
+Field | Description
+--------- | -----------
+currentPage | Current Page No, starts with 0
+totalItems | Total items(instrumentUpdateMessages) available for the given query 
+totalPages | Total pages for the available result</p></li>
+</ul>
 
       </div>
       <div class="dark-box">
