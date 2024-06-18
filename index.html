@@ -291,7 +291,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;java&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -301,20 +301,13 @@
     <div class="toc-wrapper">
       <img src="images/logo-108e5a75.png" class="logo" alt="" />
         <div class="lang-selector">
+              <a href="#" data-language-name="shell">Shell</a>
               <a href="#" data-language-name="ruby">Ruby</a>
               <a href="#" data-language-name="python">Python</a>
               <a href="#" data-language-name="java">Java</a>
               <a href="#" data-language-name="javascript">Javascript</a>
         </div>
       <ul id="toc" class="toc-list-h1">
-          <li>
-            <a href="#sample-api" class="toc-h1 toc-link" data-title="SQ Hive API Documentation">SQ Hive API Documentation</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#base-urls" class="toc-h2 toc-link" data-title="Base URLs:">Base URLs:</a>
-                  </li>
-              </ul>
-          </li>
           <li>
             <a href="#sq-hive" class="toc-h1 toc-link" data-title="SQ Hive">SQ Hive</a>
               <ul class="toc-list-h2">
@@ -339,10 +332,21 @@
             <a href="#api" class="toc-h1 toc-link" data-title="API">API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#base-urls" class="toc-h2 toc-link" data-title="Base URLs:">Base URLs:</a>
+                  </li>
+                  <li>
                     <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
                     <a href="#get-instrument-update-messages" class="toc-h2 toc-link" data-title="Get Instrument Update Messages">Get Instrument Update Messages</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#portal" class="toc-h2 toc-link" data-title="Portal">Portal</a>
                   </li>
               </ul>
           </li>
@@ -353,19 +357,14 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="sample-api">SQ Hive API Documentation</h1>
-
+        <h1 id='sq-hive'>SQ Hive</h1>
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
-<h2 id='base-urls'>Base URLs:</h2>
-<p>Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a></p>
-
-<p>Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
-<h1 id='sq-hive'>SQ Hive</h1><h2 id='introduction'>Introduction</h2>
+<h2 id='introduction'>Introduction</h2>
 <p>SQ Hive allows developers to access to capital market stock specific news at lightening speed via Webhooks and API. </p>
 <h2 id='characteristics'>Characteristics</h2>
-<p>Updates provided by us has the following characteristic, which we believe is our strength.</p>
+<p>Updates provided by us has the following characteristics:</p>
 
 <table><thead>
 <tr>
@@ -379,7 +378,7 @@
 </tr>
 <tr>
 <td><strong>Relevant</strong></td>
-<td>Through our proprietry algorithms, We filter out most of the junk news.</td>
+<td>Through our proprietry algorithms, We filter out most of the non-relevant news.</td>
 </tr>
 <tr>
 <td><strong>Actionable</strong></td>
@@ -391,7 +390,7 @@
 </tr>
 <tr>
 <td><strong>No Stock Left Behind</strong></td>
-<td>Updates are sent for all BSE listed entities.</td>
+<td>Updates are sent for all mainboard BSE listed entities.</td>
 </tr>
 <tr>
 <td><strong>Comprehensive</strong></td>
@@ -418,7 +417,11 @@ Use case is upto you, however it is mandatory to attribute ScoutQuest </p>
 <li>Each Update should have a <code>Powered by ScoutQuest.in</code> text at the bottom of the message, where <code>ScoutQuest.in</code> should be clickable</li>
 <li>For Each update the CTA / More Details Link should be the <em>shortLink</em> provided in the update message.</li>
 </ol>
-<h1 id='api'>API</h1><h2 id='authentication'>Authentication</h2>
+<h1 id='api'>API</h1><h2 id='base-urls'>Base URLs:</h2>
+<p>Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a></p>
+
+<p>Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
+<h2 id='authentication'>Authentication</h2>
 <p>SQ Hive uses API keys to allow access to the API. You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.</p>
 
 <p>SQ Hive expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
@@ -428,20 +431,74 @@ Use case is upto you, however it is mandatory to attribute ScoutQuest </p>
 <aside class="notice">
 You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
-<h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"net/http"</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="p">)</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeowte"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"x-api-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"yourapikeyhere"</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">defaultQuery</span> <span class="o">=</span> <span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span>
+
+<span class="n">timeRangeQuery</span> <span class="o">=</span> <span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?fromTime=1718709015&amp;toTime=1718190615"</span>
+
+<span class="n">messageIdQuery</span> <span class="o">=</span> <span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?messageId=590860706281420591&amp;expression=GT"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'yourapikeyhere'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: yourapikeyhere'</span>
+
+curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?fromTime=1718709015&amp;toTime=1718190615'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: yourapikeyhere'</span>
+
+curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?messageId=590860706281420591&amp;expression=GT'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: yourapikeyhere'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">x-api-key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">yourapikeyhere</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -583,9 +640,9 @@ scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
 scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
 scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
-updateType | Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>.
+updateType | Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>. Read More in the example section below. New Update types can be introduced without prior notice. Old Update Types will not be altered without prior notice.
 creationTime | Creation time of the update in epoch format
-filterCategory | This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code></p></li>
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>. New New FilterCategories can be introduced without prior notice. Old FilterCategories will not be altered without prior notice.</p></li>
 <li><p>Pagination Related fields
 Field | Description
 --------- | -----------
@@ -593,10 +650,53 @@ currentPage | Current Page No, starts with 0
 totalItems | Total items(instrumentUpdateMessages) available for the given query 
 totalPages | Total pages for the available result</p></li>
 </ul>
+<h3 id='postman'>Postman</h3>
+<p>View these calls <a href="https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&amp;entityType=collection">in postman</a></p>
+<h3 id='message-type-examples'>Message Type Examples</h3>
+<details>
+
+  <summary>Update Type : ANALYST_VIEWS</summary>
+
+```
+{
+            "id": "590882329969555364",
+            "title": "Shriram Finance Limited",
+            "description": "💎Block Deal in Shriram Finance Limited on 2024-06-18",
+            "content": "➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n",
+            "scripDetails": {
+                "bseScripCode": "511218",
+                "scripName": "Shriram Finance Limited",
+                "bseTickr": "SHRIRAMFIN",
+                "nseTickr": "SHRIRAMFIN",
+                "isin": "INE721A01013"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/PCxmR"
+            },
+            "updateType": "BULK_BLOCK",
+            "creationTime": 1718714125,
+            "filterCategory": "KEY_UPDATE"
+        }
+```  
+</details>
+<h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
+<p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="hive-dev-portal.scoutquest.in">hive-dev-portal.scoutquest.in</a></p>
+
+<details>
+
+  <summary>Click me</summary>
+
+  | Header 1 | Header 2 |
+  | -------- | -------- |
+  | Row 1    | Row 1    |
+  | Row 2    | Row 2    |
+  
+</details>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
+                <a href="#" data-language-name="shell">Shell</a>
                 <a href="#" data-language-name="ruby">Ruby</a>
                 <a href="#" data-language-name="python">Python</a>
                 <a href="#" data-language-name="java">Java</a>
