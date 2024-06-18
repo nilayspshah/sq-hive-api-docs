@@ -731,72 +731,72 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
 <p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="hive-dev-portal.scoutquest.in">hive-dev-portal.scoutquest.in</a></p>
 <h1 id='examples'>Examples</h1><h2 id='instrument-update-messages-examples'>Instrument Update Messages Examples</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code></code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code></code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:
-<code>json
-{
-  &quot;id&quot;: &quot;590882329969555364&quot;,
-  &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
-  &quot;description&quot;: &quot;💎Block Deal in Shriram Finance Limited on 2024-06-18&quot;,
-  &quot;content&quot;: &quot;➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n&quot;,
-  &quot;scripDetails&quot;: {
-    &quot;bseScripCode&quot;: &quot;511218&quot;,
-    &quot;scripName&quot;: &quot;Shriram Finance Limited&quot;,
-    &quot;bseTickr&quot;: &quot;SHRIRAMFIN&quot;,
-    &quot;nseTickr&quot;: &quot;SHRIRAMFIN&quot;,
-    &quot;isin&quot;: &quot;INE721A01013&quot;
-  },
-  &quot;linkDetail&quot;: {
-    &quot;shortLink&quot;: &quot;https://sqst.in/PCxmR&quot;
-  },
-  &quot;updateType&quot;: &quot;BULK_BLOCK&quot;,
-  &quot;creationTime&quot;: 1718714125,
-  &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
-}
-</code>  </p>
-
-<p>Example for Update Type : CORPORATE_ANNOUNCEMENT
-<code>json
-{
-  &quot;id&quot;: &quot;590874081665218776&quot;,
-  &quot;title&quot;: &quot;KIRLOSKAR OIL ENGINES LTD.&quot;,
-  &quot;description&quot;: &quot;💼 Analyst / Institutional Meet&quot;,
-  &quot;content&quot;: &quot;Kirloskar Oil Engines Limited held a virtual meeting with Antique securities to discuss the operational overview of the company. No unpublished price sensitive information was disclosed. The meeting was in compliance with SEBI regulations.&quot;,
-  &quot;scripDetails&quot;: {
-    &quot;bseScripCode&quot;: &quot;533293&quot;,
-    &quot;scripName&quot;: &quot;KIRLOSKAR OIL ENGINES LTD.&quot;,
-    &quot;bseTickr&quot;: &quot;KIRLOSENG&quot;,
-    &quot;nseTickr&quot;: null,
-    &quot;isin&quot;: &quot;INE146L01010&quot;
-  },
-  &quot;linkDetail&quot;: {
-    &quot;shortLink&quot;: &quot;https://sqst.in/GixAV&quot;
-  },
-  &quot;updateType&quot;: &quot;CORPORATE_ANNOUNCEMENT&quot;,
-  &quot;creationTime&quot;: 1718712158,
-  &quot;filterCategory&quot;: &quot;EVENT_SCHEDULE&quot;
-}
-</code>  </p>
-
-<p>Example for Update Type : ANALYST_VIEWS
-<code>json
-{}
-</code>  </p>
-
-<p>Example for Update Type : CONCALL_HIGHLIGHTS
-<code>json
-{}
-</code>  </p>
-
-<p>Example for Update Type : CONCALL_SUMMARY
-<code>json
-{}
-</code>  </p>
-
-<p>Example for Update Type : FUTURE_OUTLOOK
-<code>json
-{}
-</code>  </p>
-
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590882329969555364"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shriram Finance Limited"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💎Block Deal in Shriram Finance Limited on 2024-06-18"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"➖ Seller(s):</span><span class="se">\n</span><span class="s2">BNP PARIBAS FINANCIAL MARKETS</span><span class="se">\n</span><span class="s2">Total Sold Qty:1,467,822</span><span class="se">\n</span><span class="s2">Total Sold Value:401.03 crores</span><span class="se">\n</span><span class="s2">➕ Buyer(s):</span><span class="se">\n</span><span class="s2">MARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND</span><span class="se">\n</span><span class="s2">Total Bought Qty:1,467,822</span><span class="se">\n</span><span class="s2">Total Bought Value:401.03 crores</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"511218"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shriram Finance Limited"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHRIRAMFIN"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHRIRAMFIN"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE721A01013"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/PCxmR"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULK_BLOCK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718714125</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEY_UPDATE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type - CORPORATE_ANNOUNCEMENT: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590874081665218776"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KIRLOSKAR OIL ENGINES LTD."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💼 Analyst / Institutional Meet"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kirloskar Oil Engines Limited held a virtual meeting with Antique securities to discuss the operational overview of the company. No unpublished price sensitive information was disclosed. The meeting was in compliance with SEBI regulations."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"533293"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KIRLOSKAR OIL ENGINES LTD."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KIRLOSENG"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE146L01010"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/GixAV"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORPORATE_ANNOUNCEMENT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718712158</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT_SCHEDULE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type : ANALYST_VIEWS</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type : CONCALL_HIGHLIGHTS</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type : CONCALL_SUMMARY</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type : FUTURE_OUTLOOK</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Example for Update Type : GENERAL_NEWS</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
@@ -820,22 +820,20 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
-<code>json
- {}
-</code>  </p>
-
-<p>Example for Update Type : TECHNICAL_ANALYSIS
-<code>json
- {}
-</code>  </p>
-
-<p>Example for Update Type : TWEET
-<code>json
- {}
-</code>  </p>
+<p>Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT</p>
 </blockquote>
-<h3 id='update-1'>Update 1</h3><h3 id='update-2'>Update 2</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type : TECHNICAL_ANALYSIS</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example for Update Type : TWEET</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></code></pre></div><h3 id='update-1'>Update 1</h3><h3 id='update-2'>Update 2</h3>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
