@@ -729,125 +729,107 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
 <p>View these calls <a href="https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&amp;entityType=collection">in postman</a></p>
 <h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
 <p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="hive-dev-portal.scoutquest.in">hive-dev-portal.scoutquest.in</a></p>
-<h1 id='examples'>Examples</h1><h2 id='instrument-update-messages-examples'>Instrument Update Messages Examples</h2><h3 id='update-type-bulk_block'>Update Type : BULK_BLOCK</h3>
+<h1 id='examples'>Examples</h1><h2 id='instrument-update-messages-examples'>Instrument Update Messages Examples</h2>
 <blockquote>
-<p>Example for Update Type : BULK_BLOCK:
+<p>The above command returns JSON structured like this:
 <code>json
 {
-            &quot;id&quot;: &quot;590882329969555364&quot;,
-            &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
-            &quot;description&quot;: &quot;💎Block Deal in Shriram Finance Limited on 2024-06-18&quot;,
-            &quot;content&quot;: &quot;➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n&quot;,
-            &quot;scripDetails&quot;: {
-                &quot;bseScripCode&quot;: &quot;511218&quot;,
-                &quot;scripName&quot;: &quot;Shriram Finance Limited&quot;,
-                &quot;bseTickr&quot;: &quot;SHRIRAMFIN&quot;,
-                &quot;nseTickr&quot;: &quot;SHRIRAMFIN&quot;,
-                &quot;isin&quot;: &quot;INE721A01013&quot;
-            },
-            &quot;linkDetail&quot;: {
-                &quot;shortLink&quot;: &quot;https://sqst.in/PCxmR&quot;
-            },
-            &quot;updateType&quot;: &quot;BULK_BLOCK&quot;,
-            &quot;creationTime&quot;: 1718714125,
-            &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
-        }
+  &quot;id&quot;: &quot;590882329969555364&quot;,
+  &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
+  &quot;description&quot;: &quot;💎Block Deal in Shriram Finance Limited on 2024-06-18&quot;,
+  &quot;content&quot;: &quot;➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n&quot;,
+  &quot;scripDetails&quot;: {
+    &quot;bseScripCode&quot;: &quot;511218&quot;,
+    &quot;scripName&quot;: &quot;Shriram Finance Limited&quot;,
+    &quot;bseTickr&quot;: &quot;SHRIRAMFIN&quot;,
+    &quot;nseTickr&quot;: &quot;SHRIRAMFIN&quot;,
+    &quot;isin&quot;: &quot;INE721A01013&quot;
+  },
+  &quot;linkDetail&quot;: {
+    &quot;shortLink&quot;: &quot;https://sqst.in/PCxmR&quot;
+  },
+  &quot;updateType&quot;: &quot;BULK_BLOCK&quot;,
+  &quot;creationTime&quot;: 1718714125,
+  &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
+}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-corporate_announcement'>Update Type : CORPORATE_ANNOUNCEMENT</h3>
-<blockquote>
+
 <p>Example for Update Type : CORPORATE_ANNOUNCEMENT
 <code>json
 {
-            &quot;id&quot;: &quot;590882329969555364&quot;,
-            &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
-            &quot;description&quot;: &quot;💎Block Deal in Shriram Finance Limited on 2024-06-18&quot;,
-            &quot;content&quot;: &quot;➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n&quot;,
-            &quot;scripDetails&quot;: {
-                &quot;bseScripCode&quot;: &quot;511218&quot;,
-                &quot;scripName&quot;: &quot;Shriram Finance Limited&quot;,
-                &quot;bseTickr&quot;: &quot;SHRIRAMFIN&quot;,
-                &quot;nseTickr&quot;: &quot;SHRIRAMFIN&quot;,
-                &quot;isin&quot;: &quot;INE721A01013&quot;
-            },
-            &quot;linkDetail&quot;: {
-                &quot;shortLink&quot;: &quot;https://sqst.in/PCxmR&quot;
-            },
-            &quot;updateType&quot;: &quot;BULK_BLOCK&quot;,
-            &quot;creationTime&quot;: 1718714125,
-            &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
-        }
+  &quot;id&quot;: &quot;590874081665218776&quot;,
+  &quot;title&quot;: &quot;KIRLOSKAR OIL ENGINES LTD.&quot;,
+  &quot;description&quot;: &quot;💼 Analyst / Institutional Meet&quot;,
+  &quot;content&quot;: &quot;Kirloskar Oil Engines Limited held a virtual meeting with Antique securities to discuss the operational overview of the company. No unpublished price sensitive information was disclosed. The meeting was in compliance with SEBI regulations.&quot;,
+  &quot;scripDetails&quot;: {
+    &quot;bseScripCode&quot;: &quot;533293&quot;,
+    &quot;scripName&quot;: &quot;KIRLOSKAR OIL ENGINES LTD.&quot;,
+    &quot;bseTickr&quot;: &quot;KIRLOSENG&quot;,
+    &quot;nseTickr&quot;: null,
+    &quot;isin&quot;: &quot;INE146L01010&quot;
+  },
+  &quot;linkDetail&quot;: {
+    &quot;shortLink&quot;: &quot;https://sqst.in/GixAV&quot;
+  },
+  &quot;updateType&quot;: &quot;CORPORATE_ANNOUNCEMENT&quot;,
+  &quot;creationTime&quot;: 1718712158,
+  &quot;filterCategory&quot;: &quot;EVENT_SCHEDULE&quot;
+}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-analyst_views'>Update Type : ANALYST_VIEWS</h3>
-<blockquote>
+
 <p>Example for Update Type : ANALYST_VIEWS
 <code>json
 {}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-concall_highlights'>Update Type : CONCALL_HIGHLIGHTS</h3>
-<blockquote>
+
 <p>Example for Update Type : CONCALL_HIGHLIGHTS
 <code>json
 {}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-concall_summary'>Update Type : CONCALL_SUMMARY</h3>
-<blockquote>
+
 <p>Example for Update Type : CONCALL_SUMMARY
 <code>json
 {}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-future_outlook'>Update Type : FUTURE_OUTLOOK</h3>
-<blockquote>
+
 <p>Example for Update Type : FUTURE_OUTLOOK
 <code>json
 {}
 </code>  </p>
+
+<p>Example for Update Type : GENERAL_NEWS</p>
 </blockquote>
-<h3 id='update-type-general_news'>Update Type : GENERAL_NEWS</h3>
-<blockquote>
-<p>Example for Update Type : GENERAL_NEWS
-<code>json
- {
-            &quot;id&quot;: &quot;590874291145537518&quot;,
-            &quot;title&quot;: &quot;M&amp;M&quot;,
-            &quot;description&quot;: &quot;Video feed - CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V&quot;,
-            &quot;content&quot;: &quot;CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V&quot;,
-            &quot;scripDetails&quot;: {
-                &quot;bseScripCode&quot;: &quot;509196&quot;,
-                &quot;scripName&quot;: &quot;M&amp;M&quot;,
-                &quot;bseTickr&quot;: &quot;MMRUBBR-B&quot;,
-                &quot;nseTickr&quot;: null,
-                &quot;isin&quot;: &quot;INE159E01026&quot;
-            },
-            &quot;linkDetail&quot;: {
-                &quot;shortLink&quot;: &quot;https://sqst.in/d1d04&quot;
-            },
-            &quot;updateType&quot;: &quot;GENERAL_NEWS&quot;,
-            &quot;creationTime&quot;: 1718712208,
-            &quot;filterCategory&quot;: &quot;MEDIA_COVERAGE&quot;
-        },
-</code>  </p>
-</blockquote>
-<h3 id='update-type-sq_spvma_intraday_volume_spurt'>Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590874291145537518"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M&amp;M"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Video feed - CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509196"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M&amp;M"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MMRUBBR-B"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE159E01026"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/d1d04"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERAL_NEWS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718712208</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
 <code>json
  {}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-technical_analysis'>Update Type : TECHNICAL_ANALYSIS</h3>
-<blockquote>
+
 <p>Example for Update Type : TECHNICAL_ANALYSIS
 <code>json
  {}
 </code>  </p>
-</blockquote>
-<h3 id='update-type-tweet'>Update Type : TWEET</h3>
-<blockquote>
+
 <p>Example for Update Type : TWEET
 <code>json
  {}
