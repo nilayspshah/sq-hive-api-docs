@@ -20,7 +20,7 @@ generator: widdershins v4.0.1
 
 ---
 
-<h1 id="sample-api">Sample API v1</h1>
+<h1 id="sample-api">SQ Hive API Documentation</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -30,81 +30,56 @@ Staging: * <a href="http://scoutquest-backend-service-staging.fundsmap.com">http
 
 Live: * <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a>
 
-# Authentication
 
-- HTTP Authentication, scheme: basic
+# SQ Hive
 
-<h1 id="sample-api-admin-marketing-controller">admin-marketing-controller</h1>
+## Introduction
+SQ Hive allows developers to access to capital market stock specific news at lightening speed via Webhooks and API. 
 
----
-title: API Reference
+## Characteristics
+Updates provided by us has the following characteristic, which we believe is our strength.
 
-language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - shell
-  - ruby
-  - python
-  - javascript
+|   |   |
+|---|---|
+|__Simple__| The language of our updates is simple as we strip out most of the jargon |
+| __Relevant__ | Through our proprietry algorithms, We filter out most of the junk news. |
+| __Actionable__ | Updates provided by us are actionable |
+|__Structured__| Based on the type of updates you can choose to define your handling. |
+| __No Stock Left Behind__ | Updates are sent for all BSE listed entities. |
+| __Comprehensive__ | Our bots listen to thousands of sources including Exchange websites, Conference Calls, Twitter, News Channels, Youtube and many more, providing a 360 degree update coverage.|
+| __Realtime__ | All of the above is done and dissimenated to you at lighning speed. |
 
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+You can view [this short video](https://www.youtube.com/watch?v=s-pPlZ263Uc&ab_channel=ScoutQuestTV) to know more.
 
-includes:
-  - errors
+## How to recieve updates?
+We provide 2 methods to recieve these updates. 
+1. Webhooks
+2. API
 
-search: true
+You can register an endpoint where you will recieve each update as and when it happens. Alternatively you can periodically poll for new updates via the API endpoint.
 
-code_clipboard: true
+## How to use these updates?
+How you use the updates is upto you. Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/persionalised news feed on your website/app etc.
+Use case is upto you, however it is mandatory to attribute ScoutQuest 
 
-meta:
-  - name: description
-    content: Documentation for the SQ Hive API
----
+## What should be format for attribution?
+1. Each Update should have a `Powered by ScoutQuest.in` text at the bottom of the message, where `ScoutQuest.in` should be clickable
+2. For Each update the CTA / More Details Link should be the *shortLink* provided in the update message.
 
-# Introduction
+# API
 
+## Authentication
 
-# Authentication
+SQ Hive uses API keys to allow access to the API. You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.
 
-> To authorize, use this code:
+SQ Hive expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`x-api-key: yourapikeyhere`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
 
-# Instrument Update Messages
 
 ## Get Instrument Update Messages
 
@@ -177,7 +152,6 @@ let kittens = api.kittens.get();
             },
             "updateType": "CORPORATE_ANNOUNCEMENT",
             "creationTime": 1718292417,
-            "lastUpdateTime": 1718292419,
             "filterCategory": "UNCLASSIFIED",
             "filterCategoryId": "-1"
         },
@@ -199,8 +173,7 @@ let kittens = api.kittens.get();
             "updateType": "GENERAL_NEWS",
             "creationTime": 1718292415,
             "lastUpdateTime": 1718292417,
-            "filterCategory": "MEDIA_COVERAGE",
-            "filterCategoryId": "scrape_moneycontrol_news_business_companies"
+            "filterCategory": "MEDIA_COVERAGE"
         }
     ],
      "total-items": 9984,
@@ -250,9 +223,7 @@ scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
 updateType | Type of the Update. Possible values: TODO
 creationTime | Creation time of the update in epoch format
-lastUpdateTime | TODO Remove
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: TODO
-filterCategoryId | TODO Remove
 
 #### Pagination Related fields
 Field | Description
