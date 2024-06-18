@@ -308,28 +308,34 @@
         </div>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#sample-api" class="toc-h1 toc-link" data-title="Sample API v1">Sample API v1</a>
+            <a href="#sample-api" class="toc-h1 toc-link" data-title="SQ Hive API Documentation">SQ Hive API Documentation</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#sample-api-admin-marketing-controller" class="toc-h1 toc-link" data-title="admin-marketing-controller">admin-marketing-controller</a>
+            <a href="#sq-hive" class="toc-h1 toc-link" data-title="SQ Hive">SQ Hive</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#content-documentation-for-the-sq-hive-api" class="toc-h2 toc-link" data-title="    content: Documentation for the SQ Hive API">    content: Documentation for the SQ Hive API</a>
+                    <a href="#introduction" class="toc-h2 toc-link" data-title="Introduction">Introduction</a>
+                  </li>
+                  <li>
+                    <a href="#characteristics" class="toc-h2 toc-link" data-title="Characteristics">Characteristics</a>
+                  </li>
+                  <li>
+                    <a href="#how-to-recieve-updates" class="toc-h2 toc-link" data-title="How to recieve updates?">How to recieve updates?</a>
+                  </li>
+                  <li>
+                    <a href="#how-to-use-these-updates" class="toc-h2 toc-link" data-title="How to use these updates?">How to use these updates?</a>
+                  </li>
+                  <li>
+                    <a href="#what-should-be-format-for-attribution" class="toc-h2 toc-link" data-title="What should be format for attribution?">What should be format for attribution?</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication-2" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#instrument-update-messages" class="toc-h1 toc-link" data-title="Instrument Update Messages">Instrument Update Messages</a>
+            <a href="#api" class="toc-h1 toc-link" data-title="API">API</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
                   <li>
                     <a href="#get-instrument-update-messages" class="toc-h2 toc-link" data-title="Get Instrument Update Messages">Get Instrument Update Messages</a>
                   </li>
@@ -342,7 +348,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="sample-api">Sample API v1</h1>
+        <h1 id="sample-api">SQ Hive API Documentation</h1>
 
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
@@ -353,67 +359,73 @@
 <p>Staging: * <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a></p>
 
 <p>Live: * <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
-<h1 id='authentication'>Authentication</h1>
-<ul>
-<li>HTTP Authentication, scheme: basic</li>
-</ul>
+<h1 id='sq-hive'>SQ Hive</h1><h2 id='introduction'>Introduction</h2>
+<p>SQ Hive allows developers to access to capital market stock specific news at lightening speed via Webhooks and API. </p>
+<h2 id='characteristics'>Characteristics</h2>
+<p>Updates provided by us has the following characteristic, which we believe is our strength.</p>
 
-<h1 id="sample-api-admin-marketing-controller">admin-marketing-controller</h1>
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Simple</strong></td>
+<td>The language of our updates is simple as we strip out most of the jargon</td>
+</tr>
+<tr>
+<td><strong>Relevant</strong></td>
+<td>Through our proprietry algorithms, We filter out most of the junk news.</td>
+</tr>
+<tr>
+<td><strong>Actionable</strong></td>
+<td>Updates provided by us are actionable</td>
+</tr>
+<tr>
+<td><strong>Structured</strong></td>
+<td>Based on the type of updates you can choose to define your handling.</td>
+</tr>
+<tr>
+<td><strong>No Stock Left Behind</strong></td>
+<td>Updates are sent for all BSE listed entities.</td>
+</tr>
+<tr>
+<td><strong>Comprehensive</strong></td>
+<td>Our bots listen to thousands of sources including Exchange websites, Conference Calls, Twitter, News Channels, Youtube and many more, providing a 360 degree update coverage.</td>
+</tr>
+<tr>
+<td><strong>Realtime</strong></td>
+<td>All of the above is done and dissimenated to you at lighning speed.</td>
+</tr>
+</tbody></table>
 
-<hr>
+<p>You can view <a href="https://www.youtube.com/watch?v=s-pPlZ263Uc&amp;ab_channel=ScoutQuestTV">this short video</a> to know more.</p>
+<h2 id='how-to-recieve-updates'>How to recieve updates?</h2>
+<p>We provide 2 methods to recieve these updates. 
+1. Webhooks
+2. API</p>
 
-<p>title: API Reference</p>
+<p>You can register an endpoint where you will recieve each update as and when it happens. Alternatively you can periodically poll for new updates via the API endpoint.</p>
+<h2 id='how-to-use-these-updates'>How to use these updates?</h2>
+<p>How you use the updates is upto you. Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/persionalised news feed on your website/app etc.
+Use case is upto you, however it is mandatory to attribute ScoutQuest </p>
+<h2 id='what-should-be-format-for-attribution'>What should be format for attribution?</h2>
+<ol>
+<li>Each Update should have a <code>Powered by ScoutQuest.in</code> text at the bottom of the message, where <code>ScoutQuest.in</code> should be clickable</li>
+<li>For Each update the CTA / More Details Link should be the <em>shortLink</em> provided in the update message.</li>
+</ol>
+<h1 id='api'>API</h1><h2 id='authentication'>Authentication</h2>
+<p>SQ Hive uses API keys to allow access to the API. You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.</p>
 
-<p>language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - shell
-  - ruby
-  - python
-  - javascript</p>
+<p>SQ Hive expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p>toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></p>
-
-<p>includes:
-  - errors</p>
-
-<p>search: true</p>
-
-<p>code_clipboard: true</p>
-
-<p>meta:
-  - name: description</p>
-<h2 id='content-documentation-for-the-sq-hive-api'>    content: Documentation for the SQ Hive API</h2><h1 id='introduction'>Introduction</h1><h1 id='authentication-2'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>x-api-key: yourapikeyhere</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
-<h1 id='instrument-update-messages'>Instrument Update Messages</h1><h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -471,7 +483,6 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
             </span><span class="p">},</span><span class="w">
             </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORPORATE_ANNOUNCEMENT"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292417</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292419</span><span class="p">,</span><span class="w">
             </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="w">
         </span><span class="p">},</span><span class="w">
@@ -493,8 +504,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
             </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERAL_NEWS"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292415</span><span class="p">,</span><span class="w">
             </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292417</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scrape_moneycontrol_news_business_companies"</span><span class="w">
+            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
      </span><span class="nl">"total-items"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
@@ -555,7 +565,7 @@ Remember — a happy kitten is an authenticated kitten!
 </aside>
 <h3 id='response-object'>Response Object</h3>
 <p>The update will have 4 main components - <code>title</code>, <code>description</code>, <code>content</code>, <code>linkDetail.shortLink</code> which can be used </p>
-<h4 id='instrument-update-messages-2'>Instrument Update Messages</h4>
+<h4 id='instrument-update-messages'>Instrument Update Messages</h4>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -611,16 +621,8 @@ Remember — a happy kitten is an authenticated kitten!
 <td>Creation time of the update in epoch format</td>
 </tr>
 <tr>
-<td>lastUpdateTime</td>
-<td>TODO Remove</td>
-</tr>
-<tr>
 <td>filterCategory</td>
 <td>This field can be used to filter out certain kinds of update. Possible Values: TODO</td>
-</tr>
-<tr>
-<td>filterCategoryId</td>
-<td>TODO Remove</td>
 </tr>
 </tbody></table>
 <h4 id='pagination-related-fields'>Pagination Related fields</h4>
