@@ -268,6 +268,7 @@ Remember — a happy kitten is an authenticated kitten!
 The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used 
 
 - Instrument Update Message Related Fields
+
 Field | Description
 --------- | -----------
 id | ID of the instrument update message
@@ -282,9 +283,15 @@ scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
 updateType | Type of the Update. Possible values: `ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET`. Read More in the example section below. New Update types can be introduced without prior notice. Old Update Types will not be altered without prior notice.
 creationTime | Creation time of the update in epoch format
-filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`. New New FilterCategories can be introduced without prior notice. Old FilterCategories will not be altered without prior notice.
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`. New New FilterCategories can be introduced without prior notice. 
+
+<aside class="warn">
+New `updateType` and `filterCategory` *can be added without* prior notice. Old `updateType` and `filterCategory` will *not be altered without* prior notice.
+</aside>
+
 
 - Pagination Related fields
+
 Field | Description
 --------- | -----------
 currentPage | Current Page No, starts with 0
@@ -297,12 +304,18 @@ totalPages | Total pages for the available result
 View these calls [in postman](https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&entityType=collection)
 
 
-### Message Type Examples
+# Webhooks
 
-<details>
+## Portal
+You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [hive-dev-portal.scoutquest.in](hive-dev-portal.scoutquest.in)
 
-  <summary>Update Type : ANALYST_VIEWS</summary>
+# Examples
 
+## Instrument Update Messages Examples
+
+### Update Type : BULK_BLOCK 
+
+> Example for Update Type : BULK_BLOCK:
 ```
 {
             "id": "590882329969555364",
@@ -324,21 +337,29 @@ View these calls [in postman](https://elements.getpostman.com/redirect?entityId=
             "filterCategory": "KEY_UPDATE"
         }
 ```  
-</details>
 
+### Update Type : ANALYTICAL_UPDATE 
 
-# Webhooks
+> Example for Update Type : ANALYTICAL_UPDATE:
+```
+{
+            "id": "590882329969555364",
+            "title": "Shriram Finance Limited",
+            "description": "💎Block Deal in Shriram Finance Limited on 2024-06-18",
+            "content": "➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n",
+            "scripDetails": {
+                "bseScripCode": "511218",
+                "scripName": "Shriram Finance Limited",
+                "bseTickr": "SHRIRAMFIN",
+                "nseTickr": "SHRIRAMFIN",
+                "isin": "INE721A01013"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/PCxmR"
+            },
+            "updateType": "BULK_BLOCK",
+            "creationTime": 1718714125,
+            "filterCategory": "KEY_UPDATE"
+        }
+```  
 
-## Portal
-You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [hive-dev-portal.scoutquest.in](hive-dev-portal.scoutquest.in)
-
-<details>
-
-  <summary>Click me</summary>
-
-  | Header 1 | Header 2 |
-  | -------- | -------- |
-  | Row 1    | Row 1    |
-  | Row 2    | Row 2    |
-  
-</details>
