@@ -329,6 +329,7 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```
 
 > The above command returns JSON structured like this:
+
 ```json
 {
   "id": "590882329969555364",
@@ -352,7 +353,8 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```  
 
 
-> Example for Update Type : CORPORATE_ANNOUNCEMENT
+> Example for Update Type - CORPORATE_ANNOUNCEMENT: 
+
 ```json
 {
   "id": "590874081665218776",
@@ -377,22 +379,26 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 
 
 > Example for Update Type : ANALYST_VIEWS
+
 ```json
 {}
 ```  
 
 > Example for Update Type : CONCALL_HIGHLIGHTS
+
 ```json
 {}
 ```  
 
 > Example for Update Type : CONCALL_SUMMARY
+
 ```json
 {}
 ```  
 
 
 > Example for Update Type : FUTURE_OUTLOOK
+
 ```json
 {}
 ```  
@@ -422,16 +428,19 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```  
 
 > Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
+
 ```json
  {}
 ```  
 
 > Example for Update Type : TECHNICAL_ANALYSIS
+
 ```json
  {}
 ```  
 
 > Example for Update Type : TWEET
+
 ```json
  {}
 ```  
