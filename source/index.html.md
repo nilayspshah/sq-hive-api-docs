@@ -313,124 +313,108 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 
 ## Instrument Update Messages Examples
 
-### Update Type : BULK_BLOCK 
-
-> Example for Update Type : BULK_BLOCK:
+> The above command returns JSON structured like this:
 ```json
 {
-            "id": "590882329969555364",
-            "title": "Shriram Finance Limited",
-            "description": "💎Block Deal in Shriram Finance Limited on 2024-06-18",
-            "content": "➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n",
-            "scripDetails": {
-                "bseScripCode": "511218",
-                "scripName": "Shriram Finance Limited",
-                "bseTickr": "SHRIRAMFIN",
-                "nseTickr": "SHRIRAMFIN",
-                "isin": "INE721A01013"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/PCxmR"
-            },
-            "updateType": "BULK_BLOCK",
-            "creationTime": 1718714125,
-            "filterCategory": "KEY_UPDATE"
-        }
+  "id": "590882329969555364",
+  "title": "Shriram Finance Limited",
+  "description": "💎Block Deal in Shriram Finance Limited on 2024-06-18",
+  "content": "➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n",
+  "scripDetails": {
+    "bseScripCode": "511218",
+    "scripName": "Shriram Finance Limited",
+    "bseTickr": "SHRIRAMFIN",
+    "nseTickr": "SHRIRAMFIN",
+    "isin": "INE721A01013"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/PCxmR"
+  },
+  "updateType": "BULK_BLOCK",
+  "creationTime": 1718714125,
+  "filterCategory": "KEY_UPDATE"
+}
 ```  
 
-### Update Type : CORPORATE_ANNOUNCEMENT 
 
 > Example for Update Type : CORPORATE_ANNOUNCEMENT
 ```json
 {
-            "id": "590882329969555364",
-            "title": "Shriram Finance Limited",
-            "description": "💎Block Deal in Shriram Finance Limited on 2024-06-18",
-            "content": "➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n",
-            "scripDetails": {
-                "bseScripCode": "511218",
-                "scripName": "Shriram Finance Limited",
-                "bseTickr": "SHRIRAMFIN",
-                "nseTickr": "SHRIRAMFIN",
-                "isin": "INE721A01013"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/PCxmR"
-            },
-            "updateType": "BULK_BLOCK",
-            "creationTime": 1718714125,
-            "filterCategory": "KEY_UPDATE"
-        }
+  "id": "590874081665218776",
+  "title": "KIRLOSKAR OIL ENGINES LTD.",
+  "description": "💼 Analyst / Institutional Meet",
+  "content": "Kirloskar Oil Engines Limited held a virtual meeting with Antique securities to discuss the operational overview of the company. No unpublished price sensitive information was disclosed. The meeting was in compliance with SEBI regulations.",
+  "scripDetails": {
+    "bseScripCode": "533293",
+    "scripName": "KIRLOSKAR OIL ENGINES LTD.",
+    "bseTickr": "KIRLOSENG",
+    "nseTickr": null,
+    "isin": "INE146L01010"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/GixAV"
+  },
+  "updateType": "CORPORATE_ANNOUNCEMENT",
+  "creationTime": 1718712158,
+  "filterCategory": "EVENT_SCHEDULE"
+}
 ```  
 
-### Update Type : ANALYST_VIEWS 
 
 > Example for Update Type : ANALYST_VIEWS
 ```json
 {}
 ```  
 
-### Update Type : CONCALL_HIGHLIGHTS 
-
 > Example for Update Type : CONCALL_HIGHLIGHTS
 ```json
 {}
 ```  
-
-### Update Type : CONCALL_SUMMARY 
 
 > Example for Update Type : CONCALL_SUMMARY
 ```json
 {}
 ```  
 
-### Update Type : FUTURE_OUTLOOK 
 
 > Example for Update Type : FUTURE_OUTLOOK
 ```json
 {}
 ```  
 
-### Update Type : GENERAL_NEWS 
-
 > Example for Update Type : GENERAL_NEWS
+
 ```json
  {
-            "id": "590874291145537518",
-            "title": "M&M",
-            "description": "Video feed - CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
-            "content": "CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
-            "scripDetails": {
-                "bseScripCode": "509196",
-                "scripName": "M&M",
-                "bseTickr": "MMRUBBR-B",
-                "nseTickr": null,
-                "isin": "INE159E01026"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/d1d04"
-            },
-            "updateType": "GENERAL_NEWS",
-            "creationTime": 1718712208,
-            "filterCategory": "MEDIA_COVERAGE"
-        },
+  "id": "590874291145537518",
+  "title": "M&M",
+  "description": "Video feed - CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
+  "content": "CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
+  "scripDetails": {
+    "bseScripCode": "509196",
+    "scripName": "M&M",
+    "bseTickr": "MMRUBBR-B",
+    "nseTickr": null,
+    "isin": "INE159E01026"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/d1d04"
+  },
+  "updateType": "GENERAL_NEWS",
+  "creationTime": 1718712208,
+  "filterCategory": "MEDIA_COVERAGE"
+}
 ```  
-
-### Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT 
 
 > Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
 ```json
  {}
 ```  
 
-### Update Type : TECHNICAL_ANALYSIS 
-
 > Example for Update Type : TECHNICAL_ANALYSIS
 ```json
  {}
 ```  
-
-### Update Type : TWEET 
 
 > Example for Update Type : TWEET
 ```json
