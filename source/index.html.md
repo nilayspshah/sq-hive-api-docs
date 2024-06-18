@@ -39,7 +39,7 @@ Updates provided by us has the following characteristics:
 | __Relevant__ | Through our proprietry algorithms, We filter out most of the non-relevant news. |
 | __Actionable__ | Updates provided by us are actionable |
 |__Structured__| Based on the type of updates you can choose to define your handling. |
-| __No Stock Left Behind__ | Updates are sent for all mainboard BSE listed entities. |
+| __High Coverage__ | Updates are sent for all mainboard BSE listed entities. |
 | __Comprehensive__ | Our bots listen to thousands of sources including Exchange websites, Conference Calls, Twitter, News Channels, Youtube and many more, providing a 360 degree update coverage.|
 | __Realtime__ | All of the above is done and dissimenated to you at lighning speed. |
 
@@ -71,8 +71,7 @@ Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http:/
 
 ## Authentication
 
-SQ Hive uses API keys to allow access to the API. You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.
-
+SQ Hive uses API keys to allow access to the API. 
 SQ Hive expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
 `x-api-key: yourapikeyhere`
@@ -81,6 +80,7 @@ SQ Hive expects for the API key to be included in all API requests to the server
 You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
 
+You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.
 
 ## Get Instrument Update Messages
 
@@ -190,9 +190,6 @@ Response response = client.newCall(request).execute();
             },
             "updateType": "CORPORATE_ANNOUNCEMENT",
             "creationTime": 1718292418,
-            "lastUpdateTime": 1718292420,
-            "filterCategory": "UNCLASSIFIED",
-            "filterCategoryId": "-1"
         },
         {
             "id": "589113559821504865",
@@ -211,8 +208,7 @@ Response response = client.newCall(request).execute();
             },
             "updateType": "CORPORATE_ANNOUNCEMENT",
             "creationTime": 1718292417,
-            "filterCategory": "UNCLASSIFIED",
-            "filterCategoryId": "-1"
+            "filterCategory": "UNCLASSIFIED"
         },
         {
             "id": "589113551676169507",
@@ -231,7 +227,6 @@ Response response = client.newCall(request).execute();
             },
             "updateType": "GENERAL_NEWS",
             "creationTime": 1718292415,
-            "lastUpdateTime": 1718292417,
             "filterCategory": "MEDIA_COVERAGE"
         }
     ],
@@ -260,10 +255,6 @@ messageId | - | Used to fetch all messages created after a `messageId`. Useful w
 expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
 
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
 ### Response Object
 The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used 
 
@@ -286,8 +277,12 @@ creationTime | Creation time of the update in epoch format
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`. New New FilterCategories can be introduced without prior notice. 
 
 <aside class="warn">
-New `updateType` and `filterCategory` *can be added without* prior notice. Old `updateType` and `filterCategory` will *not be altered without* prior notice.
+New `updateType` and `filterCategory` can be added without prior notice. Old `updateType` and `filterCategory` will not be altered without prior notice.
 </aside>
+<aside class="error">
+Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
+</aside>
+
 
 
 - Pagination Related fields
@@ -309,11 +304,12 @@ View these calls [in postman](https://elements.getpostman.com/redirect?entityId=
 ## Portal
 You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [hive-dev-portal.scoutquest.in](hive-dev-portal.scoutquest.in)
 
-# Instrument Update Messages Examples
+# Examples for Instrument Update Messages 
 
-## Example for Update Type - BULK_BLOCK:
+## BULK_BLOCK - updateType:
+Example for Update Type - BULK_BLOCK
 
-> Example for Update Type - BULK_BLOCK: 
+> Example for Update Type - BULK_BLOCK
 
 ```json
 {
@@ -337,7 +333,7 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 }
 ```  
 
-## Example for Update Type - CORPORATE_ANNOUNCEMENT: 
+## CORPORATE_ANNOUNCEMENT - updateType: 
 
 > Example for Update Type - CORPORATE_ANNOUNCEMENT: 
 
@@ -364,40 +360,113 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```  
 
 
-## Example for Update Type - ANALYST_VIEWS: 
+## ANALYST_VIEWS - updateType
 
 
 > Example for Update Type : ANALYST_VIEWS
 
 ```json
-{}
+{
+  "id": "589832824574705351",
+  "title": "Zomato Ltd.",
+  "description": "SBI Securities has published a  Buy report on Zomato Ltd.. (CMP: 186.20 As on 14 Jun 24 | 16:00 )",
+  "content": "🤖 AI interpretation: Zomato Ltd. is recommended as a `BUY` with a 12-month target price of 214.0/-. The basis for this recommendation includes its diversified business model, strong brand, expanding product offerings, presence in 800+ cities, strong financial performance, and plans to double the store count. The stock's current valuation is considered premium but well supported by earnings growth. Key risk factors include any consumption slowdown and high competition.",
+  "scripDetails": {
+    "bseScripCode": "543320",
+    "scripName": "Zomato Ltd.",
+    "bseTickr": "ZOMATO",
+    "nseTickr": "",
+    "isin": "INE758T01015"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/hyONA"
+  },
+  "updateType": "ANALYST_VIEWS",
+  "creationTime": 1718463903,
+  "filterCategory": "ANALYTICAL_UPDATE"
+}
 ```  
 
-## Example for Update Type - CONCALL_HIGHLIGHTS: 
+## CONCALL_HIGHLIGHTS  - updateType
+Some concall highlights where highlights are present in the link
 
 > Example for Update Type : CONCALL_HIGHLIGHTS
 
 ```json
-{}
+{
+  "id": "581157950889684470",
+  "title": "Waaree Renewable Technologies Ltd",
+  "description": "Concall / meeting Highlights - Waaree Renewable Technologies Ltd Q4 FY24 Earnings Conference Call Insights",
+  "content": "",
+  "scripDetails": {
+    "bseScripCode": "534618",
+    "scripName": "Waaree Renewable Technologies Ltd",
+    "bseTickr": "WAAREERTL",
+    "nseTickr": null,
+    "isin": "INE299N01013"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/9nG2b"
+  },
+  "updateType": "CONCALL_HIGHLIGHTS",
+  "creationTime": 1716395652,
+  "filterCategory": "ANALYTICAL_UPDATE"
+}
 ```  
 
-## Example for Update Type - CONCALL_SUMMARY: 
+## CONCALL_SUMMARY - updateType
 
 > Example for Update Type : CONCALL_SUMMARY
 
 ```json
-{}
+{
+  "id": "588270483341468106",
+  "title": "IFB Industries Ltd ",
+  "description": "IFB Industries Ltd Earnings Conference Call Q4FY24",
+  "content": "IFB Industries Limited reported Q4 FY24 revenue of Rs.1,066.68 crore, up 7.28% YoY, with EBITDA at Rs.54.35 crore, up 44.93% YoY. For FY24, revenue was Rs.4,343.99 crore, up 5% YoY, with EBITDA at Rs.240.22 crore, up 31.27% YoY. The Home Appliance Division aims for 15%+ organic growth with a revised marketing strategy and cost reduction initiatives. The Engineering Division targets inorganic growth through M&A and focuses on stamping businesses. IFB Refrigeration Limited's Pune plant reached commercial production, aiming for 50,000 units per month by August 2024. Concerns include lower washer sales and delays in achieving double-digit EBITDA margins, with a focus on improving marketing effectiveness and managing rising commodity prices. The company maintains a strong net cash position and plans to decrease debt levels significantly by FY25.",
+  "scripDetails": {
+    "bseScripCode": "505726",
+    "scripName": "IFB Industries Ltd ",
+    "bseTickr": "IFBIND",
+    "nseTickr": null,
+    "isin": "INE559A01017"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/0ekGz"
+  },
+  "updateType": "CONCALL_SUMMARY",
+  "creationTime": 1718091412,
+  "filterCategory": "ANALYTICAL_UPDATE"
+}
 ```  
 
-## Example for Update Type - FUTURE_OUTLOOK: 
+## FUTURE_OUTLOOK - updateType
 
 > Example for Update Type : FUTURE_OUTLOOK
 
 ```json
-{}
+{
+  "id": "588993095342152338",
+  "title": "Tata Communications Ltd ",
+  "description": "ScoutQuest Crystal Ball",
+  "content": "Tata Communications is optimistic about doubling data revenues by FY27 and expects improvements in profitability, leverage ratio, ROCE, and EBITDA margins in the medium term. The company plans to launch an AI cloud offering in India with potential for international expansion and will focus on international markets and larger enterprise customers. However, concerns include slow decision making by customers, macroeconomic headwinds, increasing competition in India, and a slowdown in CPaaS growth. The integration of subsidiaries is progressing well, and there is an ongoing strategic review of businesses and subsidiaries. The company also has a robust framework in place for investment decisions and plans to refinance debt at more attractive rates.",
+  "scripDetails": {
+    "bseScripCode": "500483",
+    "scripName": "Tata Communications Ltd ",
+    "bseTickr": "TATACOMM",
+    "nseTickr": null,
+    "isin": "INE151A01013"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/Qm6Fq"
+  },
+  "updateType": "FUTURE_OUTLOOK",
+  "creationTime": 1718263696,
+  "filterCategory": "KEY_UPDATE"
+}
 ```  
 
-## Example for Update Type - GENERAL_NEWS: 
+## GENERAL_NEWS - updateType
 
 > Example for Update Type : GENERAL_NEWS
 
@@ -423,26 +492,80 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 }
 ```  
 
-## Example for Update Type - SQ_SPVMA_INTRADAY_VOLUME_SPURT: 
+## SQ_SPVMA_INTRADAY_VOLUME_SPURT - updateType
 
 > Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
 
 ```json
- {}
+ {
+  "id": "590834457848837239",
+  "title": "Kalpataru Projects International Limited",
+  "description": "🔥 Unusually high trading activity - Trading volume as of 02:54PM is  9.99 times of the average daily volume (2 week avg.) \n34 Lakh shares (Value: Rs. 413 Crores)  traded on NSE as of 02:54PM.",
+  "content": "🏷️ CMP @ 02:54PM: 1173.7 (Chg %: -3.81)",
+  "scripDetails": {
+    "bseScripCode": "522287",
+    "scripName": "Kalpataru Projects International Limited",
+    "bseTickr": "KPIL",
+    "nseTickr": "KPIL",
+    "isin": "INE220B01022"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/CaKY8"
+  },
+  "updateType": "SQ_SPVMA_INTRADAY_VOLUME_SPURT",
+  "creationTime": 1718702711,
+  "filterCategory": "SPVMA"
+}
 ```  
 
-## Example for Update Type - TECHNICAL_ANALYSIS: 
+## TECHNICAL_ANALYSIS - updateType
 
 > Example for Update Type : TECHNICAL_ANALYSIS
 
 ```json
- {}
+ {
+  "id": "583227559222362559",
+  "title": "COROMANDEL",
+  "description": "Long",
+  "content": "#COROMANDEL #NSE - CUP PATTERN",
+  "scripDetails": {
+    "bseScripCode": "506395",
+    "scripName": "COROMANDEL",
+    "bseTickr": "COROMANDEL",
+    "nseTickr": null,
+    "isin": "INE169A01031"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/qZcls"
+  },
+  "updateType": "TECHNICAL_ANALYSIS",
+  "creationTime": 1716889085,
+  "filterCategory": "TECHNICAL_IDEA"
+}
 ```  
 
-## Example for Update Type - TWEET: 
+## TWEET - updateType
 
 > Example for Update Type : TWEET
 
 ```json
- {}
+ {
+  "id": "590862555566833416",
+  "title": "Craftsman Automation",
+  "description": "Tweet",
+  "content": "Craftsman Automation has initiated its QIP today with a floor price of ₹4,426.11/sh. The company aims to raise up to ₹1,200 cr through this.",
+  "scripDetails": {
+    "bseScripCode": "543276",
+    "scripName": "Craftsman Automation",
+    "bseTickr": "CRAFTSMAN",
+    "nseTickr": null,
+    "isin": "INE00LO01017"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/u4cil"
+  },
+  "updateType": "TWEET",
+  "creationTime": 1718709410,
+  "filterCategory": "KEY_UPDATE"
+}
 ```  
