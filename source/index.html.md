@@ -24,11 +24,11 @@ generator: widdershins v4.0.1
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-Base URLs:
+## Base URLs:
 
-Staging: * <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a>
+Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a>
 
-Live: * <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a>
+Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a>
 
 
 # SQ Hive
@@ -159,7 +159,7 @@ let kittens = api.kittens.get();
             "id": "589113551676169507",
             "title": "Paytm",
             "description": "Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights",
-            "content": "Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore investment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!",
+            "content": "Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!",
             "scripDetails": {
                 "bseScripCode": "543396",
                 "scripName": "Paytm",
@@ -208,7 +208,7 @@ Remember — a happy kitten is an authenticated kitten!
 ### Response Object
 The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used 
 
-#### Instrument Update Messages
+- Instrument Update Message Related Fields
 Field | Description
 --------- | -----------
 id | ID of the instrument update message
@@ -221,11 +221,11 @@ scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
 scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
 scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
-updateType | Type of the Update. Possible values: TODO
+updateType | Type of the Update. Possible values: `ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET`.
 creationTime | Creation time of the update in epoch format
-filterCategory | This field can be used to filter out certain kinds of update. Possible Values: TODO
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`
 
-#### Pagination Related fields
+- Pagination Related fields
 Field | Description
 --------- | -----------
 currentPage | Current Page No, starts with 0
