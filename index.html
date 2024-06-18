@@ -351,37 +351,37 @@
               </ul>
           </li>
           <li>
-            <a href="#instrument-update-messages-examples" class="toc-h1 toc-link" data-title="Instrument Update Messages Examples">Instrument Update Messages Examples</a>
+            <a href="#examples-for-instrument-update-messages" class="toc-h1 toc-link" data-title="Examples for Instrument Update Messages">Examples for Instrument Update Messages</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#example-for-update-type-bulk_block" class="toc-h2 toc-link" data-title="Example for Update Type - BULK_BLOCK:">Example for Update Type - BULK_BLOCK:</a>
+                    <a href="#bulk_block-updatetype" class="toc-h2 toc-link" data-title="BULK_BLOCK - updateType:">BULK_BLOCK - updateType:</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-corporate_announcement" class="toc-h2 toc-link" data-title="Example for Update Type - CORPORATE_ANNOUNCEMENT:">Example for Update Type - CORPORATE_ANNOUNCEMENT:</a>
+                    <a href="#corporate_announcement-updatetype" class="toc-h2 toc-link" data-title="CORPORATE_ANNOUNCEMENT - updateType:">CORPORATE_ANNOUNCEMENT - updateType:</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-analyst_views" class="toc-h2 toc-link" data-title="Example for Update Type - ANALYST_VIEWS:">Example for Update Type - ANALYST_VIEWS:</a>
+                    <a href="#analyst_views-updatetype" class="toc-h2 toc-link" data-title="ANALYST_VIEWS - updateType">ANALYST_VIEWS - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-concall_highlights" class="toc-h2 toc-link" data-title="Example for Update Type - CONCALL_HIGHLIGHTS:">Example for Update Type - CONCALL_HIGHLIGHTS:</a>
+                    <a href="#concall_highlights-updatetype" class="toc-h2 toc-link" data-title="CONCALL_HIGHLIGHTS  - updateType">CONCALL_HIGHLIGHTS  - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-concall_summary" class="toc-h2 toc-link" data-title="Example for Update Type - CONCALL_SUMMARY:">Example for Update Type - CONCALL_SUMMARY:</a>
+                    <a href="#concall_summary-updatetype" class="toc-h2 toc-link" data-title="CONCALL_SUMMARY - updateType">CONCALL_SUMMARY - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-future_outlook" class="toc-h2 toc-link" data-title="Example for Update Type - FUTURE_OUTLOOK:">Example for Update Type - FUTURE_OUTLOOK:</a>
+                    <a href="#future_outlook-updatetype" class="toc-h2 toc-link" data-title="FUTURE_OUTLOOK - updateType">FUTURE_OUTLOOK - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-general_news" class="toc-h2 toc-link" data-title="Example for Update Type - GENERAL_NEWS:">Example for Update Type - GENERAL_NEWS:</a>
+                    <a href="#general_news-updatetype" class="toc-h2 toc-link" data-title="GENERAL_NEWS - updateType">GENERAL_NEWS - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-sq_spvma_intraday_volume_spurt" class="toc-h2 toc-link" data-title="Example for Update Type - SQ_SPVMA_INTRADAY_VOLUME_SPURT:">Example for Update Type - SQ_SPVMA_INTRADAY_VOLUME_SPURT:</a>
+                    <a href="#sq_spvma_intraday_volume_spurt-updatetype" class="toc-h2 toc-link" data-title="SQ_SPVMA_INTRADAY_VOLUME_SPURT - updateType">SQ_SPVMA_INTRADAY_VOLUME_SPURT - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-technical_analysis" class="toc-h2 toc-link" data-title="Example for Update Type - TECHNICAL_ANALYSIS:">Example for Update Type - TECHNICAL_ANALYSIS:</a>
+                    <a href="#technical_analysis-updatetype" class="toc-h2 toc-link" data-title="TECHNICAL_ANALYSIS - updateType">TECHNICAL_ANALYSIS - updateType</a>
                   </li>
                   <li>
-                    <a href="#example-for-update-type-tweet" class="toc-h2 toc-link" data-title="Example for Update Type - TWEET:">Example for Update Type - TWEET:</a>
+                    <a href="#tweet-updatetype" class="toc-h2 toc-link" data-title="TWEET - updateType">TWEET - updateType</a>
                   </li>
               </ul>
           </li>
@@ -424,7 +424,7 @@
 <td>Based on the type of updates you can choose to define your handling.</td>
 </tr>
 <tr>
-<td><strong>No Stock Left Behind</strong></td>
+<td><strong>High Coverage</strong></td>
 <td>Updates are sent for all mainboard BSE listed entities.</td>
 </tr>
 <tr>
@@ -457,15 +457,16 @@ Use case is upto you, however it is mandatory to attribute ScoutQuest </p>
 
 <p>Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
 <h2 id='authentication'>Authentication</h2>
-<p>SQ Hive uses API keys to allow access to the API. You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.</p>
-
-<p>SQ Hive expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>SQ Hive uses API keys to allow access to the API. 
+SQ Hive expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
 <p><code>x-api-key: yourapikeyhere</code></p>
 
 <aside class="notice">
 You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
+
+<p>You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.</p>
 <h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"net/http"</span>
 
@@ -557,9 +558,6 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
             </span><span class="p">},</span><span class="w">
             </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORPORATE_ANNOUNCEMENT"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292418</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292420</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113559821504865"</span><span class="p">,</span><span class="w">
@@ -578,8 +576,7 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
             </span><span class="p">},</span><span class="w">
             </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORPORATE_ANNOUNCEMENT"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292417</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategoryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="w">
+            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113551676169507"</span><span class="p">,</span><span class="w">
@@ -598,7 +595,6 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
             </span><span class="p">},</span><span class="w">
             </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERAL_NEWS"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292415</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292417</span><span class="p">,</span><span class="w">
             </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -654,10 +650,6 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <td>Used in conjuction with <code>messageId</code>. Controls the behviour of wether you want to get messages created after a given <code>messageId</code> or before. Possible values: (<code>GT</code>,<code>GOE</code>,<code>LT</code>,<code>LOE</code>,<code>EQ</code>); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of <code>expression</code> is passed without <code>messageId</code> , it will be ignored.</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
 <h3 id='response-object'>Response Object</h3>
 <p>The update will have 4 main components - <code>title</code>, <code>description</code>, <code>content</code>, <code>linkDetail.shortLink</code> which can be used </p>
 
@@ -726,7 +718,11 @@ Remember — a happy kitten is an authenticated kitten!
 </tbody></table>
 
 <aside class="warn">
-New `updateType` and `filterCategory` *can be added without* prior notice. Old `updateType` and `filterCategory` will *not be altered without* prior notice.
+New `updateType` and `filterCategory` can be added without prior notice. Old `updateType` and `filterCategory` will not be altered without prior notice.
+</aside>
+
+<aside class="error">
+Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
 </aside>
 
 <ul>
@@ -756,9 +752,11 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
 <p>View these calls <a href="https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&amp;entityType=collection">in postman</a></p>
 <h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
 <p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="hive-dev-portal.scoutquest.in">hive-dev-portal.scoutquest.in</a></p>
-<h1 id='instrument-update-messages-examples'>Instrument Update Messages Examples</h1><h2 id='example-for-update-type-bulk_block'>Example for Update Type - BULK_BLOCK:</h2>
+<h1 id='examples-for-instrument-update-messages'>Examples for Instrument Update Messages</h1><h2 id='bulk_block-updatetype'>BULK_BLOCK - updateType:</h2>
+<p>Example for Update Type - BULK_BLOCK</p>
+
 <blockquote>
-<p>Example for Update Type - BULK_BLOCK: </p>
+<p>Example for Update Type - BULK_BLOCK</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590882329969555364"</span><span class="p">,</span><span class="w">
@@ -779,7 +777,7 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
   </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718714125</span><span class="p">,</span><span class="w">
   </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEY_UPDATE"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-corporate_announcement'>Example for Update Type - CORPORATE_ANNOUNCEMENT:</h2>
+</span></code></pre></div><h2 id='corporate_announcement-updatetype'>CORPORATE_ANNOUNCEMENT - updateType:</h2>
 <blockquote>
 <p>Example for Update Type - CORPORATE_ANNOUNCEMENT: </p>
 </blockquote>
@@ -802,27 +800,101 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
   </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718712158</span><span class="p">,</span><span class="w">
   </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT_SCHEDULE"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-analyst_views'>Example for Update Type - ANALYST_VIEWS:</h2>
+</span></code></pre></div><h2 id='analyst_views-updatetype'>ANALYST_VIEWS - updateType</h2>
 <blockquote>
 <p>Example for Update Type : ANALYST_VIEWS</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-concall_highlights'>Example for Update Type - CONCALL_HIGHLIGHTS:</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589832824574705351"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zomato Ltd."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SBI Securities has published a  Buy report on Zomato Ltd.. (CMP: 186.20 As on 14 Jun 24 | 16:00 )"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🤖 AI interpretation: Zomato Ltd. is recommended as a `BUY` with a 12-month target price of 214.0/-. The basis for this recommendation includes its diversified business model, strong brand, expanding product offerings, presence in 800+ cities, strong financial performance, and plans to double the store count. The stock's current valuation is considered premium but well supported by earnings growth. Key risk factors include any consumption slowdown and high competition."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543320"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zomato Ltd."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZOMATO"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE758T01015"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/hyONA"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYST_VIEWS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718463903</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='concall_highlights-updatetype'>CONCALL_HIGHLIGHTS  - updateType</h2>
+<p>Some concall highlights where highlights are present in the link</p>
+
 <blockquote>
 <p>Example for Update Type : CONCALL_HIGHLIGHTS</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-concall_summary'>Example for Update Type - CONCALL_SUMMARY:</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"581157950889684470"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waaree Renewable Technologies Ltd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Concall / meeting Highlights - Waaree Renewable Technologies Ltd Q4 FY24 Earnings Conference Call Insights"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"534618"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waaree Renewable Technologies Ltd"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WAAREERTL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE299N01013"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/9nG2b"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONCALL_HIGHLIGHTS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1716395652</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='concall_summary-updatetype'>CONCALL_SUMMARY - updateType</h2>
 <blockquote>
 <p>Example for Update Type : CONCALL_SUMMARY</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-future_outlook'>Example for Update Type - FUTURE_OUTLOOK:</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"588270483341468106"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IFB Industries Ltd "</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IFB Industries Ltd Earnings Conference Call Q4FY24"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IFB Industries Limited reported Q4 FY24 revenue of Rs.1,066.68 crore, up 7.28% YoY, with EBITDA at Rs.54.35 crore, up 44.93% YoY. For FY24, revenue was Rs.4,343.99 crore, up 5% YoY, with EBITDA at Rs.240.22 crore, up 31.27% YoY. The Home Appliance Division aims for 15%+ organic growth with a revised marketing strategy and cost reduction initiatives. The Engineering Division targets inorganic growth through M&amp;A and focuses on stamping businesses. IFB Refrigeration Limited's Pune plant reached commercial production, aiming for 50,000 units per month by August 2024. Concerns include lower washer sales and delays in achieving double-digit EBITDA margins, with a focus on improving marketing effectiveness and managing rising commodity prices. The company maintains a strong net cash position and plans to decrease debt levels significantly by FY25."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"505726"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IFB Industries Ltd "</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IFBIND"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE559A01017"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/0ekGz"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONCALL_SUMMARY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718091412</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='future_outlook-updatetype'>FUTURE_OUTLOOK - updateType</h2>
 <blockquote>
 <p>Example for Update Type : FUTURE_OUTLOOK</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-general_news'>Example for Update Type - GENERAL_NEWS:</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"588993095342152338"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tata Communications Ltd "</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ScoutQuest Crystal Ball"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tata Communications is optimistic about doubling data revenues by FY27 and expects improvements in profitability, leverage ratio, ROCE, and EBITDA margins in the medium term. The company plans to launch an AI cloud offering in India with potential for international expansion and will focus on international markets and larger enterprise customers. However, concerns include slow decision making by customers, macroeconomic headwinds, increasing competition in India, and a slowdown in CPaaS growth. The integration of subsidiaries is progressing well, and there is an ongoing strategic review of businesses and subsidiaries. The company also has a robust framework in place for investment decisions and plans to refinance debt at more attractive rates."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500483"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tata Communications Ltd "</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TATACOMM"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE151A01013"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/Qm6Fq"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURE_OUTLOOK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718263696</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEY_UPDATE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='general_news-updatetype'>GENERAL_NEWS - updateType</h2>
 <blockquote>
 <p>Example for Update Type : GENERAL_NEWS</p>
 </blockquote>
@@ -845,21 +917,75 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
   </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718712208</span><span class="p">,</span><span class="w">
   </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-sq_spvma_intraday_volume_spurt'>Example for Update Type - SQ_SPVMA_INTRADAY_VOLUME_SPURT:</h2>
+</span></code></pre></div><h2 id='sq_spvma_intraday_volume_spurt-updatetype'>SQ_SPVMA_INTRADAY_VOLUME_SPURT - updateType</h2>
 <blockquote>
 <p>Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-technical_analysis'>Example for Update Type - TECHNICAL_ANALYSIS:</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590834457848837239"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kalpataru Projects International Limited"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔥 Unusually high trading activity - Trading volume as of 02:54PM is  9.99 times of the average daily volume (2 week avg.) </span><span class="se">\n</span><span class="s2">34 Lakh shares (Value: Rs. 413 Crores)  traded on NSE as of 02:54PM."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🏷️ CMP @ 02:54PM: 1173.7 (Chg %: -3.81)"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"522287"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kalpataru Projects International Limited"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KPIL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KPIL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE220B01022"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/CaKY8"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SQ_SPVMA_INTRADAY_VOLUME_SPURT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718702711</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPVMA"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='technical_analysis-updatetype'>TECHNICAL_ANALYSIS - updateType</h2>
 <blockquote>
 <p>Example for Update Type : TECHNICAL_ANALYSIS</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{}</span><span class="w">
-</span></code></pre></div><h2 id='example-for-update-type-tweet'>Example for Update Type - TWEET:</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"583227559222362559"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COROMANDEL"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#COROMANDEL #NSE - CUP PATTERN"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"506395"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COROMANDEL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COROMANDEL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE169A01031"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/qZcls"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TECHNICAL_ANALYSIS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1716889085</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TECHNICAL_IDEA"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='tweet-updatetype'>TWEET - updateType</h2>
 <blockquote>
 <p>Example for Update Type : TWEET</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590862555566833416"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craftsman Automation"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tweet"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craftsman Automation has initiated its QIP today with a floor price of ₹4,426.11/sh. The company aims to raise up to ₹1,200 cr through this."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543276"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craftsman Automation"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRAFTSMAN"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE00LO01017"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/u4cil"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TWEET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718709410</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEY_UPDATE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
       </div>
       <div class="dark-box">
