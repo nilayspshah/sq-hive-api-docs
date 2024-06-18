@@ -732,7 +732,7 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
 <h1 id='examples'>Examples</h1><h2 id='instrument-update-messages-examples'>Instrument Update Messages Examples</h2><h3 id='update-type-bulk_block'>Update Type : BULK_BLOCK</h3>
 <blockquote>
 <p>Example for Update Type : BULK_BLOCK:
-<code>
+<code>json
 {
             &quot;id&quot;: &quot;590882329969555364&quot;,
             &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
@@ -754,10 +754,10 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
         }
 </code>  </p>
 </blockquote>
-<h3 id='update-type-analytical_update'>Update Type : ANALYTICAL_UPDATE</h3>
+<h3 id='update-type-corporate_announcement'>Update Type : CORPORATE_ANNOUNCEMENT</h3>
 <blockquote>
-<p>Example for Update Type : ANALYTICAL_UPDATE:
-<code>
+<p>Example for Update Type : CORPORATE_ANNOUNCEMENT
+<code>json
 {
             &quot;id&quot;: &quot;590882329969555364&quot;,
             &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
@@ -777,6 +777,80 @@ New `updateType` and `filterCategory` *can be added without* prior notice. Old `
             &quot;creationTime&quot;: 1718714125,
             &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
         }
+</code>  </p>
+</blockquote>
+<h3 id='update-type-analyst_views'>Update Type : ANALYST_VIEWS</h3>
+<blockquote>
+<p>Example for Update Type : ANALYST_VIEWS
+<code>json
+{}
+</code>  </p>
+</blockquote>
+<h3 id='update-type-concall_highlights'>Update Type : CONCALL_HIGHLIGHTS</h3>
+<blockquote>
+<p>Example for Update Type : CONCALL_HIGHLIGHTS
+<code>json
+{}
+</code>  </p>
+</blockquote>
+<h3 id='update-type-concall_summary'>Update Type : CONCALL_SUMMARY</h3>
+<blockquote>
+<p>Example for Update Type : CONCALL_SUMMARY
+<code>json
+{}
+</code>  </p>
+</blockquote>
+<h3 id='update-type-future_outlook'>Update Type : FUTURE_OUTLOOK</h3>
+<blockquote>
+<p>Example for Update Type : FUTURE_OUTLOOK
+<code>json
+{}
+</code>  </p>
+</blockquote>
+<h3 id='update-type-general_news'>Update Type : GENERAL_NEWS</h3>
+<blockquote>
+<p>Example for Update Type : GENERAL_NEWS
+<code>json
+ {
+            &quot;id&quot;: &quot;590874291145537518&quot;,
+            &quot;title&quot;: &quot;M&amp;M&quot;,
+            &quot;description&quot;: &quot;Video feed - CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V&quot;,
+            &quot;content&quot;: &quot;CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V&quot;,
+            &quot;scripDetails&quot;: {
+                &quot;bseScripCode&quot;: &quot;509196&quot;,
+                &quot;scripName&quot;: &quot;M&amp;M&quot;,
+                &quot;bseTickr&quot;: &quot;MMRUBBR-B&quot;,
+                &quot;nseTickr&quot;: null,
+                &quot;isin&quot;: &quot;INE159E01026&quot;
+            },
+            &quot;linkDetail&quot;: {
+                &quot;shortLink&quot;: &quot;https://sqst.in/d1d04&quot;
+            },
+            &quot;updateType&quot;: &quot;GENERAL_NEWS&quot;,
+            &quot;creationTime&quot;: 1718712208,
+            &quot;filterCategory&quot;: &quot;MEDIA_COVERAGE&quot;
+        },
+</code>  </p>
+</blockquote>
+<h3 id='update-type-sq_spvma_intraday_volume_spurt'>Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT</h3>
+<blockquote>
+<p>Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
+<code>json
+ {}
+</code>  </p>
+</blockquote>
+<h3 id='update-type-technical_analysis'>Update Type : TECHNICAL_ANALYSIS</h3>
+<blockquote>
+<p>Example for Update Type : TECHNICAL_ANALYSIS
+<code>json
+ {}
+</code>  </p>
+</blockquote>
+<h3 id='update-type-tweet'>Update Type : TWEET</h3>
+<blockquote>
+<p>Example for Update Type : TWEET
+<code>json
+ {}
 </code>  </p>
 </blockquote>
 
