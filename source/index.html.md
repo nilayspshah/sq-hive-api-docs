@@ -313,6 +313,21 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 
 ## Instrument Update Messages Examples
 
+```ruby
+```
+
+```python
+```
+
+```java
+```
+
+```javascript
+```
+
+```shell
+```
+
 > The above command returns JSON structured like this:
 ```json
 {
@@ -420,3 +435,6 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```json
  {}
 ```  
+
+### Update 1
+### Update 2
