@@ -328,7 +328,10 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```shell
 ```
 
-> The above command returns JSON structured like this:
+
+### Example for Update Type - BULK_BLOCK: 
+
+> Example for Update Type - BULK_BLOCK: 
 
 ```json
 {
@@ -352,6 +355,7 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 }
 ```  
 
+### Example for Update Type - CORPORATE_ANNOUNCEMENT: 
 
 > Example for Update Type - CORPORATE_ANNOUNCEMENT: 
 
@@ -378,11 +382,16 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 ```  
 
 
+### Example for Update Type - ANALYST_VIEWS: 
+
+
 > Example for Update Type : ANALYST_VIEWS
 
 ```json
 {}
 ```  
+
+### Example for Update Type - CONCALL_HIGHLIGHTS: 
 
 > Example for Update Type : CONCALL_HIGHLIGHTS
 
@@ -390,18 +399,23 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 {}
 ```  
 
+### Example for Update Type - CONCALL_SUMMARY: 
+
 > Example for Update Type : CONCALL_SUMMARY
 
 ```json
 {}
 ```  
 
+### Example for Update Type - FUTURE_OUTLOOK: 
 
 > Example for Update Type : FUTURE_OUTLOOK
 
 ```json
 {}
 ```  
+
+### Example for Update Type - GENERAL_NEWS: 
 
 > Example for Update Type : GENERAL_NEWS
 
@@ -427,11 +441,15 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
 }
 ```  
 
+### Example for Update Type - SQ_SPVMA_INTRADAY_VOLUME_SPURT: 
+
 > Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
 
 ```json
  {}
 ```  
+
+### Example for Update Type - TECHNICAL_ANALYSIS: 
 
 > Example for Update Type : TECHNICAL_ANALYSIS
 
@@ -439,11 +457,10 @@ You can setup webhook, via the portal. To access the webportal, user name and pa
  {}
 ```  
 
+### Example for Update Type - TWEET: 
+
 > Example for Update Type : TWEET
 
 ```json
  {}
 ```  
-
-### Update 1
-### Update 2
