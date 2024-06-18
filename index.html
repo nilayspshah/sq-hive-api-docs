@@ -350,6 +350,14 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#examples" class="toc-h1 toc-link" data-title="Examples">Examples</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#instrument-update-messages-examples" class="toc-h2 toc-link" data-title="Instrument Update Messages Examples">Instrument Update Messages Examples</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
         </ul>
@@ -627,71 +635,150 @@ Remember — a happy kitten is an authenticated kitten!
 <p>The update will have 4 main components - <code>title</code>, <code>description</code>, <code>content</code>, <code>linkDetail.shortLink</code> which can be used </p>
 
 <ul>
-<li><p>Instrument Update Message Related Fields
-Field | Description
---------- | -----------
-id | ID of the instrument update message
-title | Can be thought of as the heading, In most cases gives the Long Name of the company
-description | Can be thought of as the sub-heading. In most cases it gives the type of the update
-content | This field has the details about the update
-scripDetails.bseScripCode | Gives BSE scrip code of the company if present, else null
-scripDetails.scripName | Gives the long scrip name 
-scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
-scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
-scripDetails.isin | Gives ISIN the company
-linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
-updateType | Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>. Read More in the example section below. New Update types can be introduced without prior notice. Old Update Types will not be altered without prior notice.
-creationTime | Creation time of the update in epoch format
-filterCategory | This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>. New New FilterCategories can be introduced without prior notice. Old FilterCategories will not be altered without prior notice.</p></li>
-<li><p>Pagination Related fields
-Field | Description
---------- | -----------
-currentPage | Current Page No, starts with 0
-totalItems | Total items(instrumentUpdateMessages) available for the given query 
-totalPages | Total pages for the available result</p></li>
+<li>Instrument Update Message Related Fields</li>
 </ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>ID of the instrument update message</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Can be thought of as the heading, In most cases gives the Long Name of the company</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Can be thought of as the sub-heading. In most cases it gives the type of the update</td>
+</tr>
+<tr>
+<td>content</td>
+<td>This field has the details about the update</td>
+</tr>
+<tr>
+<td>scripDetails.bseScripCode</td>
+<td>Gives BSE scrip code of the company if present, else null</td>
+</tr>
+<tr>
+<td>scripDetails.scripName</td>
+<td>Gives the long scrip name</td>
+</tr>
+<tr>
+<td>scripDetails.bseTickr</td>
+<td>Gives BSE Tickr of the company if present, else null</td>
+</tr>
+<tr>
+<td>scripDetails.nseTickr</td>
+<td>Gives NSE Tickr of the company if present, else null</td>
+</tr>
+<tr>
+<td>scripDetails.isin</td>
+<td>Gives ISIN the company</td>
+</tr>
+<tr>
+<td>linkDetail.shortLink</td>
+<td>Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish</td>
+</tr>
+<tr>
+<td>updateType</td>
+<td>Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>. Read More in the example section below. New Update types can be introduced without prior notice. Old Update Types will not be altered without prior notice.</td>
+</tr>
+<tr>
+<td>creationTime</td>
+<td>Creation time of the update in epoch format</td>
+</tr>
+<tr>
+<td>filterCategory</td>
+<td>This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>. New New FilterCategories can be introduced without prior notice.</td>
+</tr>
+</tbody></table>
+
+<aside class="warn">
+New `updateType` and `filterCategory` *can be added without* prior notice. Old `updateType` and `filterCategory` will *not be altered without* prior notice.
+</aside>
+
+<ul>
+<li>Pagination Related fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currentPage</td>
+<td>Current Page No, starts with 0</td>
+</tr>
+<tr>
+<td>totalItems</td>
+<td>Total items(instrumentUpdateMessages) available for the given query</td>
+</tr>
+<tr>
+<td>totalPages</td>
+<td>Total pages for the available result</td>
+</tr>
+</tbody></table>
 <h3 id='postman'>Postman</h3>
 <p>View these calls <a href="https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&amp;entityType=collection">in postman</a></p>
-<h3 id='message-type-examples'>Message Type Examples</h3>
-<details>
-
-  <summary>Update Type : ANALYST_VIEWS</summary>
-
-```
-{
-            "id": "590882329969555364",
-            "title": "Shriram Finance Limited",
-            "description": "💎Block Deal in Shriram Finance Limited on 2024-06-18",
-            "content": "➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n",
-            "scripDetails": {
-                "bseScripCode": "511218",
-                "scripName": "Shriram Finance Limited",
-                "bseTickr": "SHRIRAMFIN",
-                "nseTickr": "SHRIRAMFIN",
-                "isin": "INE721A01013"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/PCxmR"
-            },
-            "updateType": "BULK_BLOCK",
-            "creationTime": 1718714125,
-            "filterCategory": "KEY_UPDATE"
-        }
-```  
-</details>
 <h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
 <p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="hive-dev-portal.scoutquest.in">hive-dev-portal.scoutquest.in</a></p>
-
-<details>
-
-  <summary>Click me</summary>
-
-  | Header 1 | Header 2 |
-  | -------- | -------- |
-  | Row 1    | Row 1    |
-  | Row 2    | Row 2    |
-  
-</details>
+<h1 id='examples'>Examples</h1><h2 id='instrument-update-messages-examples'>Instrument Update Messages Examples</h2><h3 id='update-type-bulk_block'>Update Type : BULK_BLOCK</h3>
+<blockquote>
+<p>Example for Update Type : BULK_BLOCK:
+<code>
+{
+            &quot;id&quot;: &quot;590882329969555364&quot;,
+            &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
+            &quot;description&quot;: &quot;💎Block Deal in Shriram Finance Limited on 2024-06-18&quot;,
+            &quot;content&quot;: &quot;➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n&quot;,
+            &quot;scripDetails&quot;: {
+                &quot;bseScripCode&quot;: &quot;511218&quot;,
+                &quot;scripName&quot;: &quot;Shriram Finance Limited&quot;,
+                &quot;bseTickr&quot;: &quot;SHRIRAMFIN&quot;,
+                &quot;nseTickr&quot;: &quot;SHRIRAMFIN&quot;,
+                &quot;isin&quot;: &quot;INE721A01013&quot;
+            },
+            &quot;linkDetail&quot;: {
+                &quot;shortLink&quot;: &quot;https://sqst.in/PCxmR&quot;
+            },
+            &quot;updateType&quot;: &quot;BULK_BLOCK&quot;,
+            &quot;creationTime&quot;: 1718714125,
+            &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
+        }
+</code>  </p>
+</blockquote>
+<h3 id='update-type-analytical_update'>Update Type : ANALYTICAL_UPDATE</h3>
+<blockquote>
+<p>Example for Update Type : ANALYTICAL_UPDATE:
+<code>
+{
+            &quot;id&quot;: &quot;590882329969555364&quot;,
+            &quot;title&quot;: &quot;Shriram Finance Limited&quot;,
+            &quot;description&quot;: &quot;💎Block Deal in Shriram Finance Limited on 2024-06-18&quot;,
+            &quot;content&quot;: &quot;➖ Seller(s):\nBNP PARIBAS FINANCIAL MARKETS\nTotal Sold Qty:1,467,822\nTotal Sold Value:401.03 crores\n➕ Buyer(s):\nMARSHALL WACE INVESTMENT STRATEGIES - EUREKA FUND\nTotal Bought Qty:1,467,822\nTotal Bought Value:401.03 crores\n&quot;,
+            &quot;scripDetails&quot;: {
+                &quot;bseScripCode&quot;: &quot;511218&quot;,
+                &quot;scripName&quot;: &quot;Shriram Finance Limited&quot;,
+                &quot;bseTickr&quot;: &quot;SHRIRAMFIN&quot;,
+                &quot;nseTickr&quot;: &quot;SHRIRAMFIN&quot;,
+                &quot;isin&quot;: &quot;INE721A01013&quot;
+            },
+            &quot;linkDetail&quot;: {
+                &quot;shortLink&quot;: &quot;https://sqst.in/PCxmR&quot;
+            },
+            &quot;updateType&quot;: &quot;BULK_BLOCK&quot;,
+            &quot;creationTime&quot;: 1718714125,
+            &quot;filterCategory&quot;: &quot;KEY_UPDATE&quot;
+        }
+</code>  </p>
+</blockquote>
 
       </div>
       <div class="dark-box">
