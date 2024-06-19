@@ -47,13 +47,15 @@ You can view [this short video](https://www.youtube.com/watch?v=s-pPlZ263Uc&ab_c
 
 ## How to recieve updates?
 We provide 2 methods to recieve these updates. 
+
 1. Webhooks
 2. API
 
 You can register an endpoint where you will recieve each update as and when it happens. Alternatively you can periodically poll for new updates via the API endpoint.
 
 ## How to use these updates?
-How you use the updates is upto you. Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/persionalised news feed on your website/app etc.
+Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/persionalised news feed on your website/app etc.
+
 Use case is upto you, however it is mandatory to attribute ScoutQuest 
 
 ## What should be format for attribution?
@@ -302,7 +304,7 @@ View these calls [in postman](https://elements.getpostman.com/redirect?entityId=
 # Webhooks
 
 ## Portal
-You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [hive-dev-portal.scoutquest.in](hive-dev-portal.scoutquest.in)
+You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
 
 # Examples for Instrument Update Messages 
 
