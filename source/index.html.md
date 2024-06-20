@@ -54,7 +54,7 @@ We provide 2 methods to recieve these updates.
 You can register an endpoint where you will recieve each update as and when it happens. Alternatively you can periodically poll for new updates via the API endpoint.
 
 ## How to use these updates?
-Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/persionalised news feed on your website/app etc.
+Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/personalised news feed on your website/app etc.
 
 Use case is upto you, however it is mandatory to attribute ScoutQuest 
 
