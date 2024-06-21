@@ -355,13 +355,10 @@
                     <a href="#adding-an-endpoint" class="toc-h2 toc-link" data-title="Adding an Endpoint">Adding an Endpoint</a>
                   </li>
                   <li>
-                    <a href="#dashboard" class="toc-h2 toc-link" data-title="Dashboard">Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="#demo-dashboard-access" class="toc-h2 toc-link" data-title="Demo Dashboard Access">Demo Dashboard Access</a>
-                  </li>
-                  <li>
                     <a href="#webhook-signature-verification" class="toc-h2 toc-link" data-title="Webhook Signature Verification">Webhook Signature Verification</a>
+                  </li>
+                  <li>
+                    <a href="#dashboard" class="toc-h2 toc-link" data-title="Dashboard">Dashboard</a>
                   </li>
                   <li>
                     <a href="#retries" class="toc-h2 toc-link" data-title="Retries">Retries</a>
@@ -820,6 +817,8 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
 
 <p>Adding an endpoint is as simple as providing a URL that you control and a list of  <strong>event types</strong>  that you want to listen to.</p>
 
+<p>You can add your endpoint from your <a href="#dashboard">webhooks dashboard</a></p>
+
 <p><img src="https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png" alt="add endpoint" /></p>
 
 <aside class="notice">
@@ -833,12 +832,6 @@ You can also use service like <code>ngrok</code> to start recieving webhooks.
 </aside>
 
 <p>If you don&#39;t specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.</p>
-<h2 id='dashboard'>Dashboard</h2>
-<p>You can setup webhook, via the portal. 
-To access the webportal, user name and password will be shared with you during onboarding. 
-You can access the portal using this link <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a></p>
-<h2 id='demo-dashboard-access'>Demo Dashboard Access</h2>
-<p>You can access a demo dashboard by visiting: <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a> with <code>username:sq-hive-demo</code> and <code>password:sq-hive-demo</code></p>
 <h3 id='testing-your-endpoint'>Testing your Endpoint</h3>
 <p>The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.</p>
 
@@ -868,6 +861,12 @@ const wh = new Webhook(secret);
 const payload = wh.verify(payload, headers);
 </code></pre></div>
 <p>For more instructions and examples of how to verify signatures, check out their <a href="https://docs.svix.com/receiving/verifying-payloads/how">webhook verification documentation</a>.</p>
+<h2 id='dashboard'>Dashboard</h2>
+<p>You can setup webhook, via the portal. 
+To access the webportal, user name and password will be shared with you during onboarding. 
+You can access the portal using this link <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a></p>
+<h3 id='demo-dashboard-access'>Demo Dashboard Access</h3>
+<p>You can access a demo dashboard by visiting: <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a> with <code>username:sq-hive-demo</code> and <code>password:sq-hive-demo</code></p>
 <h2 id='retries'>Retries</h2>
 <p>SQ Hive attempts to deliver each webhook message based on a retry schedule with exponential backoff.</p>
 <h3 id='the-schedule'>The schedule</h3>
