@@ -278,10 +278,10 @@ updateType | Type of the Update. Possible values: `ANALYST_VIEWS, BULK_BLOCK, CO
 creationTime | Creation time of the update in epoch format
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`. 
 
-<aside class="warn">
-New `updateType` and `filterCategory` can be added without prior notice. Old `updateType` and `filterCategory` will not be altered without prior notice.
+<aside class="warning">
+New <code>updateType</code> and <code>filterCategory</code> can be added without prior notice. Old <code>>updateType</code> and <code>filterCategory</code> will not be altered without prior notice.
 </aside>
-<aside class="error">
+<aside class="warning">
 Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
 </aside>
 
@@ -302,9 +302,6 @@ View these calls [in postman](https://elements.getpostman.com/redirect?entityId=
 
 
 # Webhooks
-
-## Portal
-You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
 
 
 ## Introduction to SQ Hive Webhooks
@@ -356,17 +353,26 @@ Adding an endpoint is as simple as providing a URL that you control and a list o
 ![add endpoint](https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png)
 
 
-<aside class="warn">
+<aside class="notice">
 Helpful Tip!
 <br>
-    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play<code> button to have a unique URL generated for you.
+    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play</code> button to have a unique URL generated for you.
 <br>
 You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
 <br>
-You can also use service like <code>ngrok<code> to start recieving webhooks.
+You can also use service like <code>ngrok</code> to start recieving webhooks.
 </aside>
 
 If you don't specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.
+
+## Dashboard
+You can setup webhook, via the portal. 
+To access the webportal, user name and password will be shared with you during onboarding. 
+You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
+
+## Demo Dashboard Access
+You can access a demo dashboard by visiting: [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in) with `username:sq-hive-demo` and `password:sq-hive-demo`
+
 
 ### Testing your Endpoint
 The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.
@@ -468,7 +474,6 @@ If you need to recover from a service outage and want to replay all the events s
 From there, you can choose a time window to recover from.
 
 For a more granular recovery - for example, if you know the exact timestamp that you want to recover from - you can click the options menu on any message from the endpoint page. From there, you can click "Replay..." and choose to "Replay all failed messages since this time."
-
 
 # Examples for Instrument Update Messages 
 
