@@ -784,33 +784,37 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
 
 <p>Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  <a href="#webhook-signature-verification">webhook signature verification</a>.</p>
 <h2 id='webhook-events'>Webhook Events</h2>
-<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "creationTimestamp": 1717247896,
-  "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
-  "eventType": "V1_INSTRUMENT_UPDATE_CREATED",
-  "payload": {
-    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
-    "creationTime": 1717247895,
-    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
-    "filterCategory": "ANALYTICAL_UPDATE",
-    "id": "584732514325722439",
-    "lastUpdateTime": 0,
-    "linkDetail": {
-      "shortLink": "https://sqst.in/F08qo"
-    },
-    "scripDetails": {
-      "bseScripCode": "543287",
-      "bseTickr": "LODHA",
-      "isin": "INE670K01029",
-      "nseTickr": "LODHA",
-      "scripName": "Macrotech Developers Limited"
-    },
-    "title": "Macrotech Developers Limited",
-    "updateType": "CONCALL_SUMMARY"
-  }
-}
-</code></pre></div><h2 id='adding-an-endpoint'>Adding an Endpoint</h2>
+<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>. This is identical to the <code>Instrument Update Message</code> that you can fetch via the <a href="#get-instrument-update-messages">API</a>:</p>
+
+<blockquote>
+<p>Here is a sample payload for <code>v1.instrument_update.created</code>:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"creationTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1717247896</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V1_INSTRUMENT_UPDATE_CREATED"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1717247895</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"584732514325722439"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/F08qo"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543287"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE670K01029"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONCALL_SUMMARY"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='adding-an-endpoint'>Adding an Endpoint</h2>
 <p>In order to start listening to messages webhook messages sent by SQ Hive, you will need to configure your  <strong>endpoints</strong>.</p>
 
 <p>Adding an endpoint is as simple as providing a URL that you control and a list of  <strong>event types</strong>  that you want to listen to.</p>
@@ -820,11 +824,11 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
 <aside class="warn">
 Helpful Tip!
 <br>
-    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the  **with Svix Play**  button to have a unique URL generated for you.
+    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play<code> button to have a unique URL generated for you.
 <br>
 You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
 <br>
-You can also use service like ngrok to start recieving webhooks.
+You can also use service like <code>ngrok<code> to start recieving webhooks.
 </aside>
 
 <p>If you don&#39;t specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.</p>
@@ -839,7 +843,7 @@ You can also use service like ngrok to start recieving webhooks.
 <h2 id='webhook-signature-verification'>Webhook Signature Verification</h2>
 <p>Webhook signatures is your way to verify that webhook messages are sent by us. For a more detailed explanation, check out this article on <a href="https://docs.svix.com/receiving/verifying-payloads/why">why you should verify webhooks</a>.</p>
 <h3 id='how-to-verify-webhooks-with-svix-libraries'>How to verify webhooks with Svix Libraries</h3>
-<p>Our webhook partner Svix offers a set of useful libraries that make verifying webhooks very simple. Here is a an example using Javascript:</p>
+<p>You can use a set of useful libraries by developed by our webhook partner Svix that make verifying webhooks very simple. Here is a an example using Javascript:</p>
 <div class="highlight"><pre class="highlight plaintext"><code>import { Webhook } from "svix";
 
 const secret = "whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw";
