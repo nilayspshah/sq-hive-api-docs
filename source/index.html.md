@@ -315,9 +315,11 @@ The way to indicate that a webhook has been processed is by returning a  `2xx`  
 Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  [webhook signature verification](#webhook-signature-verification).
 
 ## Webhook Events
-We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`:
+We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
 
-```
+> Here is a sample payload for `v1.instrument_update.created`:
+
+```json
 {
   "creationTimestamp": 1717247896,
   "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
@@ -357,11 +359,11 @@ Adding an endpoint is as simple as providing a URL that you control and a list o
 <aside class="warn">
 Helpful Tip!
 <br>
-    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the  **with Svix Play**  button to have a unique URL generated for you.
+    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play<code> button to have a unique URL generated for you.
 <br>
 You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
 <br>
-You can also use service like ngrok to start recieving webhooks.
+You can also use service like <code>ngrok<code> to start recieving webhooks.
 </aside>
 
 If you don't specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.
@@ -379,7 +381,7 @@ After sending an example event, you can click into the message to view the messa
 Webhook signatures is your way to verify that webhook messages are sent by us. For a more detailed explanation, check out this article on [why you should verify webhooks](https://docs.svix.com/receiving/verifying-payloads/why).
 
 ### How to verify webhooks with Svix Libraries
-Our webhook partner Svix offers a set of useful libraries that make verifying webhooks very simple. Here is a an example using Javascript:
+You can use a set of useful libraries by developed by our webhook partner Svix that make verifying webhooks very simple. Here is a an example using Javascript:
 
 ```
 import { Webhook } from "svix";
