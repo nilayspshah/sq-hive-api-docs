@@ -343,6 +343,35 @@
               </ul>
           </li>
           <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#portal" class="toc-h2 toc-link" data-title="Portal">Portal</a>
+                  </li>
+                  <li>
+                    <a href="#introduction-to-sq-hive-webhooks" class="toc-h2 toc-link" data-title="Introduction to SQ Hive Webhooks">Introduction to SQ Hive Webhooks</a>
+                  </li>
+                  <li>
+                    <a href="#webhook-events" class="toc-h2 toc-link" data-title="Webhook Events">Webhook Events</a>
+                  </li>
+                  <li>
+                    <a href="#adding-an-endpoint" class="toc-h2 toc-link" data-title="Adding an Endpoint">Adding an Endpoint</a>
+                  </li>
+                  <li>
+                    <a href="#webhook-signature-verification" class="toc-h2 toc-link" data-title="Webhook Signature Verification">Webhook Signature Verification</a>
+                  </li>
+                  <li>
+                    <a href="#retries" class="toc-h2 toc-link" data-title="Retries">Retries</a>
+                  </li>
+                  <li>
+                    <a href="#troubleshooting-tips" class="toc-h2 toc-link" data-title="Troubleshooting Tips">Troubleshooting Tips</a>
+                  </li>
+                  <li>
+                    <a href="#failure-recovery" class="toc-h2 toc-link" data-title="Failure Recovery">Failure Recovery</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#examples-for-instrument-update-messages" class="toc-h1 toc-link" data-title="Examples for Instrument Update Messages">Examples for Instrument Update Messages</a>
               <ul class="toc-list-h2">
                   <li>
@@ -374,35 +403,6 @@
                   </li>
                   <li>
                     <a href="#tweet-updatetype" class="toc-h2 toc-link" data-title="TWEET - updateType">TWEET - updateType</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#portal" class="toc-h2 toc-link" data-title="Portal">Portal</a>
-                  </li>
-                  <li>
-                    <a href="#introduction-to-sq-hive-webhooks" class="toc-h2 toc-link" data-title="Introduction to SQ Hive Webhooks">Introduction to SQ Hive Webhooks</a>
-                  </li>
-                  <li>
-                    <a href="#webhook-events" class="toc-h2 toc-link" data-title="Webhook Events">Webhook Events</a>
-                  </li>
-                  <li>
-                    <a href="#adding-an-endpoint" class="toc-h2 toc-link" data-title="Adding an Endpoint">Adding an Endpoint</a>
-                  </li>
-                  <li>
-                    <a href="#webhook-signature-verification" class="toc-h2 toc-link" data-title="Webhook Signature Verification">Webhook Signature Verification</a>
-                  </li>
-                  <li>
-                    <a href="#retries" class="toc-h2 toc-link" data-title="Retries">Retries</a>
-                  </li>
-                  <li>
-                    <a href="#troubleshooting-tips" class="toc-h2 toc-link" data-title="Troubleshooting Tips">Troubleshooting Tips</a>
-                  </li>
-                  <li>
-                    <a href="#failure-recovery" class="toc-h2 toc-link" data-title="Failure Recovery">Failure Recovery</a>
                   </li>
               </ul>
           </li>
@@ -730,7 +730,7 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 </tr>
 <tr>
 <td>updateType</td>
-<td>Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>. Read More in the example section below. New Update types can be introduced without prior notice. Old Update Types will not be altered without prior notice.</td>
+<td>Type of the Update. Possible values: <code>ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET</code>. Read More in the <a href="#examples-for-instrument-update-messages">Examples section</a>.</td>
 </tr>
 <tr>
 <td>creationTime</td>
@@ -738,7 +738,7 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 </tr>
 <tr>
 <td>filterCategory</td>
-<td>This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>. New New FilterCategories can be introduced without prior notice.</td>
+<td>This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>.</td>
 </tr>
 </tbody></table>
 
@@ -775,6 +775,144 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
 </tbody></table>
 <h3 id='postman'>Postman</h3>
 <p>View these calls <a href="https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&amp;entityType=collection">in postman</a></p>
+<h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
+<p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a></p>
+<h2 id='introduction-to-sq-hive-webhooks'>Introduction to SQ Hive Webhooks</h2>
+<p>Webhooks are how services notify each other of events. At their core they are just a  <code>POST</code>  request to a pre-determined endpoint. The endpoint can be whatever you want, and you can just  <a href="#adding-an-endpoint">add them from the UI</a>. You normally use one endpoint per service, and that endpoint listens to all of the event types. For example, if you receive webhooks from Acme Inc., you can structure your URL like:  <code>https://www.example.com/acme/webhooks/</code>.</p>
+
+<p>The way to indicate that a webhook has been processed is by returning a  <code>2xx</code>  (status code  <code>200-299</code>) response to the webhook message within a reasonable time-frame (15s). It&#39;s also important to disable  <code>CSRF</code>  protection for this endpoint if the framework you use enables them by default.</p>
+
+<p>Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  <a href="#webhook-signature-verification">webhook signature verification</a>.</p>
+<h2 id='webhook-events'>Webhook Events</h2>
+<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "creationTimestamp": 1717247896,
+  "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
+  "eventType": "V1_INSTRUMENT_UPDATE_CREATED",
+  "payload": {
+    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
+    "creationTime": 1717247895,
+    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
+    "filterCategory": "ANALYTICAL_UPDATE",
+    "id": "584732514325722439",
+    "lastUpdateTime": 0,
+    "linkDetail": {
+      "shortLink": "https://sqst.in/F08qo"
+    },
+    "scripDetails": {
+      "bseScripCode": "543287",
+      "bseTickr": "LODHA",
+      "isin": "INE670K01029",
+      "nseTickr": "LODHA",
+      "scripName": "Macrotech Developers Limited"
+    },
+    "title": "Macrotech Developers Limited",
+    "updateType": "CONCALL_SUMMARY"
+  }
+}
+</code></pre></div><h2 id='adding-an-endpoint'>Adding an Endpoint</h2>
+<p>In order to start listening to messages webhook messages sent by SQ Hive, you will need to configure your  <strong>endpoints</strong>.</p>
+
+<p>Adding an endpoint is as simple as providing a URL that you control and a list of  <strong>event types</strong>  that you want to listen to.</p>
+
+<p><img src="https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png" alt="add endpoint" /></p>
+
+<aside class="warn">
+Helpful Tip!
+<br>
+    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the  **with Svix Play**  button to have a unique URL generated for you.
+<br>
+You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
+<br>
+You can also use service like ngrok to start recieving webhooks.
+</aside>
+
+<p>If you don&#39;t specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.</p>
+<h3 id='testing-your-endpoint'>Testing your Endpoint</h3>
+<p>The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.</p>
+
+<p>That&#39;s why we have a &quot;Testing&quot; tab for you to send example events to your endpoint.</p>
+
+<p><img src="https://docs.svix.com/assets/images/testing-endpoint-3f325ed4f08a4b9c57c49a3dd8ef2e9f.png" alt="testing endpoint" /></p>
+
+<p>After sending an example event, you can click into the message to view the message payload, all of the message attempts, and whether it succeeded or failed.</p>
+<h2 id='webhook-signature-verification'>Webhook Signature Verification</h2>
+<p>Webhook signatures is your way to verify that webhook messages are sent by us. For a more detailed explanation, check out this article on <a href="https://docs.svix.com/receiving/verifying-payloads/why">why you should verify webhooks</a>.</p>
+<h3 id='how-to-verify-webhooks-with-svix-libraries'>How to verify webhooks with Svix Libraries</h3>
+<p>Our webhook partner Svix offers a set of useful libraries that make verifying webhooks very simple. Here is a an example using Javascript:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>import { Webhook } from "svix";
+
+const secret = "whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw";
+
+// These were all sent from the server
+const headers = {
+"svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
+"svix-timestamp": "1614265330",
+"svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+};
+const payload = '{"test": 2432232314}';
+
+const wh = new Webhook(secret);
+// Throws on error, returns the verified content on success
+const payload = wh.verify(payload, headers);
+</code></pre></div>
+<p>For more instructions and examples of how to verify signatures, check out their <a href="https://docs.svix.com/receiving/verifying-payloads/how">webhook verification documentation</a>.</p>
+<h2 id='retries'>Retries</h2>
+<p>SQ Hive attempts to deliver each webhook message based on a retry schedule with exponential backoff.</p>
+<h3 id='the-schedule'>The schedule</h3>
+<p>Each message is attempted based on the following schedule, where each period is started following the failure of the preceding attempt:</p>
+
+<ul>
+<li>  Immediately</li>
+<li>  5 seconds</li>
+<li>  5 minutes</li>
+<li>  30 minutes</li>
+<li>  2 hours</li>
+<li>  5 hours</li>
+<li>  10 hours</li>
+<li>  10 hours (in addition to the previous)</li>
+</ul>
+
+<p>If an endpoint is removed or disabled delivery attempts to the endpoint will be disabled as well.</p>
+
+<p>For example, an attempt that fails three times before eventually succeeding will be delivered roughly 35 minutes and 5 seconds following the first attempt.</p>
+<h3 id='manual-retries'>Manual retries</h3>
+<p>You can also use the application portal to manually retry each message at any time, or automatically retry (&quot;Recover&quot;) all failed messages starting from a given date.</p>
+<h2 id='troubleshooting-tips'>Troubleshooting Tips</h2>
+<p>There are some common reasons why your webhook endpoint is failing:</p>
+<h3 id='not-using-the-raw-payload-body'>Not using the raw payload body</h3>
+<p>This is the most common issue. When generating the signed content, we use the raw string body of the message payload.</p>
+
+<p>If you convert JSON payloads into strings using methods like stringify, different implementations may produce different string representations of the JSON object, which can lead to discrepancies when verifying the signature. It&#39;s crucial to verify the payload exactly as it was sent, byte-for-byte or string-for-string, to ensure accurate verification.</p>
+<h3 id='missing-the-secret-key'>Missing the secret key</h3>
+<p>From time to time we see people simple using the wrong secret key. Remember that keys are unique to endpoints.</p>
+<h3 id='sending-the-wrong-response-codes'>Sending the wrong response codes</h3>
+<p>When we receive a response with a 2xx status code, we interpret that as a successful delivery even if you indicate a failure in the response payload. Make sure to use the right response status codes so we know when message are supposed to succeed vs fail.</p>
+<h3 id='responses-timing-out'>Responses timing out</h3>
+<p>We will consider any message that fails to send a response within {timeout duration} a failed message. If your endpoint is also processing complicated workflows, it may timeout and result in failed messages.</p>
+
+<p>We suggest having your endpoint simply receive the message and add it to a queue to be processed asynchronously so you can respond promptly and avoiding getting timed out.</p>
+<h2 id='failure-recovery'>Failure Recovery</h2><h3 id='re-enable-a-disabled-endpoint'>Re-enable a disabled endpoint</h3>
+<p>If all attempts to a specific endpoint fail for a period of 5 days, the endpoint will be disabled. To re-enable a disabled endpoint, go to the webhook dashboard, find the endpoint from the list and select &quot;Enable Endpoint&quot;.</p>
+<h3 id='recovering-resending-failed-messages'>Recovering/Resending failed messages</h3><h4 id='why-replay'>Why Replay</h4>
+<ul>
+<li>  If your service has downtime</li>
+<li>  If your endpoint was misconfigured</li>
+</ul>
+
+<p>If you want to replay a single event, you can find the message from the UI and click the options menu next to any of the attempts.</p>
+
+<p><img src="https://docs.svix.com/assets/images/resend-single-a4fb6e65f27f27e5700becb523135c2f.png" alt="resend message" /></p>
+
+<p>From there, click &quot;resend&quot; to have the same message send to your endpoint again.</p>
+
+<p>If you need to recover from a service outage and want to replay all the events since a given time, you can do so from the Endpoint page. On an endpoint&#39;s details page, click  <code>Options &gt; Recover Failed Messages</code>.</p>
+
+<p><img src="https://docs.svix.com/assets/images/replay-modal-fa510bd82e4eccbbb01df28581ad8901.png" alt="recover modal" /></p>
+
+<p>From there, you can choose a time window to recover from.</p>
+
+<p>For a more granular recovery - for example, if you know the exact timestamp that you want to recover from - you can click the options menu on any message from the endpoint page. From there, you can click &quot;Replay...&quot; and choose to &quot;Replay all failed messages since this time.&quot;</p>
 <h1 id='examples-for-instrument-update-messages'>Examples for Instrument Update Messages</h1><h2 id='bulk_block-updatetype'>BULK_BLOCK - updateType:</h2>
 <p>Example for Update Type - BULK_BLOCK</p>
 
@@ -1009,143 +1147,7 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
   </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718709410</span><span class="p">,</span><span class="w">
   </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEY_UPDATE"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
-<p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a></p>
-<h2 id='introduction-to-sq-hive-webhooks'>Introduction to SQ Hive Webhooks</h2>
-<p>Webhooks are how services notify each other of events. At their core they are just a  <code>POST</code>  request to a pre-determined endpoint. The endpoint can be whatever you want, and you can just  <a href="#adding-an-endpoint">add them from the UI</a>. You normally use one endpoint per service, and that endpoint listens to all of the event types. For example, if you receive webhooks from Acme Inc., you can structure your URL like:  <code>https://www.example.com/acme/webhooks/</code>.</p>
-
-<p>The way to indicate that a webhook has been processed is by returning a  <code>2xx</code>  (status code  <code>200-299</code>) response to the webhook message within a reasonable time-frame (15s). It&#39;s also important to disable  <code>CSRF</code>  protection for this endpoint if the framework you use enables them by default.</p>
-
-<p>Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  <a href="#webhook-signature-verification">webhook signature verification</a>.</p>
-<h2 id='webhook-events'>Webhook Events</h2>
-<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "creationTimestamp": 1717247896,
-  "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
-  "eventType": "V1_INSTRUMENT_UPDATE_CREATED",
-  "payload": {
-    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
-    "creationTime": 1717247895,
-    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
-    "filterCategory": "ANALYTICAL_UPDATE",
-    "id": "584732514325722439",
-    "lastUpdateTime": 0,
-    "linkDetail": {
-      "shortLink": "https://sqst.in/F08qo"
-    },
-    "scripDetails": {
-      "bseScripCode": "543287",
-      "bseTickr": "LODHA",
-      "isin": "INE670K01029",
-      "nseTickr": "LODHA",
-      "scripName": "Macrotech Developers Limited"
-    },
-    "title": "Macrotech Developers Limited",
-    "updateType": "CONCALL_SUMMARY"
-  }
-}
-</code></pre></div><h2 id='adding-an-endpoint'>Adding an Endpoint</h2>
-<p>In order to start listening to messages sent through Svix, you will need to configure your  <strong>endpoints</strong>.</p>
-
-<p>Adding an endpoint is as simple as providing a URL that you control and a list of  <strong>event types</strong>  that you want to listen to.</p>
-
-<p><img src="https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png" alt="add endpoint" /></p>
-
-<blockquote>
-<p>Helpful Tip!</p>
-
-<p>If you don&#39;t have a URL or your service isn&#39;t quite ready to start receiving events just yet, just press the  <strong>with Svix Play</strong>  button to have a unique URL generated for you.</p>
-
-<p>You&#39;ll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.</p>
-</blockquote>
-
-<p>If you don&#39;t specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.</p>
-<h3 id='testing-your-endpoint'>Testing your Endpoint</h3>
-<p>The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.</p>
-
-<p>That&#39;s why we have a &quot;Testing&quot; tab for you to send example events to your endpoint.</p>
-
-<p><img src="https://docs.svix.com/assets/images/testing-endpoint-3f325ed4f08a4b9c57c49a3dd8ef2e9f.png" alt="testing endpoint" /></p>
-
-<p>After sending an example event, you can click into the message to view the message payload, all of the message attempts, and whether it succeeded or failed.</p>
-<h2 id='webhook-signature-verification'>Webhook Signature Verification</h2>
-<p>Webhook signatures is your way to verify that webhook messages are sent by us. For a more detailed explanation, check out this article on <a href="https://docs.svix.com/receiving/verifying-payloads/why">why you should verify webhooks</a>.</p>
-<h3 id='how-to-verify-webhooks-with-svix-libraries'>How to verify webhooks with Svix Libraries</h3>
-<p>Our webhook partner Svix offers a set of useful libraries that make verifying webhooks very simple. Here is a an example using Javascript:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>import { Webhook } from "svix";
-
-const secret = "whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw";
-
-// These were all sent from the server
-const headers = {
-"svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
-"svix-timestamp": "1614265330",
-"svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
-};
-const payload = '{"test": 2432232314}';
-
-const wh = new Webhook(secret);
-// Throws on error, returns the verified content on success
-const payload = wh.verify(payload, headers);
-</code></pre></div>
-<p>For more instructions and examples of how to verify signatures, check out their <a href="https://docs.svix.com/receiving/verifying-payloads/how">webhook verification documentation</a>.</p>
-<h2 id='retries'>Retries</h2>
-<p>Svix attempts to deliver each webhook message based on a retry schedule with exponential backoff.</p>
-<h3 id='the-schedule'>The schedule</h3>
-<p>Each message is attempted based on the following schedule, where each period is started following the failure of the preceding attempt:</p>
-
-<ul>
-<li>  Immediately</li>
-<li>  5 seconds</li>
-<li>  5 minutes</li>
-<li>  30 minutes</li>
-<li>  2 hours</li>
-<li>  5 hours</li>
-<li>  10 hours</li>
-<li>  10 hours (in addition to the previous)</li>
-</ul>
-
-<p>If an endpoint is removed or disabled delivery attempts to the endpoint will be disabled as well.</p>
-
-<p>For example, an attempt that fails three times before eventually succeeding will be delivered roughly 35 minutes and 5 seconds following the first attempt.</p>
-<h3 id='manual-retries'>Manual retries</h3>
-<p>You can also use the application portal to manually retry each message at any time, or automatically retry (&quot;Recover&quot;) all failed messages starting from a given date.</p>
-<h2 id='troubleshooting-tips'>Troubleshooting Tips</h2>
-<p>There are some common reasons why your webhook endpoint is failing:</p>
-<h3 id='not-using-the-raw-payload-body'>Not using the raw payload body</h3>
-<p>This is the most common issue. When generating the signed content, we use the raw string body of the message payload.</p>
-
-<p>If you convert JSON payloads into strings using methods like stringify, different implementations may produce different string representations of the JSON object, which can lead to discrepancies when verifying the signature. It&#39;s crucial to verify the payload exactly as it was sent, byte-for-byte or string-for-string, to ensure accurate verification.</p>
-<h3 id='missing-the-secret-key'>Missing the secret key</h3>
-<p>From time to time we see people simple using the wrong secret key. Remember that keys are unique to endpoints.</p>
-<h3 id='sending-the-wrong-response-codes'>Sending the wrong response codes</h3>
-<p>When we receive a response with a 2xx status code, we interpret that as a successful delivery even if you indicate a failure in the response payload. Make sure to use the right response status codes so we know when message are supposed to succeed vs fail.</p>
-<h3 id='responses-timing-out'>Responses timing out</h3>
-<p>We will consider any message that fails to send a response within {timeout duration} a failed message. If your endpoint is also processing complicated workflows, it may timeout and result in failed messages.</p>
-
-<p>We suggest having your endpoint simply receive the message and add it to a queue to be processed asynchronously so you can respond promptly and avoiding getting timed out.</p>
-<h2 id='failure-recovery'>Failure Recovery</h2><h3 id='re-enable-a-disabled-endpoint'>Re-enable a disabled endpoint</h3>
-<p>If all attempts to a specific endpoint fail for a period of 5 days, the endpoint will be disabled. To re-enable a disabled endpoint, go to the webhook dashboard, find the endpoint from the list and select &quot;Enable Endpoint&quot;.</p>
-<h3 id='recovering-resending-failed-messages'>Recovering/Resending failed messages</h3><h4 id='why-replay'>Why Replay</h4>
-<ul>
-<li>  If your service has downtime</li>
-<li>  If your endpoint was misconfigured</li>
-</ul>
-
-<p>If you want to replay a single event, you can find the message from the UI and click the options menu next to any of the attempts.</p>
-
-<p><img src="https://docs.svix.com/assets/images/resend-single-a4fb6e65f27f27e5700becb523135c2f.png" alt="resend message" /></p>
-
-<p>From there, click &quot;resend&quot; to have the same message send to your endpoint again.</p>
-
-<p>If you need to recover from a service outage and want to replay all the events since a given time, you can do so from the Endpoint page. On an endpoint&#39;s details page, click  <code>Options &gt; Recover Failed Messages</code>.</p>
-
-<p><img src="https://docs.svix.com/assets/images/replay-modal-fa510bd82e4eccbbb01df28581ad8901.png" alt="recover modal" /></p>
-
-<p>From there, you can choose a time window to recover from.</p>
-
-<p>For a more granular recovery - for example, if you know the exact timestamp that you want to recover from - you can click the options menu on any message from the endpoint page. From there, you can click &quot;Replay...&quot; and choose to &quot;Replay all failed messages since this time.&quot;</p>
-
+</span></code></pre></div>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
