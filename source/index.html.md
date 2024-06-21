@@ -350,6 +350,8 @@ In order to start listening to messages webhook messages sent by SQ Hive, you wi
 
 Adding an endpoint is as simple as providing a URL that you control and a list of  **event types**  that you want to listen to.
 
+You can add your endpoint from your [webhooks dashboard](#dashboard)
+
 ![add endpoint](https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png)
 
 
@@ -364,15 +366,6 @@ You can also use service like <code>ngrok</code> to start recieving webhooks.
 </aside>
 
 If you don't specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.
-
-## Dashboard
-You can setup webhook, via the portal. 
-To access the webportal, user name and password will be shared with you during onboarding. 
-You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
-
-## Demo Dashboard Access
-You can access a demo dashboard by visiting: [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in) with `username:sq-hive-demo` and `password:sq-hive-demo`
-
 
 ### Testing your Endpoint
 The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.
@@ -407,6 +400,15 @@ const wh = new Webhook(secret);
 const payload = wh.verify(payload, headers);
 ```
 For more instructions and examples of how to verify signatures, check out their [webhook verification documentation](https://docs.svix.com/receiving/verifying-payloads/how).
+
+## Dashboard
+You can setup webhook, via the portal. 
+To access the webportal, user name and password will be shared with you during onboarding. 
+You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
+
+### Demo Dashboard Access
+You can access a demo dashboard by visiting: [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in) with `username:sq-hive-demo` and `password:sq-hive-demo`
+
 
 ## Retries
 SQ Hive attempts to deliver each webhook message based on a retry schedule with exponential backoff.
