@@ -301,11 +301,6 @@ totalPages | Total pages for the available result
 View these calls [in postman](https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&entityType=collection)
 
 
-# Webhooks
-
-## Portal
-You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
-
 # Examples for Instrument Update Messages 
 
 ## BULK_BLOCK - updateType:
@@ -571,3 +566,167 @@ Some concall highlights where highlights are present in the link
   "filterCategory": "KEY_UPDATE"
 }
 ```  
+
+
+
+# Webhooks
+
+## Portal
+You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
+
+
+## Introduction to SQ Hive Webhooks
+Webhooks are how services notify each other of events. At their core they are just a  `POST`  request to a pre-determined endpoint. The endpoint can be whatever you want, and you can just  [add them from the UI](#adding-an-endpoint). You normally use one endpoint per service, and that endpoint listens to all of the event types. For example, if you receive webhooks from Acme Inc., you can structure your URL like:  `https://www.example.com/acme/webhooks/`.
+
+The way to indicate that a webhook has been processed is by returning a  `2xx`  (status code  `200-299`) response to the webhook message within a reasonable time-frame (15s). It's also important to disable  `CSRF`  protection for this endpoint if the framework you use enables them by default.
+
+Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  [webhook signature verification](#webhook-signature-verification).
+
+## Webhook Events
+We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`:
+
+```
+{
+  "creationTimestamp": 1717247896,
+  "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
+  "eventType": "V1_INSTRUMENT_UPDATE_CREATED",
+  "payload": {
+    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
+    "creationTime": 1717247895,
+    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
+    "filterCategory": "ANALYTICAL_UPDATE",
+    "id": "584732514325722439",
+    "lastUpdateTime": 0,
+    "linkDetail": {
+      "shortLink": "https://sqst.in/F08qo"
+    },
+    "scripDetails": {
+      "bseScripCode": "543287",
+      "bseTickr": "LODHA",
+      "isin": "INE670K01029",
+      "nseTickr": "LODHA",
+      "scripName": "Macrotech Developers Limited"
+    },
+    "title": "Macrotech Developers Limited",
+    "updateType": "CONCALL_SUMMARY"
+  }
+}
+```
+
+
+
+## Adding an Endpoint
+In order to start listening to messages sent through Svix, you will need to configure your  **endpoints**.
+
+Adding an endpoint is as simple as providing a URL that you control and a list of  **event types**  that you want to listen to.
+
+![add endpoint](https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png)
+
+>Helpful Tip!
+>
+>If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the  **with Svix Play**  button to have a unique URL generated for you.
+>
+>You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
+
+If you don't specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.
+
+### Testing your Endpoint
+The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.
+
+That's why we have a "Testing" tab for you to send example events to your endpoint.
+
+![testing endpoint](https://docs.svix.com/assets/images/testing-endpoint-3f325ed4f08a4b9c57c49a3dd8ef2e9f.png)
+
+After sending an example event, you can click into the message to view the message payload, all of the message attempts, and whether it succeeded or failed.
+
+## Webhook Signature Verification
+Webhook signatures is your way to verify that webhook messages are sent by us. For a more detailed explanation, check out this article on [why you should verify webhooks](https://docs.svix.com/receiving/verifying-payloads/why).
+
+### How to verify webhooks with Svix Libraries
+Our webhook partner Svix offers a set of useful libraries that make verifying webhooks very simple. Here is a an example using Javascript:
+
+```
+import { Webhook } from "svix";
+
+const secret = "whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw";
+
+// These were all sent from the server
+const headers = {
+"svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
+"svix-timestamp": "1614265330",
+"svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+};
+const payload = '{"test": 2432232314}';
+
+const wh = new Webhook(secret);
+// Throws on error, returns the verified content on success
+const payload = wh.verify(payload, headers);
+```
+For more instructions and examples of how to verify signatures, check out their [webhook verification documentation](https://docs.svix.com/receiving/verifying-payloads/how).
+
+## Retries
+Svix attempts to deliver each webhook message based on a retry schedule with exponential backoff.
+
+### The schedule
+Each message is attempted based on the following schedule, where each period is started following the failure of the preceding attempt:
+
+-   Immediately
+-   5 seconds
+-   5 minutes
+-   30 minutes
+-   2 hours
+-   5 hours
+-   10 hours
+-   10 hours (in addition to the previous)
+
+If an endpoint is removed or disabled delivery attempts to the endpoint will be disabled as well.
+
+For example, an attempt that fails three times before eventually succeeding will be delivered roughly 35 minutes and 5 seconds following the first attempt.
+
+### Manual retries
+You can also use the application portal to manually retry each message at any time, or automatically retry ("Recover") all failed messages starting from a given date.
+
+## Troubleshooting Tips
+There are some common reasons why your webhook endpoint is failing:
+
+### Not using the raw payload body
+This is the most common issue. When generating the signed content, we use the raw string body of the message payload.
+
+If you convert JSON payloads into strings using methods like stringify, different implementations may produce different string representations of the JSON object, which can lead to discrepancies when verifying the signature. It's crucial to verify the payload exactly as it was sent, byte-for-byte or string-for-string, to ensure accurate verification.
+
+### Missing the secret key
+From time to time we see people simple using the wrong secret key. Remember that keys are unique to endpoints.
+
+### Sending the wrong response codes
+When we receive a response with a 2xx status code, we interpret that as a successful delivery even if you indicate a failure in the response payload. Make sure to use the right response status codes so we know when message are supposed to succeed vs fail.
+
+### Responses timing out
+We will consider any message that fails to send a response within {timeout duration} a failed message. If your endpoint is also processing complicated workflows, it may timeout and result in failed messages.
+
+We suggest having your endpoint simply receive the message and add it to a queue to be processed asynchronously so you can respond promptly and avoiding getting timed out.
+
+## Failure Recovery
+
+### Re-enable a disabled endpoint
+If all attempts to a specific endpoint fail for a period of 5 days, the endpoint will be disabled. To re-enable a disabled endpoint, go to the webhook dashboard, find the endpoint from the list and select "Enable Endpoint".
+
+### Recovering/Resending failed messages
+
+#### Why Replay
+
+-   If your service has downtime
+-   If your endpoint was misconfigured
+
+If you want to replay a single event, you can find the message from the UI and click the options menu next to any of the attempts.
+
+![resend message](https://docs.svix.com/assets/images/resend-single-a4fb6e65f27f27e5700becb523135c2f.png)
+
+From there, click "resend" to have the same message send to your endpoint again.
+
+If you need to recover from a service outage and want to replay all the events since a given time, you can do so from the Endpoint page. On an endpoint's details page, click  `Options > Recover Failed Messages`.
+
+![recover modal](https://docs.svix.com/assets/images/replay-modal-fa510bd82e4eccbbb01df28581ad8901.png)
+
+From there, you can choose a time window to recover from.
+
+For a more granular recovery - for example, if you know the exact timestamp that you want to recover from - you can click the options menu on any message from the endpoint page. From there, you can click "Replay..." and choose to "Replay all failed messages since this time."
