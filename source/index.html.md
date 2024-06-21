@@ -404,11 +404,14 @@ For more instructions and examples of how to verify signatures, check out their 
 ## Dashboard
 You can setup webhook, via the portal. 
 To access the webportal, user name and password will be shared with you during onboarding. 
-You can access the portal using this link [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in)
+You can access the portal using this link [dashboard.hive.scoutquest.in](https://dashboard.hive.scoutquest.in)
 
 ### Demo Dashboard Access
-You can access a demo dashboard by visiting: [dashboard.hive.scoutquest.in](dashboard.hive.scoutquest.in) with `username:sq-hive-demo` and `password:sq-hive-demo`
+You can access a demo dashboard by visiting: [dashboard.hive.scoutquest.in](https://dashboard.hive.scoutquest.in) with `username` - `sq-hive-demo` and `password` - `sq-hive-demo`. This demo dashboard will let you explore the functionalities.
 
+<aside class="notice">
+The demo dashboard is only for viewing and introductory purpose. Your actual credentials will be shared with you during your onboarding. 
+</aside>
 
 ## Retries
 SQ Hive attempts to deliver each webhook message based on a retry schedule with exponential backoff.
