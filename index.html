@@ -346,9 +346,6 @@
             <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#portal" class="toc-h2 toc-link" data-title="Portal">Portal</a>
-                  </li>
-                  <li>
                     <a href="#introduction-to-sq-hive-webhooks" class="toc-h2 toc-link" data-title="Introduction to SQ Hive Webhooks">Introduction to SQ Hive Webhooks</a>
                   </li>
                   <li>
@@ -356,6 +353,12 @@
                   </li>
                   <li>
                     <a href="#adding-an-endpoint" class="toc-h2 toc-link" data-title="Adding an Endpoint">Adding an Endpoint</a>
+                  </li>
+                  <li>
+                    <a href="#dashboard" class="toc-h2 toc-link" data-title="Dashboard">Dashboard</a>
+                  </li>
+                  <li>
+                    <a href="#demo-dashboard-access" class="toc-h2 toc-link" data-title="Demo Dashboard Access">Demo Dashboard Access</a>
                   </li>
                   <li>
                     <a href="#webhook-signature-verification" class="toc-h2 toc-link" data-title="Webhook Signature Verification">Webhook Signature Verification</a>
@@ -742,11 +745,11 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 </tr>
 </tbody></table>
 
-<aside class="warn">
-New `updateType` and `filterCategory` can be added without prior notice. Old `updateType` and `filterCategory` will not be altered without prior notice.
+<aside class="warning">
+New <code>updateType</code> and <code>filterCategory</code> can be added without prior notice. Old <code>>updateType</code> and <code>filterCategory</code> will not be altered without prior notice.
 </aside>
 
-<aside class="error">
+<aside class="warning">
 Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
 </aside>
 
@@ -775,9 +778,7 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
 </tbody></table>
 <h3 id='postman'>Postman</h3>
 <p>View these calls <a href="https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&amp;entityType=collection">in postman</a></p>
-<h1 id='webhooks'>Webhooks</h1><h2 id='portal'>Portal</h2>
-<p>You can setup webhook, via the portal. To access the webportal, user name and password will be shared with you during onboarding. You can access the portal using this link <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a></p>
-<h2 id='introduction-to-sq-hive-webhooks'>Introduction to SQ Hive Webhooks</h2>
+<h1 id='webhooks'>Webhooks</h1><h2 id='introduction-to-sq-hive-webhooks'>Introduction to SQ Hive Webhooks</h2>
 <p>Webhooks are how services notify each other of events. At their core they are just a  <code>POST</code>  request to a pre-determined endpoint. The endpoint can be whatever you want, and you can just  <a href="#adding-an-endpoint">add them from the UI</a>. You normally use one endpoint per service, and that endpoint listens to all of the event types. For example, if you receive webhooks from Acme Inc., you can structure your URL like:  <code>https://www.example.com/acme/webhooks/</code>.</p>
 
 <p>The way to indicate that a webhook has been processed is by returning a  <code>2xx</code>  (status code  <code>200-299</code>) response to the webhook message within a reasonable time-frame (15s). It&#39;s also important to disable  <code>CSRF</code>  protection for this endpoint if the framework you use enables them by default.</p>
@@ -821,17 +822,23 @@ Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale a
 
 <p><img src="https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png" alt="add endpoint" /></p>
 
-<aside class="warn">
+<aside class="notice">
 Helpful Tip!
 <br>
-    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play<code> button to have a unique URL generated for you.
+    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play</code> button to have a unique URL generated for you.
 <br>
 You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
 <br>
-You can also use service like <code>ngrok<code> to start recieving webhooks.
+You can also use service like <code>ngrok</code> to start recieving webhooks.
 </aside>
 
 <p>If you don&#39;t specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.</p>
+<h2 id='dashboard'>Dashboard</h2>
+<p>You can setup webhook, via the portal. 
+To access the webportal, user name and password will be shared with you during onboarding. 
+You can access the portal using this link <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a></p>
+<h2 id='demo-dashboard-access'>Demo Dashboard Access</h2>
+<p>You can access a demo dashboard by visiting: <a href="dashboard.hive.scoutquest.in">dashboard.hive.scoutquest.in</a> with <code>username:sq-hive-demo</code> and <code>password:sq-hive-demo</code></p>
 <h3 id='testing-your-endpoint'>Testing your Endpoint</h3>
 <p>The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.</p>
 
