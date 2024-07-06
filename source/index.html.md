@@ -244,6 +244,13 @@ This endpoint retrieves all instrument updates fittng your query description. Re
 
 `GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates`
 
+### Possible Querys
+
+1. Get updates for a given time period (using `fromTime` and `toTime`)
+2. Get data for a specific update (`messageId`)
+3. Get updates before/after a specific update (`messageId` + `expression`)
+4. Get updates for a specific scrip (`scripIdType` + `scripId`)
+
 ### Query Parameters
 
 Parameter | Default | Description
@@ -253,8 +260,11 @@ pageSize | 200 | No of results to be returned in a single page. You can fetch mo
 sortDirection | DESC | Direction for the sorting of messages wth respect to the time when the message was created. `DESC` will return the results with the latest update messages at the top. Possible values (`ASC`, `DESC`)
 fromTime | - | Used when you need updates within a time range. `toTime` query must also be present if `fromTime` is mentioned
 toTime | - | Used when you need updates within a time range. `fromTime` query must also be present if `toTime` is mentioned
-messageId | - | Used to fetch all messages created after a `messageId`. Useful when you have processed messages uptil a certain message and now need to process messages after it. `expression` query parameter is control this behaviour. If `expression` value is not passed, By default all messages after a message are returned i.e. `expression` will be considered to be GT.
+messageId | - | Used to fetch messages equal to, or chronologically before/after a `messageId`. Useful when you have processed messages uptil a certain message and now need to process messages after it or you need to lookup a specific update based on `messagesId`. `expression` query parameter is control this behaviour. If `expression` value is not passed, By default only data for a given messageId will be passed i.e. `expression` will be considered to be `EQ`.
 expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
+expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
+scripIdType | - | Useful when you want to query updates for a particular scrip. This property will signify which type of ID will you be using to pass the scrip identifier. Possible values: `BSE_SCRIP_CODE`,`BSE_TICKR`
+scripId | - | Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass `BSE_SCRIP_CODE` as the `scripIdType`, you need to pass the BSE Scrip code, example the scrip code for [reliance](https://www.bseindia.com/stock-share-price/reliance-industries-ltd/reliance/500325/) is 500325 
 
 
 ### Response Object
