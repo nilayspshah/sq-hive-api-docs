@@ -631,6 +631,13 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <p>This endpoint retrieves all instrument updates fittng your query description. Results are returned in paginated formate.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates</code></p>
+<h3 id='possible-querys'>Possible Querys</h3>
+<ol>
+<li>Get updates for a given time period (using <code>fromTime</code> and <code>toTime</code>)</li>
+<li>Get data for a specific update (<code>messageId</code>)</li>
+<li>Get updates before/after a specific update (<code>messageId</code> + <code>expression</code>)</li>
+<li>Get updates for a specific scrip (<code>scripIdType</code> + <code>scripId</code>)</li>
+</ol>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -667,12 +674,27 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <tr>
 <td>messageId</td>
 <td>-</td>
-<td>Used to fetch all messages created after a <code>messageId</code>. Useful when you have processed messages uptil a certain message and now need to process messages after it. <code>expression</code> query parameter is control this behaviour. If <code>expression</code> value is not passed, By default all messages after a message are returned i.e. <code>expression</code> will be considered to be GT.</td>
+<td>Used to fetch messages equal to, or chronologically before/after a <code>messageId</code>. Useful when you have processed messages uptil a certain message and now need to process messages after it or you need to lookup a specific update based on <code>messagesId</code>. <code>expression</code> query parameter is control this behaviour. If <code>expression</code> value is not passed, By default only data for a given messageId will be passed i.e. <code>expression</code> will be considered to be <code>EQ</code>.</td>
 </tr>
 <tr>
 <td>expression</td>
 <td>-</td>
 <td>Used in conjuction with <code>messageId</code>. Controls the behviour of wether you want to get messages created after a given <code>messageId</code> or before. Possible values: (<code>GT</code>,<code>GOE</code>,<code>LT</code>,<code>LOE</code>,<code>EQ</code>); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of <code>expression</code> is passed without <code>messageId</code> , it will be ignored.</td>
+</tr>
+<tr>
+<td>expression</td>
+<td>-</td>
+<td>Used in conjuction with <code>messageId</code>. Controls the behviour of wether you want to get messages created after a given <code>messageId</code> or before. Possible values: (<code>GT</code>,<code>GOE</code>,<code>LT</code>,<code>LOE</code>,<code>EQ</code>); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of <code>expression</code> is passed without <code>messageId</code> , it will be ignored.</td>
+</tr>
+<tr>
+<td>scripIdType</td>
+<td>-</td>
+<td>Useful when you want to query updates for a particular scrip. This property will signify which type of ID will you be using to pass the scrip identifier. Possible values: <code>BSE_SCRIP_CODE</code>,<code>BSE_TICKR</code></td>
+</tr>
+<tr>
+<td>scripId</td>
+<td>-</td>
+<td>Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass <code>BSE_SCRIP_CODE</code> as the <code>scripIdType</code>, you need to pass the BSE Scrip code, example the scrip code for <a href="https://www.bseindia.com/stock-share-price/reliance-industries-ltd/reliance/500325/">reliance</a> is 500325</td>
 </tr>
 </tbody></table>
 <h3 id='response-object'>Response Object</h3>
