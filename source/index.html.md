@@ -244,7 +244,7 @@ This endpoint retrieves all instrument updates fittng your query description. Re
 
 `GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates`
 
-### Possible Querys
+### Possible Queries
 
 1. Get updates for a given time period (using `fromTime` and `toTime`)
 2. Get data for a specific update (`messageId`)
