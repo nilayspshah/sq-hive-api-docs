@@ -28,7 +28,7 @@ generator: widdershins v4.0.1
 
 
 ## Introduction
-SQ Hive allows developers to access to capital market stock specific news at lightening speed via Webhooks and API. 
+SQ hive allows developers to access ScoutQuest’s AI powered high quality, actionable and de-noised capital market insights at lightning fast speeds. 
 
 ## Characteristics
 Updates provided by us has the following characteristics:
