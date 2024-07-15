@@ -82,7 +82,10 @@ SQ Hive expects for the API key to be included in all API requests to the server
 You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
 
-You can request for an API Key by mailing to us at sq@fundsmap.com if its not already shared with you.
+<aside class="warning">
+You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending  <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20API%20keys%20for%20SQ%20Hive">us a whatsapp at 918779170796</a> if its not already shared with you. 
+</aside>
+
 
 ## Get Instrument Update Messages
 
