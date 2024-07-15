@@ -291,7 +291,7 @@ creationTime | Creation time of the update in epoch format
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`. 
 
 <aside class="warning">
-New <code>updateType</code> and <code>filterCategory</code> can be added without prior notice. Old <code>>updateType</code> and <code>filterCategory</code> will not be altered without prior notice.
+New <code>updateType</code> and <code>filterCategory</code> can be added without prior notice. Old <code>updateType</code> and <code>filterCategory</code> will not be altered without prior notice.
 </aside>
 <aside class="warning">
 Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
@@ -322,6 +322,11 @@ Webhooks are how services notify each other of events. At their core they are ju
 The way to indicate that a webhook has been processed is by returning a  `2xx`  (status code  `200-299`) response to the webhook message within a reasonable time-frame (15s). It's also important to disable  `CSRF`  protection for this endpoint if the framework you use enables them by default.
 
 Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  [webhook signature verification](#webhook-signature-verification).
+
+<aside class="warning">
+You can request for webhook access by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">whatsapp at 918779170796</a>, if you don't already have it.
+</aside>
+
 
 ## Webhook Events
 We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
