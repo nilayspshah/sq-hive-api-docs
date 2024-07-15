@@ -193,7 +193,6 @@ Response response = client.newCall(request).execute();
             "linkDetail": {
                 "shortLink": "https://sqst.in/4PRQX"
             },
-            "updateType": "CORPORATE_ANNOUNCEMENT",
             "creationTime": 1718292418,
         },
         {
@@ -211,7 +210,6 @@ Response response = client.newCall(request).execute();
             "linkDetail": {
                 "shortLink": "https://sqst.in/SIKoq"
             },
-            "updateType": "CORPORATE_ANNOUNCEMENT",
             "creationTime": 1718292417,
             "filterCategory": "UNCLASSIFIED"
         },
@@ -230,7 +228,6 @@ Response response = client.newCall(request).execute();
             "linkDetail": {
                 "shortLink": "https://sqst.in/e31EG"
             },
-            "updateType": "GENERAL_NEWS",
             "creationTime": 1718292415,
             "filterCategory": "MEDIA_COVERAGE"
         }
@@ -265,7 +262,6 @@ fromTime | - | Used when you need updates within a time range. `toTime` query mu
 toTime | - | Used when you need updates within a time range. `fromTime` query must also be present if `toTime` is mentioned
 messageId | - | Used to fetch messages equal to, or chronologically before/after a `messageId`. Useful when you have processed messages uptil a certain message and now need to process messages after it or you need to lookup a specific update based on `messagesId`. `expression` query parameter is control this behaviour. If `expression` value is not passed, By default only data for a given messageId will be passed i.e. `expression` will be considered to be `EQ`.
 expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
-expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
 scripIdType | - | Useful when you want to query updates for a particular scrip. This property will signify which type of ID will you be using to pass the scrip identifier. Possible values: `BSE_SCRIP_CODE`,`BSE_TICKR`
 scripId | - | Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass `BSE_SCRIP_CODE` as the `scripIdType`, you need to pass the BSE Scrip code, in case of [Tata Motors Ltd.](https://www.bseindia.com/stock-share-price/tata-motors-ltd/tatamotors/500570/) `BSE_SCRIP_CODE` is 500570 and `BSE_TICKR` is TATAMOTORS. You can refer to Instrument Masters like Bhavcopy or Scrip master(SCRIP.zip) from [this BSE site] (https://www.bseindia.com/members/index.aspx)
 
@@ -277,8 +273,8 @@ The update will have 4 main components - `title`, `description`, `content`, `lin
 Field | Description
 --------- | -----------
 id | ID of the instrument update message
-title | Can be thought of as the heading, In most cases gives the Long Name of the company
-description | Can be thought of as the sub-heading. In most cases it gives the type of the update
+title | Will return the long name of the company
+description | Will return the type of the update
 content | This field has the details about the update
 scripDetails.bseScripCode | Gives BSE scrip code of the company if present, else null
 scripDetails.scripName | Gives the long scrip name 
@@ -286,17 +282,15 @@ scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
 scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
 scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
-updateType | Type of the Update. Possible values: `ANALYST_VIEWS, BULK_BLOCK, CONCALL_HIGHLIGHTS, CONCALL_SUMMARY, CORPORATE_ANNOUNCEMENT, FUTURE_OUTLOOK, GENERAL_NEWS, SQ_SPVMA_INTRADAY_VOLUME_SPURT, TECHNICAL_ANALYSIS, TWEET`. Read More in the [Examples section](#examples-for-instrument-update-messages). 
 creationTime | Creation time of the update in epoch format
-filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`. 
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
 
 <aside class="warning">
-New <code>updateType</code> and <code>filterCategory</code> can be added without prior notice. Old <code>updateType</code> and <code>filterCategory</code> will not be altered without prior notice.
+New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
 </aside>
 <aside class="warning">
 Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
 </aside>
-
 
 
 - Pagination Related fields
@@ -355,8 +349,7 @@ We have a variety of event types that you can subscribe to. For example, one suc
       "nseTickr": "LODHA",
       "scripName": "Macrotech Developers Limited"
     },
-    "title": "Macrotech Developers Limited",
-    "updateType": "CONCALL_SUMMARY"
+    "title": "Macrotech Developers Limited"
   }
 }
 ```
@@ -497,12 +490,12 @@ From there, you can choose a time window to recover from.
 
 For a more granular recovery - for example, if you know the exact timestamp that you want to recover from - you can click the options menu on any message from the endpoint page. From there, you can click "Replay..." and choose to "Replay all failed messages since this time."
 
-# Examples for Instrument Update Messages 
+# Examples for Instrument Update Messages Filter Categories
 
-## BULK_BLOCK - updateType:
-Example for Update Type - BULK_BLOCK
+## KEY_UPDATE - filterCategory:
+Example for Filter Category - BULK_BLOCK
 
-> Example for Update Type - BULK_BLOCK
+> Example for Filter Category - BULK_BLOCK
 
 ```json
 {
@@ -520,43 +513,16 @@ Example for Update Type - BULK_BLOCK
   "linkDetail": {
     "shortLink": "https://sqst.in/PCxmR"
   },
-  "updateType": "BULK_BLOCK",
   "creationTime": 1718714125,
   "filterCategory": "KEY_UPDATE"
 }
 ```  
 
-## CORPORATE_ANNOUNCEMENT - updateType: 
 
-> Example for Update Type - CORPORATE_ANNOUNCEMENT: 
+## ANALYTICAL_UPDATE - filterCategory:
+Example for Filter Category - BULK_BLOCK
 
-```json
-{
-  "id": "590874081665218776",
-  "title": "KIRLOSKAR OIL ENGINES LTD.",
-  "description": "💼 Analyst / Institutional Meet",
-  "content": "Kirloskar Oil Engines Limited held a virtual meeting with Antique securities to discuss the operational overview of the company. No unpublished price sensitive information was disclosed. The meeting was in compliance with SEBI regulations.",
-  "scripDetails": {
-    "bseScripCode": "533293",
-    "scripName": "KIRLOSKAR OIL ENGINES LTD.",
-    "bseTickr": "KIRLOSENG",
-    "nseTickr": null,
-    "isin": "INE146L01010"
-  },
-  "linkDetail": {
-    "shortLink": "https://sqst.in/GixAV"
-  },
-  "updateType": "CORPORATE_ANNOUNCEMENT",
-  "creationTime": 1718712158,
-  "filterCategory": "EVENT_SCHEDULE"
-}
-```  
-
-
-## ANALYST_VIEWS - updateType
-
-
-> Example for Update Type : ANALYST_VIEWS
+> Example for Filter Category : ANALYTICAL_UPDATE
 
 ```json
 {
@@ -574,94 +540,15 @@ Example for Update Type - BULK_BLOCK
   "linkDetail": {
     "shortLink": "https://sqst.in/hyONA"
   },
-  "updateType": "ANALYST_VIEWS",
   "creationTime": 1718463903,
   "filterCategory": "ANALYTICAL_UPDATE"
 }
 ```  
 
-## CONCALL_HIGHLIGHTS  - updateType
-Some concall highlights where highlights are present in the link
+## MEDIA_COVERAGE - filterCategory:
+Example for Filter Category - EVENT_SCHEDULE
 
-> Example for Update Type : CONCALL_HIGHLIGHTS
-
-```json
-{
-  "id": "581157950889684470",
-  "title": "Waaree Renewable Technologies Ltd",
-  "description": "Concall / meeting Highlights - Waaree Renewable Technologies Ltd Q4 FY24 Earnings Conference Call Insights",
-  "content": "",
-  "scripDetails": {
-    "bseScripCode": "534618",
-    "scripName": "Waaree Renewable Technologies Ltd",
-    "bseTickr": "WAAREERTL",
-    "nseTickr": null,
-    "isin": "INE299N01013"
-  },
-  "linkDetail": {
-    "shortLink": "https://sqst.in/9nG2b"
-  },
-  "updateType": "CONCALL_HIGHLIGHTS",
-  "creationTime": 1716395652,
-  "filterCategory": "ANALYTICAL_UPDATE"
-}
-```  
-
-## CONCALL_SUMMARY - updateType
-
-> Example for Update Type : CONCALL_SUMMARY
-
-```json
-{
-  "id": "588270483341468106",
-  "title": "IFB Industries Ltd ",
-  "description": "IFB Industries Ltd Earnings Conference Call Q4FY24",
-  "content": "IFB Industries Limited reported Q4 FY24 revenue of Rs.1,066.68 crore, up 7.28% YoY, with EBITDA at Rs.54.35 crore, up 44.93% YoY. For FY24, revenue was Rs.4,343.99 crore, up 5% YoY, with EBITDA at Rs.240.22 crore, up 31.27% YoY. The Home Appliance Division aims for 15%+ organic growth with a revised marketing strategy and cost reduction initiatives. The Engineering Division targets inorganic growth through M&A and focuses on stamping businesses. IFB Refrigeration Limited's Pune plant reached commercial production, aiming for 50,000 units per month by August 2024. Concerns include lower washer sales and delays in achieving double-digit EBITDA margins, with a focus on improving marketing effectiveness and managing rising commodity prices. The company maintains a strong net cash position and plans to decrease debt levels significantly by FY25.",
-  "scripDetails": {
-    "bseScripCode": "505726",
-    "scripName": "IFB Industries Ltd ",
-    "bseTickr": "IFBIND",
-    "nseTickr": null,
-    "isin": "INE559A01017"
-  },
-  "linkDetail": {
-    "shortLink": "https://sqst.in/0ekGz"
-  },
-  "updateType": "CONCALL_SUMMARY",
-  "creationTime": 1718091412,
-  "filterCategory": "ANALYTICAL_UPDATE"
-}
-```  
-
-## FUTURE_OUTLOOK - updateType
-
-> Example for Update Type : FUTURE_OUTLOOK
-
-```json
-{
-  "id": "588993095342152338",
-  "title": "Tata Communications Ltd ",
-  "description": "ScoutQuest Crystal Ball",
-  "content": "Tata Communications is optimistic about doubling data revenues by FY27 and expects improvements in profitability, leverage ratio, ROCE, and EBITDA margins in the medium term. The company plans to launch an AI cloud offering in India with potential for international expansion and will focus on international markets and larger enterprise customers. However, concerns include slow decision making by customers, macroeconomic headwinds, increasing competition in India, and a slowdown in CPaaS growth. The integration of subsidiaries is progressing well, and there is an ongoing strategic review of businesses and subsidiaries. The company also has a robust framework in place for investment decisions and plans to refinance debt at more attractive rates.",
-  "scripDetails": {
-    "bseScripCode": "500483",
-    "scripName": "Tata Communications Ltd ",
-    "bseTickr": "TATACOMM",
-    "nseTickr": null,
-    "isin": "INE151A01013"
-  },
-  "linkDetail": {
-    "shortLink": "https://sqst.in/Qm6Fq"
-  },
-  "updateType": "FUTURE_OUTLOOK",
-  "creationTime": 1718263696,
-  "filterCategory": "KEY_UPDATE"
-}
-```  
-
-## GENERAL_NEWS - updateType
-
-> Example for Update Type : GENERAL_NEWS
+> Example for Filter Category - EVENT_SCHEDULE
 
 ```json
  {
@@ -679,15 +566,14 @@ Some concall highlights where highlights are present in the link
   "linkDetail": {
     "shortLink": "https://sqst.in/d1d04"
   },
-  "updateType": "GENERAL_NEWS",
   "creationTime": 1718712208,
   "filterCategory": "MEDIA_COVERAGE"
 }
 ```  
 
-## SQ_SPVMA_INTRADAY_VOLUME_SPURT - updateType
+## SPVMA - filterCategory
 
-> Example for Update Type : SQ_SPVMA_INTRADAY_VOLUME_SPURT
+> Example for Filter Category : SPVMA
 
 ```json
  {
@@ -705,15 +591,41 @@ Some concall highlights where highlights are present in the link
   "linkDetail": {
     "shortLink": "https://sqst.in/CaKY8"
   },
-  "updateType": "SQ_SPVMA_INTRADAY_VOLUME_SPURT",
   "creationTime": 1718702711,
   "filterCategory": "SPVMA"
 }
+```
+
+
+## EVENT_SCHEDULE - filterCategory:
+Example for Filter Category - EVENT_SCHEDULE
+
+> Example for Filter Category - EVENT_SCHEDULE
+
+```json
+{
+  "id": "590874081665218776",
+  "title": "KIRLOSKAR OIL ENGINES LTD.",
+  "description": "💼 Analyst / Institutional Meet",
+  "content": "Kirloskar Oil Engines Limited held a virtual meeting with Antique securities to discuss the operational overview of the company. No unpublished price sensitive information was disclosed. The meeting was in compliance with SEBI regulations.",
+  "scripDetails": {
+    "bseScripCode": "533293",
+    "scripName": "KIRLOSKAR OIL ENGINES LTD.",
+    "bseTickr": "KIRLOSENG",
+    "nseTickr": null,
+    "isin": "INE146L01010"
+  },
+  "linkDetail": {
+    "shortLink": "https://sqst.in/GixAV"
+  },
+  "creationTime": 1718712158,
+  "filterCategory": "EVENT_SCHEDULE"
+}
 ```  
 
-## TECHNICAL_ANALYSIS - updateType
+## TECHNICAL_IDEA - filterCategory
 
-> Example for Update Type : TECHNICAL_ANALYSIS
+> Example for Filter Category : TECHNICAL_IDEA
 
 ```json
  {
@@ -731,36 +643,33 @@ Some concall highlights where highlights are present in the link
   "linkDetail": {
     "shortLink": "https://sqst.in/qZcls"
   },
-  "updateType": "TECHNICAL_ANALYSIS",
   "creationTime": 1716889085,
   "filterCategory": "TECHNICAL_IDEA"
 }
 ```  
 
-## TWEET - updateType
 
-> Example for Update Type : TWEET
+## UNCLASSIFIED - filterCategory
+
+> Example for Filter Category : UNCLASSIFIED
 
 ```json
  {
-  "id": "590862555566833416",
-  "title": "Craftsman Automation",
-  "description": "Tweet",
-  "content": "Craftsman Automation has initiated its QIP today with a floor price of ₹4,426.11/sh. The company aims to raise up to ₹1,200 cr through this.",
+  "id": "589113559821504865",
+  "title": "Amber Enterprises India Ltd",
+  "description": "Restructuring",
+  "content": "Intimation on pronouncement of the order dated 11 June 2024 (uploaded on website of Hon''ble NCLT on 13 June 2024) under first motion application bearing Company Application No. (CAA)67(MB)2024 ....",
   "scripDetails": {
-    "bseScripCode": "543276",
-    "scripName": "Craftsman Automation",
-    "bseTickr": "CRAFTSMAN",
+    "bseScripCode": "540902",
+    "scripName": "Amber Enterprises India Ltd",
+    "bseTickr": "AMBER",
     "nseTickr": null,
-    "isin": "INE00LO01017"
+    "isin": "INE371P01015"
   },
   "linkDetail": {
-    "shortLink": "https://sqst.in/u4cil"
+    "shortLink": "https://sqst.in/SIKoq"
   },
-  "updateType": "TWEET",
-  "creationTime": 1718709410,
-  "filterCategory": "KEY_UPDATE"
+  "creationTime": 1718292417,
+  "filterCategory": "UNCLASSIFIED"
 }
 ```  
-
-
