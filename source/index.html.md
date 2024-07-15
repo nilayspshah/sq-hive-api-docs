@@ -82,7 +82,7 @@ SQ Hive expects for the API key to be included in all API requests to the server
 You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
 
-<aside class="warning">
+<aside class="notice">
 You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending  <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20API%20keys%20for%20SQ%20Hive">us a whatsapp at 918779170796</a> if its not already shared with you. 
 </aside>
 
@@ -242,7 +242,7 @@ This endpoint retrieves all instrument updates fittng your query description. Re
 
 ### HTTP Request
 
-`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates`
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query`
 
 ### Possible Queries
 
@@ -266,16 +266,16 @@ scripIdType | - | Useful when you want to query updates for a particular scrip. 
 scripId | - | Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass `BSE_SCRIP_CODE` as the `scripIdType`, you need to pass the BSE Scrip code, in case of [Tata Motors Ltd.](https://www.bseindia.com/stock-share-price/tata-motors-ltd/tatamotors/500570/) `BSE_SCRIP_CODE` is 500570 and `BSE_TICKR` is TATAMOTORS. You can refer to Instrument Masters like Bhavcopy or Scrip master(SCRIP.zip) from [this BSE site] (https://www.bseindia.com/members/index.aspx)
 
 ### Response Object
-The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used 
+The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used. `title` + `description` will give you information about the company and the type of update that is being sent. `content` will give you details about the update.
 
 - Instrument Update Message Related Fields
 
 Field | Description
 --------- | -----------
 id | ID of the instrument update message
-title | Will return the long name of the company
-description | Will return the type of the update
-content | This field has the details about the update
+title | Gives the long name of the company. Can contain emojis characters.
+description | Gives the type of the update. Can contain emojis characters.
+content | This field has the details about the update. Can contain emojis characters.
 scripDetails.bseScripCode | Gives BSE scrip code of the company if present, else null
 scripDetails.scripName | Gives the long scrip name 
 scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
@@ -289,9 +289,11 @@ filterCategory | This field can be used to filter out certain kinds of update. P
 New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
 </aside>
 <aside class="warning">
-Use bseScripCode as the primary identifier as sometmes ISIN values maybe stale and out of sync
+Use <code>bseScripCode</code> as the primary identifier as sometmes ISIN values maybe stale and out of sync
 </aside>
-
+<aside class="warning">
+<code>title</code>,<code>description</code>,<code>content</code> can contain emoji characters so keep that in mind while serialising/deserialising and persisting. In most languages the String or String equivialent classes will handle it for you, but it's a gotcha to keep in mind.
+</aside>
 
 - Pagination Related fields
 
@@ -317,7 +319,7 @@ The way to indicate that a webhook has been processed is by returning a  `2xx`  
 
 Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  [webhook signature verification](#webhook-signature-verification).
 
-<aside class="warning">
+<aside class="notice">
 You can request for webhook access by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">whatsapp at 918779170796</a>, if you don't already have it.
 </aside>
 
@@ -493,9 +495,9 @@ For a more granular recovery - for example, if you know the exact timestamp that
 # Examples for Instrument Update Messages Filter Categories
 
 ## KEY_UPDATE - filterCategory:
-Example for Filter Category - BULK_BLOCK
+Example for Filter Category - KEY_UPDATE
 
-> Example for Filter Category - BULK_BLOCK
+> Example for Filter Category - KEY_UPDATE
 
 ```json
 {
@@ -520,7 +522,7 @@ Example for Filter Category - BULK_BLOCK
 
 
 ## ANALYTICAL_UPDATE - filterCategory:
-Example for Filter Category - BULK_BLOCK
+Example for Filter Category - ANALYTICAL_UPDATE
 
 > Example for Filter Category : ANALYTICAL_UPDATE
 
@@ -546,9 +548,9 @@ Example for Filter Category - BULK_BLOCK
 ```  
 
 ## MEDIA_COVERAGE - filterCategory:
-Example for Filter Category - EVENT_SCHEDULE
+Example for Filter Category - MEDIA_COVERAGE
 
-> Example for Filter Category - EVENT_SCHEDULE
+> Example for Filter Category - MEDIA_COVERAGE
 
 ```json
  {
@@ -624,6 +626,7 @@ Example for Filter Category - EVENT_SCHEDULE
 ```  
 
 ## TECHNICAL_IDEA - filterCategory
+Example for Filter Category - TECHNICAL_IDEA
 
 > Example for Filter Category : TECHNICAL_IDEA
 
@@ -650,6 +653,7 @@ Example for Filter Category - EVENT_SCHEDULE
 
 
 ## UNCLASSIFIED - filterCategory
+Example for Filter Category - UNCLASSIFIED
 
 > Example for Filter Category : UNCLASSIFIED
 
