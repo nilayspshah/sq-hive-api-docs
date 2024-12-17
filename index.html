@@ -743,6 +743,10 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <td>filterCategory</td>
 <td>This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>.  Read More in the <a href="#examples-for-instrument-update-messages-filter-categories">Examples section</a>.</td>
 </tr>
+<tr>
+<td>curationType</td>
+<td>Used to supress updates which are deemed less important by ScoutQuest. Possible values <code>CURATED, NON_CURATED</code>. Default value is <code>CURATED</code>. Updates are classified as <code>CURATED</code> based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. <code>NON_CURATED</code> updates includes <code>CURATED</code> updates + other updates.</td>
+</tr>
 </tbody></table>
 
 <aside class="warning">
