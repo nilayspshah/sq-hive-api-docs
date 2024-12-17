@@ -681,6 +681,11 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <td>-</td>
 <td>Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass <code>BSE_SCRIP_CODE</code> as the <code>scripIdType</code>, you need to pass the BSE Scrip code, in case of <a href="https://www.bseindia.com/stock-share-price/tata-motors-ltd/tatamotors/500570/">Tata Motors Ltd.</a> <code>BSE_SCRIP_CODE</code> is 500570 and <code>BSE_TICKR</code> is TATAMOTORS. You can refer to Instrument Masters like Bhavcopy or Scrip master(SCRIP.zip) from <a href="https://www.bseindia.com/members/index.aspx">this BSE site</a></td>
 </tr>
+<tr>
+<td>curationType</td>
+<td>CURATED</td>
+<td>Used to supress updates which are deemed less important by ScoutQuest. Possible values <code>CURATED, NON_CURATED</code>. Default value is <code>CURATED</code>. Updates are classified as <code>CURATED</code> based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. <code>NON_CURATED</code> updates includes <code>CURATED</code> updates + other updates.</td>
+</tr>
 </tbody></table>
 <h3 id='response-object'>Response Object</h3>
 <p>The update will have 4 main components - <code>title</code>, <code>description</code>, <code>content</code>, <code>linkDetail.shortLink</code> which can be used. <code>title</code> + <code>description</code> will give you information about the company and the type of update that is being sent. <code>content</code> will give you details about the update.</p>
@@ -742,10 +747,6 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <tr>
 <td>filterCategory</td>
 <td>This field can be used to filter out certain kinds of update. Possible Values: <code>KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA</code>.  Read More in the <a href="#examples-for-instrument-update-messages-filter-categories">Examples section</a>.</td>
-</tr>
-<tr>
-<td>curationType</td>
-<td>Used to supress updates which are deemed less important by ScoutQuest. Possible values <code>CURATED, NON_CURATED</code>. Default value is <code>CURATED</code>. Updates are classified as <code>CURATED</code> based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. <code>NON_CURATED</code> updates includes <code>CURATED</code> updates + other updates.</td>
 </tr>
 </tbody></table>
 
