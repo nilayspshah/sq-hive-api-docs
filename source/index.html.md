@@ -258,7 +258,7 @@ Parameter | Default | Description
 pageNo | 0 | change pageNo for next set of results fitting your query description
 pageSize | 200 | No of results to be returned in a single page. You can fetch more results by calling for the next `pageNo`. Maximum value of `pageSize` is 1000
 sortDirection | DESC | Direction for the sorting of messages wth respect to the time when the message was created. `DESC` will return the results with the latest update messages at the top. Possible values (`ASC`, `DESC`)
-fromTime | - | Used when you need updates within a time range. `toTime` query must also be present if `fromTime` is mentioned
+fromTime | - | Used when you need updates within a time range. if `toTime` query is absent, `toTime` is assumed to be the currentTime
 toTime | - | Used when you need updates within a time range. `fromTime` query must also be present if `toTime` is mentioned
 messageId | - | Used to fetch messages equal to, or chronologically before/after a `messageId`. Useful when you have processed messages uptil a certain message and now need to process messages after it or you need to lookup a specific update based on `messagesId`. `expression` query parameter is control this behaviour. If `expression` value is not passed, By default only data for a given messageId will be passed i.e. `expression` will be considered to be `EQ`.
 expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
@@ -293,6 +293,9 @@ Use <code>bseScripCode</code> as the primary identifier as sometmes ISIN values 
 </aside>
 <aside class="warning">
 <code>title</code>,<code>description</code>,<code>content</code> can contain emoji characters so keep that in mind while serialising/deserialising and persisting. In most languages the String or String equivialent classes will handle it for you, but it's a gotcha to keep in mind.
+</aside>
+<aside class="caution">
+Only the data for the last 7 is available via the API. 
 </aside>
 
 - Pagination Related fields
