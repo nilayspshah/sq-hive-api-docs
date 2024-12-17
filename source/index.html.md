@@ -264,6 +264,7 @@ messageId | - | Used to fetch messages equal to, or chronologically before/after
 expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
 scripIdType | - | Useful when you want to query updates for a particular scrip. This property will signify which type of ID will you be using to pass the scrip identifier. Possible values: `BSE_SCRIP_CODE`,`BSE_TICKR`
 scripId | - | Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass `BSE_SCRIP_CODE` as the `scripIdType`, you need to pass the BSE Scrip code, in case of [Tata Motors Ltd.](https://www.bseindia.com/stock-share-price/tata-motors-ltd/tatamotors/500570/) `BSE_SCRIP_CODE` is 500570 and `BSE_TICKR` is TATAMOTORS. You can refer to Instrument Masters like Bhavcopy or Scrip master(SCRIP.zip) from [this BSE site] (https://www.bseindia.com/members/index.aspx)
+curationType | - | Used to supress updates which are deemed less important by ScoutQuest. Possible values `CURATED, NON_CURATED`. Default value is `CURATED`. Updates are classified as `CURATED` based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. `NON_CURATED` updates includes `CURATED` updates + other updates.
 
 ### Response Object
 The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used. `title` + `description` will give you information about the company and the type of update that is being sent. `content` will give you details about the update.
@@ -284,7 +285,6 @@ scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
 creationTime | Creation time of the update in epoch format
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
-curationType | Used to supress updates which are deemed less important by ScoutQuest. Possible values `CURATED, NON_CURATED`. Default value is `CURATED`. Updates are classified as `CURATED` based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. `NON_CURATED` updates includes `CURATED` updates + other updates.
 
 <aside class="warning">
 New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
