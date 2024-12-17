@@ -294,8 +294,8 @@ Use <code>bseScripCode</code> as the primary identifier as sometmes ISIN values 
 <aside class="warning">
 <code>title</code>,<code>description</code>,<code>content</code> can contain emoji characters so keep that in mind while serialising/deserialising and persisting. In most languages the String or String equivialent classes will handle it for you, but it's a gotcha to keep in mind.
 </aside>
-<aside class="caution">
-Only the data for the last 7 is available via the API. 
+<aside class="notice">
+Only the data for the last 7 days is available via the API. 
 </aside>
 
 - Pagination Related fields
