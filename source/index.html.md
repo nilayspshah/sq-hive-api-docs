@@ -284,6 +284,7 @@ scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
 creationTime | Creation time of the update in epoch format
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
+curationType | Used to supress updates which are deemed less important by ScoutQuest. Possible values `CURATED, NON_CURATED`. Default value is `CURATED`. Updates are classified as `CURATED` based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. `NON_CURATED` updates includes `CURATED` updates + other updates.
 
 <aside class="warning">
 New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
