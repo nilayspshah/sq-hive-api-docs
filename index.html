@@ -654,7 +654,7 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <tr>
 <td>fromTime</td>
 <td>-</td>
-<td>Used when you need updates within a time range. <code>toTime</code> query must also be present if <code>fromTime</code> is mentioned</td>
+<td>Used when you need updates within a time range. if <code>toTime</code> query is absent, <code>toTime</code> is assumed to be the currentTime</td>
 </tr>
 <tr>
 <td>toTime</td>
@@ -755,6 +755,10 @@ Use <code>bseScripCode</code> as the primary identifier as sometmes ISIN values 
 
 <aside class="warning">
 <code>title</code>,<code>description</code>,<code>content</code> can contain emoji characters so keep that in mind while serialising/deserialising and persisting. In most languages the String or String equivialent classes will handle it for you, but it's a gotcha to keep in mind.
+</aside>
+
+<aside class="caution">
+Only the data for the last 7 is available via the API. 
 </aside>
 
 <ul>
