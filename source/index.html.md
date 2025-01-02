@@ -328,7 +328,7 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
 </aside>
 
 
-## Webhook Events
+## Instrument Update Message - Webhook Events
 We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
 
 > Here is a sample payload for `v1.instrument_update.created`:
@@ -356,6 +356,30 @@ We have a variety of event types that you can subscribe to. For example, one suc
       "scripName": "Macrotech Developers Limited"
     },
     "title": "Macrotech Developers Limited"
+  }
+}
+```
+
+## User Created - Webhook Events
+If you as a business would like to keep track of users who have signed up using your business code you can subscribe to the this webhook.
+
+> Here is a sample payload for `v1.user.created`:
+
+```json
+{
+  "creationTimestamp": 1735731297,
+  "eventId": "evt_16ecf03b-333d-4aab-aeff-6b1036e458af",
+  "eventType": "v1.user.created",
+  "payload": {
+    "countryCode": "+91",
+    "creationTime": 1735731295,
+    "messageContent": "Hello I'm a client of Broker A. I would like to subscribe to WhatsApp updates for Stocks that I track",
+    "messageId": "67752577f91729f7d301a793",
+    "mobileNo": "888888888",
+    "referralOrigin": "whatsapp-tellephant-bot",
+    "referralSource": "Broker-A",
+    "userId": "usr_6622575129096656",
+    "userSignupChannel": "WHATSAPP"
   }
 }
 ```
