@@ -349,7 +349,10 @@
                     <a href="#introduction-to-sq-hive-webhooks" class="toc-h2 toc-link" data-title="Introduction to SQ Hive Webhooks">Introduction to SQ Hive Webhooks</a>
                   </li>
                   <li>
-                    <a href="#webhook-events" class="toc-h2 toc-link" data-title="Webhook Events">Webhook Events</a>
+                    <a href="#instrument-update-message-webhook-events" class="toc-h2 toc-link" data-title="Instrument Update Message - Webhook Events">Instrument Update Message - Webhook Events</a>
+                  </li>
+                  <li>
+                    <a href="#user-created-webhook-events" class="toc-h2 toc-link" data-title="User Created - Webhook Events">User Created - Webhook Events</a>
                   </li>
                   <li>
                     <a href="#adding-an-endpoint" class="toc-h2 toc-link" data-title="Adding an Endpoint">Adding an Endpoint</a>
@@ -801,7 +804,7 @@ Only the data for the last 7 days is available via the API.
 <aside class="notice">
 You can request for webhook access by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">whatsapp at 918779170796</a>, if you don't already have it.
 </aside>
-<h2 id='webhook-events'>Webhook Events</h2>
+<h2 id='instrument-update-message-webhook-events'>Instrument Update Message - Webhook Events</h2>
 <p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>. This is identical to the <code>Instrument Update Message</code> that you can fetch via the <a href="#get-instrument-update-messages">API</a>:</p>
 
 <blockquote>
@@ -829,6 +832,28 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
       </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='user-created-webhook-events'>User Created - Webhook Events</h2>
+<p>If you as a business would like to keep track of users who have signed up using your business code you can subscribe to the this webhook.</p>
+
+<blockquote>
+<p>Here is a sample payload for <code>v1.user.created</code>:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"creationTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1735731297</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"evt_16ecf03b-333d-4aab-aeff-6b1036e458af"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.user.created"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"countryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+91"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1735731295</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"messageContent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello I'm a client of Broker A. I would like to subscribe to WhatsApp updates for Stocks that I track"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"messageId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67752577f91729f7d301a793"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"mobileNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"888888888"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"referralOrigin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"whatsapp-tellephant-bot"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"referralSource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Broker-A"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usr_6622575129096656"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userSignupChannel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WHATSAPP"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='adding-an-endpoint'>Adding an Endpoint</h2>
