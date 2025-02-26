@@ -384,6 +384,29 @@ If you as a business would like to keep track of users who have signed up using 
 }
 ```
 
+## User Modified - Webhook Events
+You can also subscribe to user modified webhook events which are sent when user related attributes are modified.
+Supported attributes whose modification which trigger an event are:
+1. When user updates their whatsapp consent
+
+> Here is a sample payload for `v1.user.modified`:
+
+```json
+{
+  "creationTimestamp": 1740599471,
+  "eventId": "evt_5d303a23-ada3-4b38-b3ea-e23dc29ece3a",
+  "eventType": "v1.user.modified",
+  "payload": {
+    "consentStatus": "OPT_IN",
+    "countryCode": "+91",
+    "creationTime": 1735731295,
+    "lastModificationTime": 1740599471,
+    "mobileNo": "9999999999",
+    "userId": "usr_662257512909639656"
+  }
+}
+```
+
 
 ## Adding an Endpoint
 In order to start listening to messages webhook messages sent by SQ Hive, you will need to configure your  **endpoints**.
