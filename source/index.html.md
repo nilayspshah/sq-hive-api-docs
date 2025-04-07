@@ -283,7 +283,7 @@ scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
 scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
 scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
-creationTime | Creation time of the update in epoch format
+creationTime | Creation time of the update in epoch format (Epoch time is always in UTC time zone, Please add +5:30 hours to get the time in IST time zone)
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
 
 <aside class="warning">
