@@ -285,6 +285,11 @@ scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
 creationTime | Creation time of the update in epoch format (Epoch time is always in UTC time zone, Please add +5:30 hours to get the time in IST time zone)
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
+smartTags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A three-word tag that classifies each update into predefined, actionable categories.
+concernFlags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Indicators such as Red Flag or Review for Concern to highlight updates requiring investor attention.
+flagNote <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A concise, one-line explanation for the flag.
+deepDiveLink <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A one-page HTML article providing a detailed explanation of the update for investors. 
+additionalDetails <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Provides a JSON data on the specifics of the update. Examples include revenue/PAT in results or shareholding details in large transactions.
 
 <aside class="warning">
 New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
@@ -328,7 +333,7 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
 </aside>
 
 
-## Instrument Update Message - Webhook Events
+## Instrument Update Created Message - Webhook Events
 We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
 
 > Here is a sample payload for `v1.instrument_update.created`:
@@ -359,6 +364,39 @@ We have a variety of event types that you can subscribe to. For example, one suc
   }
 }
 ```
+
+## Instrument Update Modified Message - Webhook Events
+In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. Here is a sample payload for `v1.instrument_update.modified`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
+
+> Here is a sample payload for `v1.instrument_update.modified`:
+
+```json
+{
+  "creationTimestamp": 1717247896,
+  "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
+  "eventType": "V1_INSTRUMENT_UPDATE_MODIFIED",
+  "payload": {
+    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
+    "creationTime": 1717247895,
+    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
+    "filterCategory": "ANALYTICAL_UPDATE",
+    "id": "584732514325722439",
+    "lastUpdateTime": 0,
+    "linkDetail": {
+      "shortLink": "https://sqst.in/F08qo"
+    },
+    "scripDetails": {
+      "bseScripCode": "543287",
+      "bseTickr": "LODHA",
+      "isin": "INE670K01029",
+      "nseTickr": "LODHA",
+      "scripName": "Macrotech Developers Limited"
+    },
+    "title": "Macrotech Developers Limited"
+  }
+}
+```
+
 
 ## User Created - Webhook Events
 If you as a business would like to keep track of users who have signed up using your business code you can subscribe to the this webhook.
