@@ -288,7 +288,7 @@ filterCategory | This field can be used to filter out certain kinds of update. P
 smartTags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A three-word tag that classifies each update into predefined, actionable categories.
 concernFlags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Indicators such as Red Flag or Review for Concern to highlight updates requiring investor attention.
 flagNote <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A concise, one-line explanation for the flag.
-deepDiveLink <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A one-page HTML article providing a detailed explanation of the update for investors. 
+deepDive <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A one-page HTML article providing a detailed explanation of the update for investors. 
 additionalDetails <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Provides a JSON data on the specifics of the update. Examples include revenue/PAT in results or shareholding details in large transactions.
 
 <aside class="warning">
