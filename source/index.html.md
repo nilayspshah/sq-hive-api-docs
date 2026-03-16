@@ -179,39 +179,65 @@ Response response = client.newCall(request).execute();
 {
     "instrumentUpdateMessages": [
         {
-            "id": "589113564166804304",
-            "title": "Amber Enterprises India Ltd",
-            "description": "Restructuring",
-            "content": "Intimation on pronouncement of the order dated 11 June 2024 (uploaded on website of Hon''ble NCLT on 13 June 2024) under first motion application bearing Company Application No. (CAA)67(MB)2024 ....",
+            "id": "818768429104481561",
+            "title": "Vedanta Ltd",
+            "description": "💰 Large NCD Issuance Approved",
+            "content": "📍Key Insight:  Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
             "scripDetails": {
-                "bseScripCode": "540902",
-                "scripName": "Amber Enterprises India Ltd",
-                "bseTickr": "AMBER",
+                "bseScripCode": "500295",
+                "scripName": "Vedanta Ltd",
+                "bseTickr": "VEDL",
                 "nseTickr": null,
-                "isin": "INE371P01015"
+                "isin": "INE205A01025"
             },
             "linkDetail": {
-                "shortLink": "https://sqst.in/4PRQX"
+                "shortLink": "https://sqst.in/XHB3R"
             },
-            "creationTime": 1718292418,
-        },
-        {
-            "id": "589113559821504865",
-            "title": "Amber Enterprises India Ltd",
-            "description": "Restructuring",
-            "content": "Intimation on pronouncement of the order dated 11 June 2024 (uploaded on website of Hon''ble NCLT on 13 June 2024) under first motion application bearing Company Application No. (CAA)67(MB)2024 ....",
-            "scripDetails": {
-                "bseScripCode": "540902",
-                "scripName": "Amber Enterprises India Ltd",
-                "bseTickr": "AMBER",
-                "nseTickr": null,
-                "isin": "INE371P01015"
+            "creationTime": 1773046405,
+            "filterCategory": "UNCLASSIFIED",
+            "proFunnel": {
+                "sentiment": "neutral",
+                "bytes": [
+                    {
+                        "tag": "Maximum number of NCDs issued",
+                        "data": "300,000"
+                    },
+                    {
+                        "tag": "Face value per NCD",
+                        "data": "₹1 crore"
+                    },
+                    {
+                        "tag": "Total issuing amount",
+                        "data": "up to ₹3,000 crores"
+                    },
+                    {
+                        "tag": "Listing exchange",
+                        "data": "BSE"
+                    },
+                    {
+                        "tag": "Issue method",
+                        "data": "private placement"
+                    }
+                ],
+                "classificationJson": {
+                    "smartTag": "NCD Issuance",
+                    "importanceFlag": "Insightful",
+                    "category": "Financial Instruments",
+                    "subcategory": "Non-Convertible Debenture (NCD) Issuance",
+                    "emoji": "💰"
+                }
             },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/SIKoq"
-            },
-            "creationTime": 1718292417,
-            "filterCategory": "UNCLASSIFIED"
+            "deepDiveData": {
+                "title": "*💰 Large NCD Issuance Approved*",
+                "insight": "• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
+                "fast_fact": "The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE.",
+                "source_link": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf",
+                "deep_dive_html": "<h2>💡 Type of Securities:</h2><ul><li>The company plans to issue unsecured Non-Convertible Debentures (NCDs), i.e., loans without collateral security.</li><li>NCDs are redeemable, meaning principal will be repaid after a set time.</li><li>They are rated, indicating assessment of credit quality.</li></ul><h2>💰 Issue Size and Value:</h2><ul><li>Up to 300,000 NCDs are proposed.</li><li>Each NCD has a face value of ₹1 crore.</li><li>Total amount can reach up to ₹3,000 crores (₹30 billion).</li></ul><h2>📈 Issuance Method and Listing:</h2><ul><li>Issued on a private placement basis to select investors.</li><li>NCDs will be listed on BSE Limited, allowing trading on exchange.</li></ul><h2>📅 Terms and Details:</h2><ul><li>Terms like interest (coupon rate), maturity, and schedule depend on a Disclosure Document.</li><li>No late payment or default reported till date.</li></ul><h2>🔍 What This Means:</h2><ul><li>Raising a large debt sum suggests financing for expansion, refinancing, or corporate purposes.</li><li>Unsecured nature means higher risk but potential for higher returns for investors.</li><li>Private placement targets qualified institutional investors.</li></ul><h2>🧑💼 For Investors:</h2><ul><li>It's a significant update about the company raising debt capital.</li><li>Investors should look for Disclosure Document for interest rates and maturity.</li><li>Listing provides liquidity option for NCD holders.</li></ul><p>Overall, this update reflects the company’s strategic move to secure funds through debt via private placement of NCDs.</p>",
+                "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html",
+                "deep_dive_text": "💡 Type of Securities:<br>- The company plans to issue unsecured Non-Convertible Debentures (NCDs). These are loans taken by the company from investors without any collateral security.<br>- NCDs are \"redeemable,\" meaning the company will repay the principal after a set period.<br>- They are \"rated,\" indicating a credit quality assessment by agencies.<br><br>💰 Issue Size and Value:<br>- Up to 300,000 NCDs will be issued.<br>- Each has a face value of ₹1 crore.<br>- Total amount can go up to ₹3,000 crores (₹30 billion).<br><br>📈 Issuance Method and Listing:<br>- The issuance is on a \"private placement basis,\" which means shares will be offered to a select group of institutional or qualified investors rather than the general public.<br>- The NCDs will be listed on BSE Limited, allowing investors to trade them on the stock exchange.<br><br>📅 Terms and Details:<br>- Specifics like coupon rate (interest paid), maturity dates, payment schedule, and any charges are as per a separate Disclosure Document.<br>- As of the announcement date, no delays or defaults on paying interest or principal have been reported.<br><br>🔍 What This Means:<br>- Such a large fundraise via NCDs suggests the company is raising significant debt capital, possibly for business expansion, debt refinancing, or other corporate needs.<br>- Being unsecured means investors face higher risk relative to secured debt but may expect higher returns.<br>- Private placement limits access to qualified investors, focusing on institutional investment.<br><br>🧑💼 For Investors:<br>- This update informs that the company is undertaking a major debt issuance.<br>- Investors might watch details in the forthcoming Disclosure Document for interest rates and maturities to assess appeal.<br>- The listing of NCDs enables liquidity for investors holding them.<br><br>Overall, the news highlights a strategic financial move by the company to raise substantial funds through debt on a private placement basis. Details on terms will be key to fully understand implications.",
+                "flagNote": "Large debt fundraising approved, important for investors' financial understanding",
+                "concernFlag": ""
+            }
         },
         {
             "id": "589113551676169507",
@@ -287,8 +313,8 @@ creationTime | Creation time of the update in epoch format (Epoch time is always
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
 smartTags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A three-word tag that classifies each update into predefined, actionable categories.
 concernFlags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Indicators such as Red Flag or Review for Concern to highlight updates requiring investor attention.
-flagNote <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A concise, one-line explanation for the flag.
-deepDiveData <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Provides a JSON data on the specifics of the update. Examples include revenue/PAT in results or shareholding details in large transactions.
+proFunnel <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Structured data regarding sentiment, key bytes, and classification of the update.
+deepDiveData <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Provides a JSON data on the specifics of the update. Examples include revenue/PAT in results or shareholding details in large transactions. Note: The structure of this field is dynamic.
 
 <aside class="warning">
 New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
@@ -301,6 +327,29 @@ Use <code>bseScripCode</code> as the primary identifier as sometmes ISIN values 
 </aside>
 <aside class="notice">
 Only the data for the last 7 days is available via the API. 
+</aside>
+
+### `proFunnel` Object Structure
+
+Field | Description
+--------- | -----------
+sentiment | The sentiment of the update (possible values: "positive", "negative", "neutral", "not_known").
+bytes | An array of key data points extracted from the update.
+bytes[].tag | The label for the data point.
+bytes[].data | The value for the data point.
+classificationJson | Structural classification of the event.
+classificationJson.smartTag | A concise tag summarizing the update.
+classificationJson.importanceFlag | Flag indicating the importance (e.g., "Insightful", "Procedural").
+classificationJson.category | The broader category of the update.
+classificationJson.subcategory | The specific subcategory.
+classificationJson.emoji | An emoji representing the update.
+
+### `deepDiveData` Object Structure
+
+The `deepDiveData` object provides detailed, specific insights into the update. 
+
+<aside class="notice">
+The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions). Comprehensive documentation for all possible variations will be provided in a future update.
 </aside>
 
 - Pagination Related fields
