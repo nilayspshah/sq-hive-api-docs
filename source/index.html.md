@@ -349,7 +349,7 @@ classificationJson.emoji | An emoji representing the update.
 The `deepDiveData` object provides detailed, specific insights into the update. 
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions). Comprehensive documentation for all possible variations will be provided in a future update.
+The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
 </aside>
 
 - Pagination Related fields
