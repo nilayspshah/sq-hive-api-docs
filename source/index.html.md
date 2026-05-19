@@ -352,6 +352,145 @@ The `deepDiveData` object provides detailed, specific insights into the update.
 The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
 </aside>
 
+## Get Assessment for an Instrument Update
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Get.new(url)
+request["x-api-key"] = "yourapikeyhere"
+
+response = http.request(request)
+puts response.read_body
+
+```
+
+```python
+import requests
+
+url = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"
+
+payload = {}
+headers = {
+  'x-api-key': 'yourapikeyhere'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
+
+```
+
+```shell
+curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561' \
+--header 'x-api-key: yourapikeyhere'
+```
+
+```javascript
+const axios = require('axios');
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561',
+  headers: { 
+    'x-api-key': 'yourapikeyhere'
+  }
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561")
+  .method("GET", body)
+  .addHeader("x-api-key", "yourapikeyhere")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "stock": "Zydus Lifesciences Ltd",
+  "event_type": "Share Buyback (board-approved)",
+  "significance": "Medium",
+  "what_happened": "Board approved a buyback of up to 95.65 lakh shares (≈0.95% of outstanding), at ₹1,150/share, with a maximum cash outlay of ₹1,100 crore. Record date for participation: May 29, 2026. Company cites utilisation of equity/reserves for the buyback.",
+  "why_this_matters": [
+    "Cash commitment is sizeable but affordable: ₹1,100 Cr represents ~1.06% of reported market cap (₹1,03,944 Cr) and ~39.6% of reported Cash & Bank (₹2,782 Cr).",
+    "Buyback price (~₹1,150) is ≈11.3% premium to current price (₹1,033), creating a direct near-term upside incentive for holders to tender.",
+    "Supply reduction is modest (0.95% of shares) — unlikely to materially change float or EPS by itself, though selective tendering (eg. promoter participation) can alter effective benefit to public holders.",
+    "Company appears to have strong cash-generation: latest operating cash flow ₹6,777 Cr (rising), supporting the payout without straining operations.",
+    "Signal on capital allocation: buyback + proposed dividend indicates management prefers buybacks/dividends over other uses — positive for return-focused investors given healthy ROE/ROCE (21.2% / 24.3%)."
+  ],
+  "investor_impact": {
+    "short_term": "Likely positive price support: buyback at an ~11% premium may lift market price ahead of/around the record date. Trading reaction could be muted after completion given small share reduction (0.95%).",
+    "medium_term": "Limited EPS accretion given small reduction in shares; main benefit is return of capital to holders. If promoters participate, public minority may see less proportional benefit.",
+    "long_term": "Neutral-to-modestly positive structural effect if buybacks become a recurring disciplined allocation method — preserves capital returns while company retains strong operating cash generation and healthy ROE/ROCE."
+  },
+  "risk_reward_outlook": "Moderate Positive",
+  "risk_reward_score": 7,
+  "ITI": "SSB3YW50IHRvIHVuZGVyc3RhbmQgZnVydGhlciBpHVybiBvZiBjYXBpdGFsIiwiY2FwaXRhbCByZWR1Y3Rpb24iXQo="
+}
+```
+
+This endpoint retrieves the assessment data for a specific instrument update.
+
+### HTTP Request
+
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+instrumentUpdateId | - | The ID of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the [Get Instrument Update Messages](#get-instrument-update-messages) endpoint.
+
+### Response Object
+
+Field | Description
+--------- | -----------
+stock | Name of the company / stock for which the assessment has been generated.
+event_type | The type of corporate event being assessed (e.g., `Share Buyback (board-approved)`, `Earnings`, `M&A`).
+significance | Overall significance of the event. Possible values: `Low`, `Medium`, `High`.
+what_happened | A concise factual summary of the event in plain language.
+why_this_matters | An array of bullet points explaining the rationale behind the assessment — financial impact, comparisons with relevant metrics, and structural implications.
+investor_impact | An object describing the expected impact on investors across multiple time horizons.
+investor_impact.short_term | Expected impact in the short term (typically days to weeks around the event).
+investor_impact.medium_term | Expected impact in the medium term (typically months).
+investor_impact.long_term | Expected structural / long-term impact.
+risk_reward_outlook | A qualitative outlook label. Possible values include `Strong Negative`, `Moderate Negative`, `Neutral`, `Moderate Positive`, `Strong Positive`.
+risk_reward_score | A numeric score from `1` (least favourable) to `10` (most favourable) representing the risk/reward profile of the event.
+ITI | A base64-encoded string intended to be fed directly into an LLM of the client's choice for further analysis or chat-style interaction over the assessment.
+
+<aside class="notice">
+The set of fields in the assessment response may evolve over time as the underlying model improves. New fields can be added without prior notice. Existing fields will not be altered without prior notice.
+</aside>
+
+<aside class="notice">
+Access to this endpoint requires a separate assessment entitlement. You can request access by mailing us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20access%20to%20the%20Assessment%20API%20for%20SQ%20Hive">whatsapp at 918779170796</a>.
+</aside>
+
 - Pagination Related fields
 
 Field | Description
