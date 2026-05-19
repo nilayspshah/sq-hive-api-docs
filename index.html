@@ -340,6 +340,9 @@
                   <li>
                     <a href="#get-instrument-update-messages" class="toc-h2 toc-link" data-title="Get Instrument Update Messages">Get Instrument Update Messages</a>
                   </li>
+                  <li>
+                    <a href="#get-assessment-for-an-instrument-update" class="toc-h2 toc-link" data-title="Get Assessment for an Instrument Update">Get Assessment for an Instrument Update</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -869,6 +872,171 @@ Only the data for the last 7 days is available via the API.
 
 <aside class="notice">
 The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
+</aside>
+<h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"net/http"</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"x-api-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"yourapikeyhere"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'yourapikeyhere'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: yourapikeyhere'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">x-api-key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">yourapikeyhere</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zydus Lifesciences Ltd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Share Buyback (board-approved)"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"significance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"what_happened"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board approved a buyback of up to 95.65 lakh shares (≈0.95% of outstanding), at ₹1,150/share, with a maximum cash outlay of ₹1,100 crore. Record date for participation: May 29, 2026. Company cites utilisation of equity/reserves for the buyback."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"why_this_matters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Cash commitment is sizeable but affordable: ₹1,100 Cr represents ~1.06% of reported market cap (₹1,03,944 Cr) and ~39.6% of reported Cash &amp; Bank (₹2,782 Cr)."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Buyback price (~₹1,150) is ≈11.3% premium to current price (₹1,033), creating a direct near-term upside incentive for holders to tender."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Supply reduction is modest (0.95% of shares) — unlikely to materially change float or EPS by itself, though selective tendering (eg. promoter participation) can alter effective benefit to public holders."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Company appears to have strong cash-generation: latest operating cash flow ₹6,777 Cr (rising), supporting the payout without straining operations."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Signal on capital allocation: buyback + proposed dividend indicates management prefers buybacks/dividends over other uses — positive for return-focused investors given healthy ROE/ROCE (21.2% / 24.3%)."</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"investor_impact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"short_term"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Likely positive price support: buyback at an ~11% premium may lift market price ahead of/around the record date. Trading reaction could be muted after completion given small share reduction (0.95%)."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"medium_term"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Limited EPS accretion given small reduction in shares; main benefit is return of capital to holders. If promoters participate, public minority may see less proportional benefit."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"long_term"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Neutral-to-modestly positive structural effect if buybacks become a recurring disciplined allocation method — preserves capital returns while company retains strong operating cash generation and healthy ROE/ROCE."</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"risk_reward_outlook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moderate Positive"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"risk_reward_score"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ITI"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSB3YW50IHRvIHVuZGVyc3RhbmQgZnVydGhlciBpHVybiBvZiBjYXBpdGFsIiwiY2FwaXRhbCByZWR1Y3Rpb24iXQo="</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves the assessment data for a specific instrument update.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>instrumentUpdateId</td>
+<td>-</td>
+<td>The ID of the instrument update for which the assessment is to be retrieved. This is the same <code>id</code> field returned by the <a href="#get-instrument-update-messages">Get Instrument Update Messages</a> endpoint.</td>
+</tr>
+</tbody></table>
+<h3 id='response-object-2'>Response Object</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>stock</td>
+<td>Name of the company / stock for which the assessment has been generated.</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>The type of corporate event being assessed (e.g., <code>Share Buyback (board-approved)</code>, <code>Earnings</code>, <code>M&amp;A</code>).</td>
+</tr>
+<tr>
+<td>significance</td>
+<td>Overall significance of the event. Possible values: <code>Low</code>, <code>Medium</code>, <code>High</code>.</td>
+</tr>
+<tr>
+<td>what_happened</td>
+<td>A concise factual summary of the event in plain language.</td>
+</tr>
+<tr>
+<td>why_this_matters</td>
+<td>An array of bullet points explaining the rationale behind the assessment — financial impact, comparisons with relevant metrics, and structural implications.</td>
+</tr>
+<tr>
+<td>investor_impact</td>
+<td>An object describing the expected impact on investors across multiple time horizons.</td>
+</tr>
+<tr>
+<td>investor_impact.short_term</td>
+<td>Expected impact in the short term (typically days to weeks around the event).</td>
+</tr>
+<tr>
+<td>investor_impact.medium_term</td>
+<td>Expected impact in the medium term (typically months).</td>
+</tr>
+<tr>
+<td>investor_impact.long_term</td>
+<td>Expected structural / long-term impact.</td>
+</tr>
+<tr>
+<td>risk_reward_outlook</td>
+<td>A qualitative outlook label. Possible values include <code>Strong Negative</code>, <code>Moderate Negative</code>, <code>Neutral</code>, <code>Moderate Positive</code>, <code>Strong Positive</code>.</td>
+</tr>
+<tr>
+<td>risk_reward_score</td>
+<td>A numeric score from <code>1</code> (least favourable) to <code>10</code> (most favourable) representing the risk/reward profile of the event.</td>
+</tr>
+<tr>
+<td>ITI</td>
+<td>A base64-encoded string intended to be fed directly into an LLM of the client&#39;s choice for further analysis or chat-style interaction over the assessment.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The set of fields in the assessment response may evolve over time as the underlying model improves. New fields can be added without prior notice. Existing fields will not be altered without prior notice.
+</aside>
+
+<aside class="notice">
+Access to this endpoint requires a separate assessment entitlement. You can request access by mailing us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20access%20to%20the%20Assessment%20API%20for%20SQ%20Hive">whatsapp at 918779170796</a>.
 </aside>
 
 <ul>
