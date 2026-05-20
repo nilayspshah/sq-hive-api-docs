@@ -523,7 +523,7 @@ The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic.
 
 The `type` field inside `proFunnel.deepdiveData` is always present when `deepdiveData` is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.
 
-Possible values: `BLOCK_DEAL`, `BULK_DEAL`, `CRYSTAL_BALL`, `MANAGEMENT_TAKE`, `CONCALL_DECODER`, `RESULTS_QUICK_LOOK`, `IMPACT_ANALYSIS`, `SAST_NOTEWORTHY_TRANSACTION`, `CHART_WIZARD`, `BROADCAST_BRIEFING`, `ANALYST_VIEW`, `VOLUME_SPURT`, `CREDIT_RATING`, `ANALYST_MEET`, `ACQUISITION`, `ORDER_RECEIVED`, `GENERIC`.
+Possible values: `BLOCK_DEAL`, `BULK_DEAL`, `CRYSTAL_BALL`, `MANAGEMENT_TAKE`, `CONCALL_DECODER`, `RESULTS_QUICK_LOOK`, `IMPACT_ANALYSIS`, `SAST_NOTEWORTHY_TRANSACTION`, `CHART_WIZARD`, `BROADCAST_BRIEFING`, `ANALYST_VIEW`, `VOLUME_SPURT`, `TWEET`, `CREDIT_RATING`, `ANALYST_MEET`, `ACQUISITION`, `ORDER_RECEIVED`, `GENERIC`.
 
 <aside class="notice">
 New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
@@ -613,6 +613,20 @@ The examples below show representative `proFunnel.deepdiveData` payloads for eac
 }
 ```
 
+**`MANAGEMENT_TAKE`**
+
+```json
+{
+  "type": "MANAGEMENT_TAKE",
+  "imageUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e463d-d9da-7605-9a77-9fd12c4de414_ps.png",
+  "audio_url": "https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/amioXmTD.mp3",
+  "isAudioPresent": true,
+  "isImagePresent": true,
+  "future_outlook_essence": "<ul><li><b>Virtual Console Launch:</b> Launch planned within two weeks on Flipkart, priced under INR 5,000 with subscription.</li><li><b>Growth Target:</b> Aims for gaming MRR of USD 3 million within 15–18 months.</li></ul>",
+  "current_performance_essence": "<ul><li><b>EBITDA Growth:</b> FY26 EBITDA surged 110.6% to INR 297 million through cost optimizations.</li><li><b>Revenue Trends:</b> FY26 revenue declined 10.2% YoY to INR 5,245 million.</li></ul>"
+}
+```
+
 **`RESULTS_QUICK_LOOK`**
 
 ```json
@@ -630,6 +644,15 @@ The examples below show representative `proFunnel.deepdiveData` payloads for eac
     "latest_profits": "1,329",
     "relevant_page_image": "https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"
   }
+}
+```
+
+**`IMPACT_ANALYSIS`**
+
+```json
+{
+  "type": "IMPACT_ANALYSIS",
+  "fast_fact": "The company approved FY26 audited financial results showing a net profit of ₹4,104.61 Lakh on ₹77,165.74 Lakh revenue. A final dividend of ₹1.50 per share was recommended and several director and auditor appointments were made. The Annual General Meeting is set for 12 August 2026."
 }
 ```
 
@@ -733,14 +756,23 @@ The examples below show representative `proFunnel.deepdiveData` payloads for eac
 }
 ```
 
-**`GENERIC`**
-
-When `type` is `GENERIC`, the remaining keys in `deepdiveData` are source-specific and should be treated as opaque JSON.
+**`TWEET`**
 
 ```json
 {
-  "type": "GENERIC",
-  "fast_fact": "Company announced a buyback at a 15% premium to market price."
+  "type": "TWEET",
+  "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e463a-6c4a-7773-81b2-6a7a5f95414b_ps.png",
+  "isImagePresent": true
+}
+```
+
+**`GENERIC`**
+
+`GENERIC` is returned for update sources that do not map to any of the named types above. The fields within `deepdiveData` for a `GENERIC` payload are entirely source-dependent — no specific schema is guaranteed. Clients should treat the remaining keys as opaque JSON.
+
+```json
+{
+  "type": "GENERIC"
 }
 ```
 
