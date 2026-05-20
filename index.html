@@ -459,7 +459,7 @@ You must replace <code>yourapikeyhere</code> with your personal API key.
 You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending  <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20API%20keys%20for%20SQ%20Hive">us a whatsapp at 918779170796</a> if its not already shared with you. 
 </aside>
 <h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2>
-<aside class="notice">
+<aside class="warning">
 A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
 </aside>
 <div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
@@ -520,14 +520,14 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
 <span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
 <span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 <span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
 
 </code></pre></div>
@@ -535,90 +535,90 @@ curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-back
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"instrumentUpdateMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"818768429104481561"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vedanta Ltd"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💰 Large NCD Issuance Approved"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📍Key Insight:  Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE."</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500295"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vedanta Ltd"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VEDL"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE205A01025"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/XHB3R"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1773046405</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neutral"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maximum number of NCDs issued"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300,000"</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Face value per NCD"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"₹1 crore"</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total issuing amount"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up to ₹3,000 crores"</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Listing exchange"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSE"</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Issue method"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private placement"</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NCD Issuance"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Instruments"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Non-Convertible Debenture (NCD) Issuance"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💰"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"deepDiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*💰 Large NCD Issuance Approved*"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"insight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE."</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE."</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"source_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;💡 Type of Securities:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;The company plans to issue unsecured Non-Convertible Debentures (NCDs), i.e., loans without collateral security.&lt;/li&gt;&lt;li&gt;NCDs are redeemable, meaning principal will be repaid after a set time.&lt;/li&gt;&lt;li&gt;They are rated, indicating assessment of credit quality.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;💰 Issue Size and Value:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Up to 300,000 NCDs are proposed.&lt;/li&gt;&lt;li&gt;Each NCD has a face value of ₹1 crore.&lt;/li&gt;&lt;li&gt;Total amount can reach up to ₹3,000 crores (₹30 billion).&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;📈 Issuance Method and Listing:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Issued on a private placement basis to select investors.&lt;/li&gt;&lt;li&gt;NCDs will be listed on BSE Limited, allowing trading on exchange.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;📅 Terms and Details:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Terms like interest (coupon rate), maturity, and schedule depend on a Disclosure Document.&lt;/li&gt;&lt;li&gt;No late payment or default reported till date.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;🔍 What This Means:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Raising a large debt sum suggests financing for expansion, refinancing, or corporate purposes.&lt;/li&gt;&lt;li&gt;Unsecured nature means higher risk but potential for higher returns for investors.&lt;/li&gt;&lt;li&gt;Private placement targets qualified institutional investors.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;🧑💼 For Investors:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;It's a significant update about the company raising debt capital.&lt;/li&gt;&lt;li&gt;Investors should look for Disclosure Document for interest rates and maturity.&lt;/li&gt;&lt;li&gt;Listing provides liquidity option for NCD holders.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Overall, this update reflects the company’s strategic move to secure funds through debt via private placement of NCDs.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💡 Type of Securities:&lt;br&gt;- The company plans to issue unsecured Non-Convertible Debentures (NCDs). These are loans taken by the company from investors without any collateral security.&lt;br&gt;- NCDs are </span><span class="se">\"</span><span class="s2">redeemable,</span><span class="se">\"</span><span class="s2"> meaning the company will repay the principal after a set period.&lt;br&gt;- They are </span><span class="se">\"</span><span class="s2">rated,</span><span class="se">\"</span><span class="s2"> indicating a credit quality assessment by agencies.&lt;br&gt;&lt;br&gt;💰 Issue Size and Value:&lt;br&gt;- Up to 300,000 NCDs will be issued.&lt;br&gt;- Each has a face value of ₹1 crore.&lt;br&gt;- Total amount can go up to ₹3,000 crores (₹30 billion).&lt;br&gt;&lt;br&gt;📈 Issuance Method and Listing:&lt;br&gt;- The issuance is on a </span><span class="se">\"</span><span class="s2">private placement basis,</span><span class="se">\"</span><span class="s2"> which means shares will be offered to a select group of institutional or qualified investors rather than the general public.&lt;br&gt;- The NCDs will be listed on BSE Limited, allowing investors to trade them on the stock exchange.&lt;br&gt;&lt;br&gt;📅 Terms and Details:&lt;br&gt;- Specifics like coupon rate (interest paid), maturity dates, payment schedule, and any charges are as per a separate Disclosure Document.&lt;br&gt;- As of the announcement date, no delays or defaults on paying interest or principal have been reported.&lt;br&gt;&lt;br&gt;🔍 What This Means:&lt;br&gt;- Such a large fundraise via NCDs suggests the company is raising significant debt capital, possibly for business expansion, debt refinancing, or other corporate needs.&lt;br&gt;- Being unsecured means investors face higher risk relative to secured debt but may expect higher returns.&lt;br&gt;- Private placement limits access to qualified investors, focusing on institutional investment.&lt;br&gt;&lt;br&gt;🧑💼 For Investors:&lt;br&gt;- This update informs that the company is undertaking a major debt issuance.&lt;br&gt;- Investors might watch details in the forthcoming Disclosure Document for interest rates and maturities to assess appeal.&lt;br&gt;- The listing of NCDs enables liquidity for investors holding them.&lt;br&gt;&lt;br&gt;Overall, the news highlights a strategic financial move by the company to raise substantial funds through debt on a private placement basis. Details on terms will be key to fully understand implications."</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large debt fundraising approved, important for investors' financial understanding"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113551676169507"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543396"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYTM"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE982J01020"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/e31EG"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292415</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="w">
+  </span><span class="nl">"instrumentUpdateMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"818768429104481561"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vedanta Ltd"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💰 Large NCD Issuance Approved"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📍Key Insight:  Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500295"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vedanta Ltd"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VEDL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE205A01025"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/XHB3R"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1773046405</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCLASSIFIED"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neutral"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maximum number of NCDs issued"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300,000"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Face value per NCD"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"₹1 crore"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total issuing amount"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up to ₹3,000 crores"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Listing exchange"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Issue method"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private placement"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NCD Issuance"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Instruments"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Non-Convertible Debenture (NCD) Issuance"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💰"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-     </span><span class="nl">"total-items"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
-     </span><span class="nl">"current-page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"total-pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"deepDiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*💰 Large NCD Issuance Approved*"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"insight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"source_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;💡 Type of Securities:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;The company plans to issue unsecured Non-Convertible Debentures (NCDs), i.e., loans without collateral security.&lt;/li&gt;&lt;li&gt;NCDs are redeemable, meaning principal will be repaid after a set time.&lt;/li&gt;&lt;li&gt;They are rated, indicating assessment of credit quality.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;💰 Issue Size and Value:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Up to 300,000 NCDs are proposed.&lt;/li&gt;&lt;li&gt;Each NCD has a face value of ₹1 crore.&lt;/li&gt;&lt;li&gt;Total amount can reach up to ₹3,000 crores (₹30 billion).&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;📈 Issuance Method and Listing:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Issued on a private placement basis to select investors.&lt;/li&gt;&lt;li&gt;NCDs will be listed on BSE Limited, allowing trading on exchange.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;📅 Terms and Details:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Terms like interest (coupon rate), maturity, and schedule depend on a Disclosure Document.&lt;/li&gt;&lt;li&gt;No late payment or default reported till date.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;🔍 What This Means:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Raising a large debt sum suggests financing for expansion, refinancing, or corporate purposes.&lt;/li&gt;&lt;li&gt;Unsecured nature means higher risk but potential for higher returns for investors.&lt;/li&gt;&lt;li&gt;Private placement targets qualified institutional investors.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;🧑💼 For Investors:&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;It's a significant update about the company raising debt capital.&lt;/li&gt;&lt;li&gt;Investors should look for Disclosure Document for interest rates and maturity.&lt;/li&gt;&lt;li&gt;Listing provides liquidity option for NCD holders.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Overall, this update reflects the company’s strategic move to secure funds through debt via private placement of NCDs.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💡 Type of Securities:&lt;br&gt;- The company plans to issue unsecured Non-Convertible Debentures (NCDs). These are loans taken by the company from investors without any collateral security.&lt;br&gt;- NCDs are </span><span class="se">\"</span><span class="s2">redeemable,</span><span class="se">\"</span><span class="s2"> meaning the company will repay the principal after a set period.&lt;br&gt;- They are </span><span class="se">\"</span><span class="s2">rated,</span><span class="se">\"</span><span class="s2"> indicating a credit quality assessment by agencies.&lt;br&gt;&lt;br&gt;💰 Issue Size and Value:&lt;br&gt;- Up to 300,000 NCDs will be issued.&lt;br&gt;- Each has a face value of ₹1 crore.&lt;br&gt;- Total amount can go up to ₹3,000 crores (₹30 billion).&lt;br&gt;&lt;br&gt;📈 Issuance Method and Listing:&lt;br&gt;- The issuance is on a </span><span class="se">\"</span><span class="s2">private placement basis,</span><span class="se">\"</span><span class="s2"> which means shares will be offered to a select group of institutional or qualified investors rather than the general public.&lt;br&gt;- The NCDs will be listed on BSE Limited, allowing investors to trade them on the stock exchange.&lt;br&gt;&lt;br&gt;📅 Terms and Details:&lt;br&gt;- Specifics like coupon rate (interest paid), maturity dates, payment schedule, and any charges are as per a separate Disclosure Document.&lt;br&gt;- As of the announcement date, no delays or defaults on paying interest or principal have been reported.&lt;br&gt;&lt;br&gt;🔍 What This Means:&lt;br&gt;- Such a large fundraise via NCDs suggests the company is raising significant debt capital, possibly for business expansion, debt refinancing, or other corporate needs.&lt;br&gt;- Being unsecured means investors face higher risk relative to secured debt but may expect higher returns.&lt;br&gt;- Private placement limits access to qualified investors, focusing on institutional investment.&lt;br&gt;&lt;br&gt;🧑💼 For Investors:&lt;br&gt;- This update informs that the company is undertaking a major debt issuance.&lt;br&gt;- Investors might watch details in the forthcoming Disclosure Document for interest rates and maturities to assess appeal.&lt;br&gt;- The listing of NCDs enables liquidity for investors holding them.&lt;br&gt;&lt;br&gt;Overall, the news highlights a strategic financial move by the company to raise substantial funds through debt on a private placement basis. Details on terms will be key to fully understand implications."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large debt fundraising approved, important for investors' financial understanding"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"589113551676169507"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543396"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paytm"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYTM"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE982J01020"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/e31EG"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1718292415</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEDIA_COVERAGE"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"total-items"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"current-page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"total-pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves all instrument updates fittng your query description. Results are returned in paginated formate.</p>
@@ -836,7 +836,7 @@ Only the data for the last 7 days is available via the API.
 <p>The <code>deepDiveData</code> object provides detailed, specific insights into the update.</p>
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
+The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. In <a href="#get-instrument-update-messages-v2">API v2</a>, this payload has been formalised into typed schemas — each response includes a <code>deepdiveData.type</code> discriminator that identifies the schema variant, enabling clients to parse the payload deterministically.
 </aside>
 <h2 id='get-instrument-update-messages-v2'>Get Instrument Update Messages (v2)</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"net/http"</span>
@@ -886,14 +886,14 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
 <span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
 <span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 <span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
 
 </code></pre></div>
@@ -901,57 +901,57 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"instrumentUpdateMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"844612012360130364"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📅 Board Meeting Scheduled for Financial Results &amp; Dividend"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone &amp; Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"522105"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRLAPREC"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE372E01025"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/mMHzW"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1779207995</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT_SCHEDULE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neutral"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-22"</span><span class="w"> </span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Year End Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-03-31"</span><span class="w"> </span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Results Approval"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Audited standalone and consolidated financial results to be approved"</span><span class="w"> </span><span class="p">}</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Key Decisions"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Governance &amp; Board Updates"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Outcomes - Key Decisions"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📃"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nl">"deepdive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔍 Board Meeting Announcement&lt;br&gt;- The company informed the stock exchange about a board meeting scheduled for May 22, 2026..."</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;🔍 Board Meeting Announcement&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;The company informed the stock exchange about a board meeting scheduled for May 22, 2026.&lt;/li&gt;&lt;/ul&gt;..."</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📎 Procedural Update"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Routine board meeting notice for financial results approval"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nl">"deepdiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPACT_ANALYSIS"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"instrumentUpdateMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"844612012360130364"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📅 Board Meeting Scheduled for Financial Results &amp; Dividend"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone &amp; Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"522105"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRLAPREC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE372E01025"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/mMHzW"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1779207995</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT_SCHEDULE"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neutral"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-22"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Year End Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-03-31"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Results Approval"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Audited standalone and consolidated financial results to be approved"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Key Decisions"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Governance &amp; Board Updates"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Outcomes - Key Decisions"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📃"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"deepdive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔍 Board Meeting Announcement&lt;br&gt;- The company informed the stock exchange about a board meeting scheduled for May 22, 2026..."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;🔍 Board Meeting Announcement&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;The company informed the stock exchange about a board meeting scheduled for May 22, 2026.&lt;/li&gt;&lt;/ul&gt;..."</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📎 Procedural Update"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Routine board meeting notice for financial results approval"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"deepdiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPACT_ANALYSIS"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"totalItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (<code>id</code>, <code>title</code>, <code>description</code>, <code>content</code>, <code>scripDetails</code>, <code>linkDetail</code>, <code>creationTime</code>, <code>filterCategory</code>) are unchanged. The top-level <code>deepDiveData</code> field from v1 has been <strong>removed</strong>; its content has been folded into the <code>proFunnel</code> object as three new sub-objects: <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>.</p>
@@ -1010,7 +1010,7 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 </tr>
 <tr>
 <td>deepdive</td>
-<td>Object containing the long-form deep-dive content. <strong>Not present for the <code>PRO_AOL</code> tier.</strong> See structure below.</td>
+<td>Object containing the long-form deep-dive content.</td>
 </tr>
 <tr>
 <td>deepdive.deep_dive_text</td>
@@ -1018,11 +1018,11 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 </tr>
 <tr>
 <td>deepdive.deep_dive_link</td>
-<td>A link to a hosted HTML page with the full deep-dive analysis. Sourced from <code>deep_dive_link</code> in the underlying payload, or <code>deep_dive_url</code> when the payload uses that key.</td>
+<td>A link to a hosted HTML page with the full deep-dive analysis.</td>
 </tr>
 <tr>
 <td>deepdive.deep_dive_html</td>
-<td>The full deep-dive analysis as raw HTML (omitted for the <code>PRO_WITHOUT_DEEPDIVE_HTML</code> tier; <strong>present</strong> for <code>PRO_AOL</code>).</td>
+<td>The full deep-dive analysis as raw HTML</td>
 </tr>
 <tr>
 <td>concernFlag</td>
@@ -1049,118 +1049,16 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 <aside class="notice">
 The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. Use <code>deepdiveData.type</code> to determine which schema to expect for the remaining keys.
 </aside>
-<h3 id='per-tier-inclusion-rules-v2'>Per-Tier Inclusion Rules (v2)</h3>
-<table><thead>
-<tr>
-<th>Tier</th>
-<th>proFunnel fields included</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>STANDARD</code></td>
-<td>No <code>proFunnel</code> key at all.</td>
-</tr>
-<tr>
-<td><code>STANDARD_WITH_FLAG_AND_SENTIMENT</code></td>
-<td><code>sentiment</code> and <code>classificationJson.importanceFlag</code> only. No <code>bytes</code>, no other <code>classificationJson</code> fields, no <code>deepdive</code> / <code>concernFlag</code> / <code>deepdiveData</code>.</td>
-</tr>
-<tr>
-<td><code>PRO_WITHOUT_DEEPDIVE_HTML</code></td>
-<td>Full v2 shape, but <code>deepdive.deep_dive_html</code> is omitted.</td>
-</tr>
-<tr>
-<td><code>PRO_WITH_DEEPDIVE_HTML</code></td>
-<td>Full v2 shape — the reference shape shown in the sample above.</td>
-</tr>
-<tr>
-<td><code>PRO_AOL</code></td>
-<td>Restricted base (<code>sentiment</code> + <code>classificationJson.importanceFlag</code>; no <code>bytes</code>, no full <code>classificationJson</code>) plus full <code>concernFlag</code> and <code>deepdiveData</code>. <strong>No <code>deepdive</code> block</strong> (but <code>deep_dive_text</code> / <code>deep_dive_link</code> / <code>deep_dive_html</code> are absent from the response for this tier).</td>
-</tr>
-</tbody></table>
 <h3 id='deepdivedata-type-values'><code>deepdiveData.type</code> Values</h3>
 <p>The <code>type</code> field inside <code>proFunnel.deepdiveData</code> is always present when <code>deepdiveData</code> is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.</p>
 
-<table><thead>
-<tr>
-<th><code>type</code> value</th>
-<th>Trigger</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>BLOCK_DEAL</code></td>
-<td>Source = <code>BLOCK_DEALS</code></td>
-</tr>
-<tr>
-<td><code>BULK_DEAL</code></td>
-<td>Source = <code>BULK_DEALS</code></td>
-</tr>
-<tr>
-<td><code>CRYSTAL_BALL</code></td>
-<td>Source = <code>SQ_CRYSTAL_BALL</code></td>
-</tr>
-<tr>
-<td><code>MANAGEMENT_TAKE</code></td>
-<td>Source = <code>SQ_MANAGEMENT_TAKE</code></td>
-</tr>
-<tr>
-<td><code>CONCALL_DECODER</code></td>
-<td>Source = <code>SQ_CONCALL_DECODER</code></td>
-</tr>
-<tr>
-<td><code>RESULTS_QUICK_LOOK</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_RESULT_IMAGE</code></td>
-</tr>
-<tr>
-<td><code>IMPACT_ANALYSIS</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_IMPACT_ANALYSIS</code></td>
-</tr>
-<tr>
-<td><code>SAST_NOTEWORTHY_TRANSACTION</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_SAST_ENRICHED</code></td>
-</tr>
-<tr>
-<td><code>CHART_WIZARD</code></td>
-<td>Source = <code>CHART_WIZARD</code></td>
-</tr>
-<tr>
-<td><code>BROADCAST_BRIEFING</code></td>
-<td>Source = <code>YOUTUBE_NEWS</code></td>
-</tr>
-<tr>
-<td><code>ANALYST_VIEW</code></td>
-<td>Source = <code>ANALYST_VIEWS</code></td>
-</tr>
-<tr>
-<td><code>VOLUME_SPURT</code></td>
-<td>Source = <code>SQ_SPVMA_INTRADAY_VOLUME_SPURT</code></td>
-</tr>
-<tr>
-<td><code>CREDIT_RATING</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED</code> + <code>filterCategoryId = 2</code></td>
-</tr>
-<tr>
-<td><code>ANALYST_MEET</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED</code> + <code>filterCategoryId = 11</code></td>
-</tr>
-<tr>
-<td><code>ACQUISITION</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED</code> + <code>filterCategoryId = 19</code></td>
-</tr>
-<tr>
-<td><code>ORDER_RECEIVED</code></td>
-<td>Source = <code>CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED</code> + <code>filterCategoryId = 24</code></td>
-</tr>
-<tr>
-<td><code>GENERIC</code></td>
-<td>Anything else with a non-empty <code>additionalInformation</code> payload.</td>
-</tr>
-</tbody></table>
+<p>Possible values: <code>BLOCK_DEAL</code>, <code>BULK_DEAL</code>, <code>CRYSTAL_BALL</code>, <code>MANAGEMENT_TAKE</code>, <code>CONCALL_DECODER</code>, <code>RESULTS_QUICK_LOOK</code>, <code>IMPACT_ANALYSIS</code>, <code>SAST_NOTEWORTHY_TRANSACTION</code>, <code>CHART_WIZARD</code>, <code>BROADCAST_BRIEFING</code>, <code>ANALYST_VIEW</code>, <code>VOLUME_SPURT</code>, <code>CREDIT_RATING</code>, <code>ANALYST_MEET</code>, <code>ACQUISITION</code>, <code>ORDER_RECEIVED</code>, <code>GENERIC</code>.</p>
 
 <aside class="notice">
 New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
 </aside>
 <h3 id='deepdivedata-payload-examples-by-type'><code>deepdiveData</code> Payload Examples by Type</h3>
-<p>The examples below show representative <code>proFunnel.deepdiveData</code> payloads for each <code>type</code>. Examples sourced from real payloads reflect the actual field names; types marked <em>(illustrative)</em> use representative field names. Note that dates for block/bulk deals are returned as ISO strings (<code>&quot;YYYY-MM-DD&quot;</code>), not arrays.</p>
+<p>The examples below show representative <code>proFunnel.deepdiveData</code> payloads for each <code>type</code>, sourced from real payloads. Note that dates for block/bulk deals are returned as ISO strings (<code>&quot;YYYY-MM-DD&quot;</code>), not arrays.</p>
 
 <p><strong><code>BLOCK_DEAL</code></strong></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -1233,23 +1131,6 @@ New <code>type</code> values may be added as new update sources are introduced. 
   </span><span class="nl">"current_performance_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Revenue Growth:&lt;/b&gt; Q4 FY26 revenue at Rs.9,200 million, up 19.1% YoY...&lt;/li&gt;&lt;/ul&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><strong><code>MANAGEMENT_TAKE</code></strong> <em>(illustrative)</em></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MANAGEMENT_TAKE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"management_commentary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Management indicated strong order pipeline for H1 FY27 with 40% already secured."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"key_guidance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FY27 revenue guidance maintained at INR 5,000 crore."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>CONCALL_DECODER</code></strong> <em>(illustrative)</em></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONCALL_DECODER"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"key_highlights"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"Q4 FY24 pre-sales: INR 42.3 billion (40% YoY)"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Net debt reduced to INR 30.1 billion"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
 <p><strong><code>RESULTS_QUICK_LOOK</code></strong></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RESULTS_QUICK_LOOK"</span><span class="p">,</span><span class="w">
@@ -1265,14 +1146,6 @@ New <code>type</code> values may be added as new update sources are introduced. 
     </span><span class="nl">"latest_profits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1,329"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"relevant_page_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>IMPACT_ANALYSIS</code></strong> <em>(illustrative)</em></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPACT_ANALYSIS"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has scheduled a board meeting on May 22, 2026 to approve audited financial results and consider a final dividend."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"impact_summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moderate positive sentiment expected pending result quality."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"affected_segments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Equity"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Dividend seekers"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong><code>SAST_NOTEWORTHY_TRANSACTION</code></strong></p>
@@ -1316,16 +1189,6 @@ New <code>type</code> values may be added as new update sources are introduced. 
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYST_VIEW"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e4553-1378-7078-ba88-e4c128941651_ps.png"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>VOLUME_SPURT</code></strong> <em>(illustrative)</em></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VOLUME_SPURT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"volume_today"</span><span class="p">:</span><span class="w"> </span><span class="mi">12500000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"avg_volume_20d"</span><span class="p">:</span><span class="w"> </span><span class="mi">3200000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"volume_multiple"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.9</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price_change_pct"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10:35 IST"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong><code>CREDIT_RATING</code></strong></p>
@@ -1425,14 +1288,14 @@ The code samples below use the v1 URL for illustration. Swap <code>v1</code> for
 
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
 <span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
 <span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 <span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
 
 </code></pre></div>
