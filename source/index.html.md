@@ -75,7 +75,7 @@ You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.c
 
 ## Get Instrument Update Messages
 
-<aside class="notice">
+<aside class="warning">
 A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
 </aside>
 
@@ -150,14 +150,14 @@ axios.request(config)
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
+        .build();
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
-  .method("GET", body)
-  .addHeader("x-api-key", "yourapikeyhere")
-  .build();
+        .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
+        .method("GET", body)
+        .addHeader("x-api-key", "yourapikeyhere")
+        .build();
 Response response = client.newCall(request).execute();
 
 ```
@@ -167,90 +167,90 @@ Response response = client.newCall(request).execute();
 
 ```json
 {
-    "instrumentUpdateMessages": [
-        {
-            "id": "818768429104481561",
-            "title": "Vedanta Ltd",
-            "description": "💰 Large NCD Issuance Approved",
-            "content": "📍Key Insight:  Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
-            "scripDetails": {
-                "bseScripCode": "500295",
-                "scripName": "Vedanta Ltd",
-                "bseTickr": "VEDL",
-                "nseTickr": null,
-                "isin": "INE205A01025"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/XHB3R"
-            },
-            "creationTime": 1773046405,
-            "filterCategory": "UNCLASSIFIED",
-            "proFunnel": {
-                "sentiment": "neutral",
-                "bytes": [
-                    {
-                        "tag": "Maximum number of NCDs issued",
-                        "data": "300,000"
-                    },
-                    {
-                        "tag": "Face value per NCD",
-                        "data": "₹1 crore"
-                    },
-                    {
-                        "tag": "Total issuing amount",
-                        "data": "up to ₹3,000 crores"
-                    },
-                    {
-                        "tag": "Listing exchange",
-                        "data": "BSE"
-                    },
-                    {
-                        "tag": "Issue method",
-                        "data": "private placement"
-                    }
-                ],
-                "classificationJson": {
-                    "smartTag": "NCD Issuance",
-                    "importanceFlag": "Insightful",
-                    "category": "Financial Instruments",
-                    "subcategory": "Non-Convertible Debenture (NCD) Issuance",
-                    "emoji": "💰"
-                }
-            },
-            "deepDiveData": {
-                "title": "*💰 Large NCD Issuance Approved*",
-                "insight": "• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
-                "fast_fact": "The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE.",
-                "source_link": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf",
-                "deep_dive_html": "<h2>💡 Type of Securities:</h2><ul><li>The company plans to issue unsecured Non-Convertible Debentures (NCDs), i.e., loans without collateral security.</li><li>NCDs are redeemable, meaning principal will be repaid after a set time.</li><li>They are rated, indicating assessment of credit quality.</li></ul><h2>💰 Issue Size and Value:</h2><ul><li>Up to 300,000 NCDs are proposed.</li><li>Each NCD has a face value of ₹1 crore.</li><li>Total amount can reach up to ₹3,000 crores (₹30 billion).</li></ul><h2>📈 Issuance Method and Listing:</h2><ul><li>Issued on a private placement basis to select investors.</li><li>NCDs will be listed on BSE Limited, allowing trading on exchange.</li></ul><h2>📅 Terms and Details:</h2><ul><li>Terms like interest (coupon rate), maturity, and schedule depend on a Disclosure Document.</li><li>No late payment or default reported till date.</li></ul><h2>🔍 What This Means:</h2><ul><li>Raising a large debt sum suggests financing for expansion, refinancing, or corporate purposes.</li><li>Unsecured nature means higher risk but potential for higher returns for investors.</li><li>Private placement targets qualified institutional investors.</li></ul><h2>🧑💼 For Investors:</h2><ul><li>It's a significant update about the company raising debt capital.</li><li>Investors should look for Disclosure Document for interest rates and maturity.</li><li>Listing provides liquidity option for NCD holders.</li></ul><p>Overall, this update reflects the company’s strategic move to secure funds through debt via private placement of NCDs.</p>",
-                "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html",
-                "deep_dive_text": "💡 Type of Securities:<br>- The company plans to issue unsecured Non-Convertible Debentures (NCDs). These are loans taken by the company from investors without any collateral security.<br>- NCDs are \"redeemable,\" meaning the company will repay the principal after a set period.<br>- They are \"rated,\" indicating a credit quality assessment by agencies.<br><br>💰 Issue Size and Value:<br>- Up to 300,000 NCDs will be issued.<br>- Each has a face value of ₹1 crore.<br>- Total amount can go up to ₹3,000 crores (₹30 billion).<br><br>📈 Issuance Method and Listing:<br>- The issuance is on a \"private placement basis,\" which means shares will be offered to a select group of institutional or qualified investors rather than the general public.<br>- The NCDs will be listed on BSE Limited, allowing investors to trade them on the stock exchange.<br><br>📅 Terms and Details:<br>- Specifics like coupon rate (interest paid), maturity dates, payment schedule, and any charges are as per a separate Disclosure Document.<br>- As of the announcement date, no delays or defaults on paying interest or principal have been reported.<br><br>🔍 What This Means:<br>- Such a large fundraise via NCDs suggests the company is raising significant debt capital, possibly for business expansion, debt refinancing, or other corporate needs.<br>- Being unsecured means investors face higher risk relative to secured debt but may expect higher returns.<br>- Private placement limits access to qualified investors, focusing on institutional investment.<br><br>🧑💼 For Investors:<br>- This update informs that the company is undertaking a major debt issuance.<br>- Investors might watch details in the forthcoming Disclosure Document for interest rates and maturities to assess appeal.<br>- The listing of NCDs enables liquidity for investors holding them.<br><br>Overall, the news highlights a strategic financial move by the company to raise substantial funds through debt on a private placement basis. Details on terms will be key to fully understand implications.",
-                "flagNote": "Large debt fundraising approved, important for investors' financial understanding",
-                "concernFlag": ""
-            }
-        },
-        {
-            "id": "589113551676169507",
-            "title": "Paytm",
-            "description": "Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights",
-            "content": "Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!",
-            "scripDetails": {
-                "bseScripCode": "543396",
-                "scripName": "Paytm",
-                "bseTickr": "PAYTM",
-                "nseTickr": null,
-                "isin": "INE982J01020"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/e31EG"
-            },
-            "creationTime": 1718292415,
-            "filterCategory": "MEDIA_COVERAGE"
+  "instrumentUpdateMessages": [
+    {
+      "id": "818768429104481561",
+      "title": "Vedanta Ltd",
+      "description": "💰 Large NCD Issuance Approved",
+      "content": "📍Key Insight:  Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
+      "scripDetails": {
+        "bseScripCode": "500295",
+        "scripName": "Vedanta Ltd",
+        "bseTickr": "VEDL",
+        "nseTickr": null,
+        "isin": "INE205A01025"
+      },
+      "linkDetail": {
+        "shortLink": "https://sqst.in/XHB3R"
+      },
+      "creationTime": 1773046405,
+      "filterCategory": "UNCLASSIFIED",
+      "proFunnel": {
+        "sentiment": "neutral",
+        "bytes": [
+          {
+            "tag": "Maximum number of NCDs issued",
+            "data": "300,000"
+          },
+          {
+            "tag": "Face value per NCD",
+            "data": "₹1 crore"
+          },
+          {
+            "tag": "Total issuing amount",
+            "data": "up to ₹3,000 crores"
+          },
+          {
+            "tag": "Listing exchange",
+            "data": "BSE"
+          },
+          {
+            "tag": "Issue method",
+            "data": "private placement"
+          }
+        ],
+        "classificationJson": {
+          "smartTag": "NCD Issuance",
+          "importanceFlag": "Insightful",
+          "category": "Financial Instruments",
+          "subcategory": "Non-Convertible Debenture (NCD) Issuance",
+          "emoji": "💰"
         }
-    ],
-     "total-items": 9984,
-     "current-page": 0,
-    "total-pages": 3328
+      },
+      "deepDiveData": {
+        "title": "*💰 Large NCD Issuance Approved*",
+        "insight": "• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
+        "fast_fact": "The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE.",
+        "source_link": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf",
+        "deep_dive_html": "<h2>💡 Type of Securities:</h2><ul><li>The company plans to issue unsecured Non-Convertible Debentures (NCDs), i.e., loans without collateral security.</li><li>NCDs are redeemable, meaning principal will be repaid after a set time.</li><li>They are rated, indicating assessment of credit quality.</li></ul><h2>💰 Issue Size and Value:</h2><ul><li>Up to 300,000 NCDs are proposed.</li><li>Each NCD has a face value of ₹1 crore.</li><li>Total amount can reach up to ₹3,000 crores (₹30 billion).</li></ul><h2>📈 Issuance Method and Listing:</h2><ul><li>Issued on a private placement basis to select investors.</li><li>NCDs will be listed on BSE Limited, allowing trading on exchange.</li></ul><h2>📅 Terms and Details:</h2><ul><li>Terms like interest (coupon rate), maturity, and schedule depend on a Disclosure Document.</li><li>No late payment or default reported till date.</li></ul><h2>🔍 What This Means:</h2><ul><li>Raising a large debt sum suggests financing for expansion, refinancing, or corporate purposes.</li><li>Unsecured nature means higher risk but potential for higher returns for investors.</li><li>Private placement targets qualified institutional investors.</li></ul><h2>🧑💼 For Investors:</h2><ul><li>It's a significant update about the company raising debt capital.</li><li>Investors should look for Disclosure Document for interest rates and maturity.</li><li>Listing provides liquidity option for NCD holders.</li></ul><p>Overall, this update reflects the company’s strategic move to secure funds through debt via private placement of NCDs.</p>",
+        "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html",
+        "deep_dive_text": "💡 Type of Securities:<br>- The company plans to issue unsecured Non-Convertible Debentures (NCDs). These are loans taken by the company from investors without any collateral security.<br>- NCDs are \"redeemable,\" meaning the company will repay the principal after a set period.<br>- They are \"rated,\" indicating a credit quality assessment by agencies.<br><br>💰 Issue Size and Value:<br>- Up to 300,000 NCDs will be issued.<br>- Each has a face value of ₹1 crore.<br>- Total amount can go up to ₹3,000 crores (₹30 billion).<br><br>📈 Issuance Method and Listing:<br>- The issuance is on a \"private placement basis,\" which means shares will be offered to a select group of institutional or qualified investors rather than the general public.<br>- The NCDs will be listed on BSE Limited, allowing investors to trade them on the stock exchange.<br><br>📅 Terms and Details:<br>- Specifics like coupon rate (interest paid), maturity dates, payment schedule, and any charges are as per a separate Disclosure Document.<br>- As of the announcement date, no delays or defaults on paying interest or principal have been reported.<br><br>🔍 What This Means:<br>- Such a large fundraise via NCDs suggests the company is raising significant debt capital, possibly for business expansion, debt refinancing, or other corporate needs.<br>- Being unsecured means investors face higher risk relative to secured debt but may expect higher returns.<br>- Private placement limits access to qualified investors, focusing on institutional investment.<br><br>🧑💼 For Investors:<br>- This update informs that the company is undertaking a major debt issuance.<br>- Investors might watch details in the forthcoming Disclosure Document for interest rates and maturities to assess appeal.<br>- The listing of NCDs enables liquidity for investors holding them.<br><br>Overall, the news highlights a strategic financial move by the company to raise substantial funds through debt on a private placement basis. Details on terms will be key to fully understand implications.",
+        "flagNote": "Large debt fundraising approved, important for investors' financial understanding",
+        "concernFlag": ""
+      }
+    },
+    {
+      "id": "589113551676169507",
+      "title": "Paytm",
+      "description": "Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights",
+      "content": "Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!",
+      "scripDetails": {
+        "bseScripCode": "543396",
+        "scripName": "Paytm",
+        "bseTickr": "PAYTM",
+        "nseTickr": null,
+        "isin": "INE982J01020"
+      },
+      "linkDetail": {
+        "shortLink": "https://sqst.in/e31EG"
+      },
+      "creationTime": 1718292415,
+      "filterCategory": "MEDIA_COVERAGE"
+    }
+  ],
+  "total-items": 9984,
+  "current-page": 0,
+  "total-pages": 3328
 }
 ```
 
@@ -339,7 +339,7 @@ classificationJson.emoji | An emoji representing the update.
 The `deepDiveData` object provides detailed, specific insights into the update.
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
+The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. In <a href="#get-instrument-update-messages-v2">API v2</a>, this payload has been formalised into typed schemas — each response includes a <code>deepdiveData.type</code> discriminator that identifies the schema variant, enabling clients to parse the payload deterministically.
 </aside>
 
 ## Get Instrument Update Messages (v2)
@@ -405,14 +405,14 @@ axios.request(config)
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
+        .build();
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
-  .method("GET", body)
-  .addHeader("x-api-key", "yourapikeyhere")
-  .build();
+        .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
+        .method("GET", body)
+        .addHeader("x-api-key", "yourapikeyhere")
+        .build();
 Response response = client.newCall(request).execute();
 
 ```
@@ -422,57 +422,57 @@ Response response = client.newCall(request).execute();
 
 ```json
 {
-    "instrumentUpdateMessages": [
-        {
-            "id": "844612012360130364",
-            "title": "Birla Precision Technologies Ltd",
-            "description": "📅 Board Meeting Scheduled for Financial Results & Dividend",
-            "content": "📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone & Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement",
-            "scripDetails": {
-                "bseScripCode": "522105",
-                "scripName": "Birla Precision Technologies Ltd",
-                "bseTickr": "BIRLAPREC",
-                "nseTickr": null,
-                "isin": "INE372E01025"
-            },
-            "linkDetail": {
-                "shortLink": "https://sqst.in/mMHzW"
-            },
-            "creationTime": 1779207995,
-            "filterCategory": "EVENT_SCHEDULE",
-            "proFunnel": {
-                "sentiment": "neutral",
-                "bytes": [
-                    { "tag": "Board Meeting Date", "data": "2026-05-22" },
-                    { "tag": "Financial Year End Date", "data": "2026-03-31" },
-                    { "tag": "Results Approval", "data": "Audited standalone and consolidated financial results to be approved" }
-                ],
-                "classificationJson": {
-                    "smartTag": "Board Key Decisions",
-                    "importanceFlag": "Insightful",
-                    "category": "Governance & Board Updates",
-                    "subcategory": "Board Meeting Outcomes - Key Decisions",
-                    "emoji": "📃"
-                },
-                "deepdive": {
-                    "deep_dive_text": "🔍 Board Meeting Announcement<br>- The company informed the stock exchange about a board meeting scheduled for May 22, 2026...",
-                    "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html",
-                    "deep_dive_html": "<h2>🔍 Board Meeting Announcement</h2><ul><li>The company informed the stock exchange about a board meeting scheduled for May 22, 2026.</li></ul>..."
-                },
-                "concernFlag": {
-                    "flag": "📎 Procedural Update",
-                    "flagNote": "Routine board meeting notice for financial results approval"
-                },
-                "deepdiveData": {
-                    "type": "IMPACT_ANALYSIS",
-                    "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."
-                }
-            }
+  "instrumentUpdateMessages": [
+    {
+      "id": "844612012360130364",
+      "title": "Birla Precision Technologies Ltd",
+      "description": "📅 Board Meeting Scheduled for Financial Results & Dividend",
+      "content": "📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone & Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement",
+      "scripDetails": {
+        "bseScripCode": "522105",
+        "scripName": "Birla Precision Technologies Ltd",
+        "bseTickr": "BIRLAPREC",
+        "nseTickr": null,
+        "isin": "INE372E01025"
+      },
+      "linkDetail": {
+        "shortLink": "https://sqst.in/mMHzW"
+      },
+      "creationTime": 1779207995,
+      "filterCategory": "EVENT_SCHEDULE",
+      "proFunnel": {
+        "sentiment": "neutral",
+        "bytes": [
+          { "tag": "Board Meeting Date", "data": "2026-05-22" },
+          { "tag": "Financial Year End Date", "data": "2026-03-31" },
+          { "tag": "Results Approval", "data": "Audited standalone and consolidated financial results to be approved" }
+        ],
+        "classificationJson": {
+          "smartTag": "Board Key Decisions",
+          "importanceFlag": "Insightful",
+          "category": "Governance & Board Updates",
+          "subcategory": "Board Meeting Outcomes - Key Decisions",
+          "emoji": "📃"
+        },
+        "deepdive": {
+          "deep_dive_text": "🔍 Board Meeting Announcement<br>- The company informed the stock exchange about a board meeting scheduled for May 22, 2026...",
+          "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html",
+          "deep_dive_html": "<h2>🔍 Board Meeting Announcement</h2><ul><li>The company informed the stock exchange about a board meeting scheduled for May 22, 2026.</li></ul>..."
+        },
+        "concernFlag": {
+          "flag": "📎 Procedural Update",
+          "flagNote": "Routine board meeting notice for financial results approval"
+        },
+        "deepdiveData": {
+          "type": "IMPACT_ANALYSIS",
+          "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."
         }
-    ],
-    "currentPage": 0,
-    "totalItems": 9984,
-    "totalPages": 3328
+      }
+    }
+  ],
+  "currentPage": 0,
+  "totalItems": 9984,
+  "totalPages": 3328
 }
 ```
 
@@ -504,10 +504,10 @@ classificationJson.importanceFlag | Flag indicating the importance (e.g., "Insig
 classificationJson.category | The broader category of the update.
 classificationJson.subcategory | The specific subcategory.
 classificationJson.emoji | An emoji representing the update.
-deepdive | Object containing the long-form deep-dive content. **Not present for the `PRO_AOL` tier.** See structure below.
+deepdive | Object containing the long-form deep-dive content. 
 deepdive.deep_dive_text | A plain-text/lightly-HTML rendering of the deep-dive analysis.
-deepdive.deep_dive_link | A link to a hosted HTML page with the full deep-dive analysis. Sourced from `deep_dive_link` in the underlying payload, or `deep_dive_url` when the payload uses that key.
-deepdive.deep_dive_html | The full deep-dive analysis as raw HTML (omitted for the `PRO_WITHOUT_DEEPDIVE_HTML` tier; **present** for `PRO_AOL`).
+deepdive.deep_dive_link | A link to a hosted HTML page with the full deep-dive analysis.
+deepdive.deep_dive_html | The full deep-dive analysis as raw HTML 
 concernFlag | Object indicating any concern flag attached to the update.
 concernFlag.flag | The concern flag label (e.g., "📎 Procedural Update", "🚩 Red Flag").
 concernFlag.flagNote | A short explanation of why the flag was raised.
@@ -518,39 +518,12 @@ deepdiveData.type | A string discriminator identifying which schema variant the 
 The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. Use <code>deepdiveData.type</code> to determine which schema to expect for the remaining keys.
 </aside>
 
-### Per-Tier Inclusion Rules (v2)
-
-Tier | proFunnel fields included
---------- | -----------
-`STANDARD` | No `proFunnel` key at all.
-`STANDARD_WITH_FLAG_AND_SENTIMENT` | `sentiment` and `classificationJson.importanceFlag` only. No `bytes`, no other `classificationJson` fields, no `deepdive` / `concernFlag` / `deepdiveData`.
-`PRO_WITHOUT_DEEPDIVE_HTML` | Full v2 shape, but `deepdive.deep_dive_html` is omitted.
-`PRO_WITH_DEEPDIVE_HTML` | Full v2 shape — the reference shape shown in the sample above.
-`PRO_AOL` | Restricted base (`sentiment` + `classificationJson.importanceFlag`; no `bytes`, no full `classificationJson`) plus full `concernFlag` and `deepdiveData`. **No `deepdive` block** (but `deep_dive_text` / `deep_dive_link` / `deep_dive_html` are absent from the response for this tier).
 
 ### `deepdiveData.type` Values
 
 The `type` field inside `proFunnel.deepdiveData` is always present when `deepdiveData` is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.
 
-`type` value | Trigger
---------- | -----------
-`BLOCK_DEAL` | Source = `BLOCK_DEALS`
-`BULK_DEAL` | Source = `BULK_DEALS`
-`CRYSTAL_BALL` | Source = `SQ_CRYSTAL_BALL`
-`MANAGEMENT_TAKE` | Source = `SQ_MANAGEMENT_TAKE`
-`CONCALL_DECODER` | Source = `SQ_CONCALL_DECODER`
-`RESULTS_QUICK_LOOK` | Source = `CORPORATE_ANNOUNCEMENT_RESULT_IMAGE`
-`IMPACT_ANALYSIS` | Source = `CORPORATE_ANNOUNCEMENT_IMPACT_ANALYSIS`
-`SAST_NOTEWORTHY_TRANSACTION` | Source = `CORPORATE_ANNOUNCEMENT_SAST_ENRICHED`
-`CHART_WIZARD` | Source = `CHART_WIZARD`
-`BROADCAST_BRIEFING` | Source = `YOUTUBE_NEWS`
-`ANALYST_VIEW` | Source = `ANALYST_VIEWS`
-`VOLUME_SPURT` | Source = `SQ_SPVMA_INTRADAY_VOLUME_SPURT`
-`CREDIT_RATING` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 2`
-`ANALYST_MEET` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 11`
-`ACQUISITION` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 19`
-`ORDER_RECEIVED` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 24`
-`GENERIC` | Anything else with a non-empty `additionalInformation` payload.
+Possible values: `BLOCK_DEAL`, `BULK_DEAL`, `CRYSTAL_BALL`, `MANAGEMENT_TAKE`, `CONCALL_DECODER`, `RESULTS_QUICK_LOOK`, `IMPACT_ANALYSIS`, `SAST_NOTEWORTHY_TRANSACTION`, `CHART_WIZARD`, `BROADCAST_BRIEFING`, `ANALYST_VIEW`, `VOLUME_SPURT`, `CREDIT_RATING`, `ANALYST_MEET`, `ACQUISITION`, `ORDER_RECEIVED`, `GENERIC`.
 
 <aside class="notice">
 New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
@@ -558,7 +531,7 @@ New <code>type</code> values may be added as new update sources are introduced. 
 
 ### `deepdiveData` Payload Examples by Type
 
-The examples below show representative `proFunnel.deepdiveData` payloads for each `type`. Examples sourced from real payloads reflect the actual field names; types marked *(illustrative)* use representative field names. Note that dates for block/bulk deals are returned as ISO strings (`"YYYY-MM-DD"`), not arrays.
+The examples below show representative `proFunnel.deepdiveData` payloads for each `type`, sourced from real payloads. Note that dates for block/bulk deals are returned as ISO strings (`"YYYY-MM-DD"`), not arrays.
 
 **`BLOCK_DEAL`**
 
@@ -640,29 +613,6 @@ The examples below show representative `proFunnel.deepdiveData` payloads for eac
 }
 ```
 
-**`MANAGEMENT_TAKE`** *(illustrative)*
-
-```json
-{
-  "type": "MANAGEMENT_TAKE",
-  "management_commentary": "Management indicated strong order pipeline for H1 FY27 with 40% already secured.",
-  "key_guidance": "FY27 revenue guidance maintained at INR 5,000 crore."
-}
-```
-
-**`CONCALL_DECODER`** *(illustrative)*
-
-```json
-{
-  "type": "CONCALL_DECODER",
-  "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%.",
-  "key_highlights": [
-    "Q4 FY24 pre-sales: INR 42.3 billion (40% YoY)",
-    "Net debt reduced to INR 30.1 billion"
-  ]
-}
-```
-
 **`RESULTS_QUICK_LOOK`**
 
 ```json
@@ -680,17 +630,6 @@ The examples below show representative `proFunnel.deepdiveData` payloads for eac
     "latest_profits": "1,329",
     "relevant_page_image": "https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"
   }
-}
-```
-
-**`IMPACT_ANALYSIS`** *(illustrative)*
-
-```json
-{
-  "type": "IMPACT_ANALYSIS",
-  "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results and consider a final dividend.",
-  "impact_summary": "Moderate positive sentiment expected pending result quality.",
-  "affected_segments": ["Equity", "Dividend seekers"]
 }
 ```
 
@@ -746,19 +685,6 @@ The examples below show representative `proFunnel.deepdiveData` payloads for eac
   "type": "ANALYST_VIEW",
   "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e4553-1378-7078-ba88-e4c128941651_ps.png",
   "isImagePresent": true
-}
-```
-
-**`VOLUME_SPURT`** *(illustrative)*
-
-```json
-{
-  "type": "VOLUME_SPURT",
-  "volume_today": 12500000,
-  "avg_volume_20d": 3200000,
-  "volume_multiple": 3.9,
-  "price_change_pct": 4.2,
-  "trigger_time": "10:35 IST"
 }
 ```
 
@@ -891,14 +817,14 @@ axios.request(config)
 ```java
 
 OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
+        .build();
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561")
-  .method("GET", body)
-  .addHeader("x-api-key", "yourapikeyhere")
-  .build();
+        .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561")
+        .method("GET", body)
+        .addHeader("x-api-key", "yourapikeyhere")
+        .build();
 Response response = client.newCall(request).execute();
 
 ```
