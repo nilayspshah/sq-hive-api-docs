@@ -490,7 +490,7 @@ Response response = client.newCall(request).execute();
 }
 ```
 
-This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (`id`, `title`, `description`, `content`, `scripDetails`, `linkDetail`, `creationTime`, `filterCategory`) are unchanged. The top-level `deepDiveData` field from v1 has been **removed**; its content has been folded into the `proFunnel` object as three new sub-objects: `deepdive`, `concernFlag`, and `deepdiveData`. The v1 STANDARD_WITH_FLAG_AND_SENTIMENT top-level `sentiment` and `concernFlags` fields have also been folded into `proFunnel`.
+This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (`id`, `title`, `description`, `content`, `scripDetails`, `linkDetail`, `creationTime`, `filterCategory`) are unchanged. The top-level `deepDiveData` field from v1 has been **removed**; its content has been folded into the `proFunnel` object as three new sub-objects: `deepdive`, `concernFlag`, and `deepdiveData`. 
 
 ### HTTP Request
 
@@ -531,15 +531,6 @@ deepdiveData | Dynamic object with the remaining payload from the underlying add
 The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. The schema will vary based on the specific type of update.
 </aside>
 
-### Per-Tier Inclusion (v2)
-
-Tier | `proFunnel` content
---------- | -----------
-`STANDARD` | absent — no `proFunnel` field in the response
-`STANDARD_WITH_FLAG_AND_SENTIMENT` | only `sentiment` and `classificationJson.importanceFlag`
-`PRO_WITHOUT_DEEPDIVE_HTML` | full v2 `proFunnel`, but `deepdive.deep_dive_html` is omitted
-`PRO_WITH_DEEPDIVE_HTML` | full v2 `proFunnel` including `deepdive.deep_dive_html`
-`PRO_AOL` | restricted base (`sentiment` + `classificationJson.importanceFlag`; no `bytes`, no other `classificationJson` fields) + full `deepdive` (including `deep_dive_html`), `concernFlag`, and `deepdiveData`
 
 ## Get Assessment for an Instrument Update
 
