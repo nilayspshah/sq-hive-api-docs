@@ -341,6 +341,9 @@
                     <a href="#get-instrument-update-messages" class="toc-h2 toc-link" data-title="Get Instrument Update Messages">Get Instrument Update Messages</a>
                   </li>
                   <li>
+                    <a href="#get-instrument-update-messages-v2" class="toc-h2 toc-link" data-title="Get Instrument Update Messages (v2)">Get Instrument Update Messages (v2)</a>
+                  </li>
+                  <li>
                     <a href="#get-assessment-for-an-instrument-update" class="toc-h2 toc-link" data-title="Get Assessment for an Instrument Update">Get Assessment for an Instrument Update</a>
                   </li>
               </ul>
@@ -497,7 +500,11 @@ You must replace <code>yourapikeyhere</code> with your personal API key.
 <aside class="notice">
 You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending  <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20API%20keys%20for%20SQ%20Hive">us a whatsapp at 918779170796</a> if its not already shared with you. 
 </aside>
-<h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
+<h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2>
+<aside class="notice">
+A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
+</aside>
+<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"net/http"</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="p">)</span>
@@ -873,7 +880,251 @@ Only the data for the last 7 days is available via the API.
 <aside class="notice">
 The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
 </aside>
-<h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
+<h2 id='get-instrument-update-messages-v2'>Get Instrument Update Messages (v2)</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"net/http"</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s2">"x-api-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"yourapikeyhere"</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'yourapikeyhere'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: yourapikeyhere'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">x-api-key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">yourapikeyhere</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
+<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
+<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"instrumentUpdateMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"844612012360130364"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📅 Board Meeting Scheduled for Financial Results &amp; Dividend"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone &amp; Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"522105"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRLAPREC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE372E01025"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/mMHzW"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1779207995</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT_SCHEDULE"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neutral"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-22"</span><span class="w"> </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Year End Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-03-31"</span><span class="w"> </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Results Approval"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Audited standalone and consolidated financial results to be approved"</span><span class="w"> </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Key Decisions"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Governance &amp; Board Updates"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Outcomes - Key Decisions"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📃"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"deepdive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔍 Board Meeting Announcement&lt;br&gt;- The company informed the stock exchange about a board meeting scheduled for May 22, 2026..."</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;🔍 Board Meeting Announcement&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;The company informed the stock exchange about a board meeting scheduled for May 22, 2026.&lt;/li&gt;&lt;/ul&gt;..."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📎 Procedural Update"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Routine board meeting notice for financial results approval"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"deepdiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"source_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.bseindia.com/xml-data/corpfiling/AttachLive/8be200dd-c308-4da3-a6dc-563a30aeb498.pdf"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (<code>id</code>, <code>title</code>, <code>description</code>, <code>content</code>, <code>scripDetails</code>, <code>linkDetail</code>, <code>creationTime</code>, <code>filterCategory</code>) are unchanged. The top-level <code>deepDiveData</code> field from v1 has been <strong>removed</strong>; its content has been folded into the <code>proFunnel</code> object as three new sub-objects: <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>. The v1 STANDARD_WITH_FLAG_AND_SENTIMENT top-level <code>sentiment</code> and <code>concernFlags</code> fields have also been folded into <code>proFunnel</code>.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<p>Query parameters are identical to the <a href="#get-instrument-update-messages">v1 endpoint</a>: <code>pageNo</code>, <code>pageSize</code>, <code>sortDirection</code>, <code>fromTime</code>, <code>toTime</code>, <code>messageId</code>, <code>expression</code>, <code>curationType</code>, <code>scripIdType</code>, <code>scripId</code>.</p>
+<h3 id='response-object-2'>Response Object</h3>
+<p>Top-level fields outside <code>proFunnel</code> are identical to v1 and documented under the <a href="#response-object">v1 Response Object</a> section. Only the <code>proFunnel</code> object differs.</p>
+<h3 id='profunnel-object-structure-v2'><code>proFunnel</code> Object Structure (v2)</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sentiment</td>
+<td>The sentiment of the update (possible values: &quot;positive&quot;, &quot;negative&quot;, &quot;neutral&quot;, &quot;not_known&quot;).</td>
+</tr>
+<tr>
+<td>bytes</td>
+<td>An array of key data points extracted from the update.</td>
+</tr>
+<tr>
+<td>bytes[].tag</td>
+<td>The label for the data point.</td>
+</tr>
+<tr>
+<td>bytes[].data</td>
+<td>The value for the data point.</td>
+</tr>
+<tr>
+<td>classificationJson</td>
+<td>Structural classification of the event.</td>
+</tr>
+<tr>
+<td>classificationJson.smartTag</td>
+<td>A concise tag summarizing the update.</td>
+</tr>
+<tr>
+<td>classificationJson.importanceFlag</td>
+<td>Flag indicating the importance (e.g., &quot;Insightful&quot;, &quot;Procedural&quot;).</td>
+</tr>
+<tr>
+<td>classificationJson.category</td>
+<td>The broader category of the update.</td>
+</tr>
+<tr>
+<td>classificationJson.subcategory</td>
+<td>The specific subcategory.</td>
+</tr>
+<tr>
+<td>classificationJson.emoji</td>
+<td>An emoji representing the update.</td>
+</tr>
+<tr>
+<td>deepdive</td>
+<td>Object containing the long-form deep-dive content. See structure below.</td>
+</tr>
+<tr>
+<td>deepdive.deep_dive_text</td>
+<td>A plain-text/lightly-HTML rendering of the deep-dive analysis.</td>
+</tr>
+<tr>
+<td>deepdive.deep_dive_link</td>
+<td>A link to a hosted HTML page with the full deep-dive analysis. Sourced from <code>deep_dive_link</code> in the underlying payload, or <code>deep_dive_url</code> when the payload uses that key.</td>
+</tr>
+<tr>
+<td>deepdive.deep_dive_html</td>
+<td>The full deep-dive analysis as raw HTML (omitted for the <code>PRO_WITHOUT_DEEPDIVE_HTML</code> tier).</td>
+</tr>
+<tr>
+<td>concernFlag</td>
+<td>Object indicating any concern flag attached to the update.</td>
+</tr>
+<tr>
+<td>concernFlag.flag</td>
+<td>The concern flag label (e.g., &quot;📎 Procedural Update&quot;, &quot;🚩 Red Flag&quot;).</td>
+</tr>
+<tr>
+<td>concernFlag.flagNote</td>
+<td>A short explanation of why the flag was raised.</td>
+</tr>
+<tr>
+<td>deepdiveData</td>
+<td>Dynamic object with the remaining payload from the underlying additional information (e.g., <code>fast_fact</code>, <code>source_link</code>, plus any update-type-specific fields). Excludes anything already surfaced under <code>deepdive</code> / <code>concernFlag</code>, and also excludes <code>insight</code> and <code>title</code>.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. The schema will vary based on the specific type of update.
+</aside>
+<h3 id='per-tier-inclusion-v2'>Per-Tier Inclusion (v2)</h3>
+<table><thead>
+<tr>
+<th>Tier</th>
+<th><code>proFunnel</code> content</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>STANDARD</code></td>
+<td>absent — no <code>proFunnel</code> field in the response</td>
+</tr>
+<tr>
+<td><code>STANDARD_WITH_FLAG_AND_SENTIMENT</code></td>
+<td>only <code>sentiment</code> and <code>classificationJson.importanceFlag</code></td>
+</tr>
+<tr>
+<td><code>PRO_WITHOUT_DEEPDIVE_HTML</code></td>
+<td>full v2 <code>proFunnel</code>, but <code>deepdive.deep_dive_html</code> is omitted</td>
+</tr>
+<tr>
+<td><code>PRO_WITH_DEEPDIVE_HTML</code></td>
+<td>full v2 <code>proFunnel</code> including <code>deepdive.deep_dive_html</code></td>
+</tr>
+<tr>
+<td><code>PRO_AOL</code></td>
+<td>restricted base (<code>sentiment</code> + <code>classificationJson.importanceFlag</code>; no <code>bytes</code>, no other <code>classificationJson</code> fields) + full <code>deepdive</code> (including <code>deep_dive_html</code>), <code>concernFlag</code>, and <code>deepdiveData</code></td>
+</tr>
+</tbody></table>
+<h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2>
+<aside class="notice">
+This endpoint is available on <strong>both v1 and v2</strong> with the same response shape. Use whichever base path matches the rest of your integration:
+<ul>
+<li><code>GET /hive/api/v1/instrumentUpdates/assessment</code></li>
+<li><code>GET /hive/api/v2/instrumentUpdates/assessment</code></li>
+</ul>
+The code samples below use the v1 URL for illustration. Swap <code>v1</code> for <code>v2</code> if you are migrating clients to the v2 path.
+</aside>
+<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"net/http"</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561"</span><span class="p">)</span>
@@ -958,9 +1209,13 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves the assessment data for a specific instrument update.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+
+<p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/assessment</code></p>
+
+<p>Both paths accept the same query parameters and return the same response.</p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -971,10 +1226,10 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 <tr>
 <td>instrumentUpdateId</td>
 <td>-</td>
-<td>The ID of the instrument update for which the assessment is to be retrieved. This is the same <code>id</code> field returned by the <a href="#get-instrument-update-messages">Get Instrument Update Messages</a> endpoint.</td>
+<td>The ID of the instrument update for which the assessment is to be retrieved. This is the same <code>id</code> field returned by the <a href="#get-instrument-update-messages">v1</a> / <a href="#get-instrument-update-messages-v2">v2</a> instrument-updates endpoints.</td>
 </tr>
 </tbody></table>
-<h3 id='response-object-2'>Response Object</h3>
+<h3 id='response-object-3'>Response Object</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1075,7 +1330,7 @@ Access to this endpoint requires a separate assessment entitlement. You can requ
 You can request for webhook access by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">whatsapp at 918779170796</a>, if you don't already have it.
 </aside>
 <h2 id='instrument-update-created-message-webhook-events'>Instrument Update Created Message - Webhook Events</h2>
-<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>. This is identical to the <code>Instrument Update Message</code> that you can fetch via the <a href="#get-instrument-update-messages">API</a>:</p>
+<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>. The <code>payload</code> shape is identical to the <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> response item — <code>deepDiveData</code> is no longer at the top level; instead it has been folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>. Per-tier inclusion rules match the v2 API.</p>
 
 <blockquote>
 <p>Here is a sample payload for <code>v1.instrument_update.created</code>:</p>
@@ -1085,27 +1340,55 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
   </span><span class="nl">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V1_INSTRUMENT_UPDATE_CREATED"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1717247895</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"584732514325722439"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📊 Macrotech Developers Limited Earnings Conference Call Q4FY24"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. ..."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543287"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE670K01029"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/F08qo"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543287"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE670K01029"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
+    </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1717247895</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positive"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q4 FY24 Pre-sales"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR 42.3 billion"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FY24 Pre-sales"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR 145.2 billion"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FY24 EBITDA margin"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"~30%"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Net Debt"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR 30.1 billion"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarterly Earnings Report"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Performance"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Earnings Reports"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📊"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"deepdive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔍 Q4 FY24 highlights..."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_Macrotech_2024.html"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;🔍 Q4 FY24 highlights&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Record pre-sales of INR 42.3 billion&lt;/li&gt;&lt;/ul&gt;..."</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💡 Insightful Update"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Strong operating performance with margin expansion"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"deepdiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"source_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='instrument-update-modified-message-webhook-events'>Instrument Update Modified Message - Webhook Events</h2>
-<p>In case there is a revision to an already sent instrument update, we send the updated instrument message using the <code>v1.instrument_update.modified</code> event. Here is a sample payload for <code>v1.instrument_update.modified</code>. This is identical to the <code>Instrument Update Message</code> that you can fetch via the <a href="#get-instrument-update-messages">API</a>:</p>
+<p>In case there is a revision to an already sent instrument update, we send the updated instrument message using the <code>v1.instrument_update.modified</code> event. The <code>payload</code> shape is the same as for <code>v1.instrument_update.created</code> above — identical to the <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> response item, with per-tier inclusion rules matching the v2 API.</p>
 
 <blockquote>
 <p>Here is a sample payload for <code>v1.instrument_update.modified</code>:</p>
@@ -1115,23 +1398,49 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
   </span><span class="nl">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V1_INSTRUMENT_UPDATE_MODIFIED"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1717247895</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"584732514325722439"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastUpdateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📊 Macrotech Developers Limited Earnings Conference Call Q4FY24 (Revised)"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. ..."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543287"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE670K01029"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/F08qo"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"543287"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE670K01029"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LODHA"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech Developers Limited"</span><span class="w">
+    </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1717247895</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYTICAL_UPDATE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positive"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q4 FY24 Pre-sales"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR 42.3 billion"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FY24 Pre-sales"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR 145.2 billion"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarterly Earnings Report"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Performance"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Earnings Reports"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📊"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"deepdive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔍 Q4 FY24 highlights (revised)..."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_Macrotech_2024.html"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;🔍 Q4 FY24 highlights (revised)&lt;/h2&gt;..."</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💡 Insightful Update"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Strong operating performance with margin expansion"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"deepdiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"source_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='user-created-webhook-events'>User Created - Webhook Events</h2>
