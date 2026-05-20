@@ -1052,7 +1052,7 @@ The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic.
 <h3 id='deepdivedata-type-values'><code>deepdiveData.type</code> Values</h3>
 <p>The <code>type</code> field inside <code>proFunnel.deepdiveData</code> is always present when <code>deepdiveData</code> is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.</p>
 
-<p>Possible values: <code>BLOCK_DEAL</code>, <code>BULK_DEAL</code>, <code>CRYSTAL_BALL</code>, <code>MANAGEMENT_TAKE</code>, <code>CONCALL_DECODER</code>, <code>RESULTS_QUICK_LOOK</code>, <code>IMPACT_ANALYSIS</code>, <code>SAST_NOTEWORTHY_TRANSACTION</code>, <code>CHART_WIZARD</code>, <code>BROADCAST_BRIEFING</code>, <code>ANALYST_VIEW</code>, <code>VOLUME_SPURT</code>, <code>CREDIT_RATING</code>, <code>ANALYST_MEET</code>, <code>ACQUISITION</code>, <code>ORDER_RECEIVED</code>, <code>GENERIC</code>.</p>
+<p>Possible values: <code>BLOCK_DEAL</code>, <code>BULK_DEAL</code>, <code>CRYSTAL_BALL</code>, <code>MANAGEMENT_TAKE</code>, <code>CONCALL_DECODER</code>, <code>RESULTS_QUICK_LOOK</code>, <code>IMPACT_ANALYSIS</code>, <code>SAST_NOTEWORTHY_TRANSACTION</code>, <code>CHART_WIZARD</code>, <code>BROADCAST_BRIEFING</code>, <code>ANALYST_VIEW</code>, <code>VOLUME_SPURT</code>, <code>TWEET</code>, <code>CREDIT_RATING</code>, <code>ANALYST_MEET</code>, <code>ACQUISITION</code>, <code>ORDER_RECEIVED</code>, <code>GENERIC</code>.</p>
 
 <aside class="notice">
 New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
@@ -1131,6 +1131,17 @@ New <code>type</code> values may be added as new update sources are introduced. 
   </span><span class="nl">"current_performance_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Revenue Growth:&lt;/b&gt; Q4 FY26 revenue at Rs.9,200 million, up 19.1% YoY...&lt;/li&gt;&lt;/ul&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p><strong><code>MANAGEMENT_TAKE</code></strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MANAGEMENT_TAKE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"imageUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e463d-d9da-7605-9a77-9fd12c4de414_ps.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"audio_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/amioXmTD.mp3"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"isAudioPresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"future_outlook_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Virtual Console Launch:&lt;/b&gt; Launch planned within two weeks on Flipkart, priced under INR 5,000 with subscription.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Growth Target:&lt;/b&gt; Aims for gaming MRR of USD 3 million within 15–18 months.&lt;/li&gt;&lt;/ul&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"current_performance_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;EBITDA Growth:&lt;/b&gt; FY26 EBITDA surged 110.6% to INR 297 million through cost optimizations.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Revenue Trends:&lt;/b&gt; FY26 revenue declined 10.2% YoY to INR 5,245 million.&lt;/li&gt;&lt;/ul&gt;"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p><strong><code>RESULTS_QUICK_LOOK</code></strong></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RESULTS_QUICK_LOOK"</span><span class="p">,</span><span class="w">
@@ -1146,6 +1157,12 @@ New <code>type</code> values may be added as new update sources are introduced. 
     </span><span class="nl">"latest_profits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1,329"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"relevant_page_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"</span><span class="w">
   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong><code>IMPACT_ANALYSIS</code></strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPACT_ANALYSIS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company approved FY26 audited financial results showing a net profit of ₹4,104.61 Lakh on ₹77,165.74 Lakh revenue. A final dividend of ₹1.50 per share was recommended and several director and auditor appointments were made. The Annual General Meeting is set for 12 August 2026."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong><code>SAST_NOTEWORTHY_TRANSACTION</code></strong></p>
@@ -1224,12 +1241,18 @@ New <code>type</code> values may be added as new update sources are introduced. 
   </span><span class="nl">"short_description_of_order_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Refex Industries Ltd received an order from a leading Miniratna Company for logistics and material handling services in the infrastructure and mining sector to be executed over ~6 months."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p><strong><code>TWEET</code></strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TWEET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e463a-6c4a-7773-81b2-6a7a5f95414b_ps.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p><strong><code>GENERIC</code></strong></p>
 
-<p>When <code>type</code> is <code>GENERIC</code>, the remaining keys in <code>deepdiveData</code> are source-specific and should be treated as opaque JSON.</p>
+<p><code>GENERIC</code> is returned for update sources that do not map to any of the named types above. The fields within <code>deepdiveData</code> for a <code>GENERIC</code> payload are entirely source-dependent — no specific schema is guaranteed. Clients should treat the remaining keys as opaque JSON.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERIC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company announced a buyback at a 15% premium to market price."</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERIC"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2>
 <aside class="notice">
