@@ -28,43 +28,29 @@ generator: widdershins v4.0.1
 
 
 ## Introduction
-SQ Hive allows developers to access ScoutQuest's AI-powered, high-quality, actionable and de-noised capital market insights at lightning-fast speeds.
+SQ hive allows developers to access ScoutQuest’s AI powered high quality, actionable and de-noised capital market insights at lightning fast speeds.
 
-## Characteristics
-Updates provided by us have the following characteristics:
-
-|   |   |
-|---|---|
-|__Simple__| The language of our updates is simple — we strip out most of the jargon. |
-|__Relevant__| Through our proprietary algorithms, we filter out most non-relevant news. |
-|__Actionable__| Updates provided by us are actionable. |
-|__Structured__| Based on the type of update, you can choose to define your own handling logic. |
-|__High Coverage__| Updates are sent for all mainboard BSE-listed entities. |
-|__Comprehensive__| Our bots listen to thousands of sources including Exchange websites, Conference Calls, Twitter, News Channels, YouTube and many more, providing 360-degree update coverage. |
-|__Realtime__| All of the above is done and disseminated to you at lightning speed. |
-
-You can view [this short video](https://www.youtube.com/watch?v=s-pPlZ263Uc&ab_channel=ScoutQuestTV) to know more.
-
-## How to receive updates?
-We provide 2 methods to receive these updates.
+## How to recieve updates?
+We provide 2 methods to recieve these updates.
 
 1. Webhooks
 2. API
 
-You can register an endpoint where you will receive each update as and when it happens. Alternatively you can periodically poll for new updates via the API endpoint.
+You can register an endpoint where you will recieve each update as and when it happens. Alternatively you can periodically poll for new updates via the API endpoint.
 
 ## How to use these updates?
-Examples of general use cases include — sending these updates to your clients based on their holdings, having a general/personalised news feed on your website/app, etc.
+Examples of general use cases include - Sending these updates to your clients based on their holdings, Having a general/personalised news feed on your website/app etc.
 
-The use case is up to you, however it is mandatory to attribute ScoutQuest.
+Use case is upto you, however it is mandatory to attribute ScoutQuest
 
-## What should the attribution format be?
-1. Each update should have a `Powered by ScoutQuest.in` text at the bottom of the message, where `ScoutQuest.in` should be a clickable hyperlink.
-2. For each update the CTA / More Details link should be the *shortLink* provided in the update message.
+## What should be format for attribution?
+1. Each Update should have a `Powered by ScoutQuest.in` text at the bottom of the message, where `ScoutQuest.in` should be clickable
+2. For Each update the CTA / More Details Link should be the *shortLink* provided in the update message.
+3. Any other attribution format mentioned during the signed contract
 
 # API
 
-## Base URLs
+## Base URLs:
 
 Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a>
 
@@ -83,11 +69,15 @@ You must replace <code>yourapikeyhere</code> with your personal API key.
 </aside>
 
 <aside class="notice">
-You can request an API Key by mailing us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20API%20keys%20for%20SQ%20Hive">us a WhatsApp at 918779170796</a> if it has not already been shared with you.
+You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending  <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20API%20keys%20for%20SQ%20Hive">us a whatsapp at 918779170796</a> if its not already shared with you. 
 </aside>
 
 
 ## Get Instrument Update Messages
+
+<aside class="notice">
+A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
+</aside>
 
 ```ruby
 require "uri"
@@ -101,18 +91,16 @@ request["x-api-key"] = "yourapikeyhere"
 
 response = http.request(request)
 puts response.read_body
+
 ```
 
 ```python
 import requests
 
-# Default paginated query
 defaultQuery = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC"
 
-# Time range query
-timeRangeQuery = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?fromTime=1718709015&toTime=1718790615"
+timeRangeQuery = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?fromTime=1718709015&toTime=1718190615"
 
-# Poll for updates after a known message ID
 messageIdQuery = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?messageId=590860706281420591&expression=GT"
 
 payload = {}
@@ -120,20 +108,19 @@ headers = {
   'x-api-key': 'yourapikeyhere'
 }
 
-response = requests.request("GET", defaultQuery, headers=headers, data=payload)
+response = requests.request("GET", url, headers=headers, data=payload)
+
 print(response.text)
+
 ```
 
 ```shell
-# Default paginated query
 curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC' \
 --header 'x-api-key: yourapikeyhere'
 
-# Time range query
-curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?fromTime=1718709015&toTime=1718790615' \
+curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?fromTime=1718709015&toTime=1718190615' \
 --header 'x-api-key: yourapikeyhere'
 
-# Poll for updates after a known message ID
 curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?messageId=590860706281420591&expression=GT' \
 --header 'x-api-key: yourapikeyhere'
 ```
@@ -145,7 +132,7 @@ let config = {
   method: 'get',
   maxBodyLength: Infinity,
   url: 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC',
-  headers: {
+  headers: { 
     'x-api-key': 'yourapikeyhere'
   }
 };
@@ -157,9 +144,11 @@ axios.request(config)
 .catch((error) => {
   console.log(error);
 });
+
 ```
 
 ```java
+
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("text/plain");
@@ -170,6 +159,7 @@ Request request = new Request.Builder()
   .addHeader("x-api-key", "yourapikeyhere")
   .build();
 Response response = client.newCall(request).execute();
+
 ```
 
 
@@ -177,79 +167,94 @@ Response response = client.newCall(request).execute();
 
 ```json
 {
-  "instrumentUpdateMessages": [
-    {
-      "id": "818768429104481561",
-      "title": "Vedanta Ltd",
-      "description": "💰 Large NCD Issuance Approved",
-      "content": "📍Key Insight: Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
-      "scripDetails": {
-        "bseScripCode": "500295",
-        "scripName": "Vedanta Ltd",
-        "bseTickr": "VEDL",
-        "nseTickr": null,
-        "isin": "INE205A01025"
-      },
-      "linkDetail": {
-        "shortLink": "https://sqst.in/XHB3R"
-      },
-      "creationTime": 1773046405,
-      "filterCategory": "UNCLASSIFIED",
-      "proFunnel": {
-        "sentiment": "neutral",
-        "bytes": [
-          { "tag": "Maximum number of NCDs issued", "data": "300,000" },
-          { "tag": "Face value per NCD", "data": "₹1 crore" },
-          { "tag": "Total issuing amount", "data": "up to ₹3,000 crores" },
-          { "tag": "Listing exchange", "data": "BSE" },
-          { "tag": "Issue method", "data": "private placement" }
-        ],
-        "classificationJson": {
-          "smartTag": "NCD Issuance",
-          "importanceFlag": "Insightful",
-          "category": "Financial Instruments",
-          "subcategory": "Non-Convertible Debenture (NCD) Issuance",
-          "emoji": "💰"
+    "instrumentUpdateMessages": [
+        {
+            "id": "818768429104481561",
+            "title": "Vedanta Ltd",
+            "description": "💰 Large NCD Issuance Approved",
+            "content": "📍Key Insight:  Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
+            "scripDetails": {
+                "bseScripCode": "500295",
+                "scripName": "Vedanta Ltd",
+                "bseTickr": "VEDL",
+                "nseTickr": null,
+                "isin": "INE205A01025"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/XHB3R"
+            },
+            "creationTime": 1773046405,
+            "filterCategory": "UNCLASSIFIED",
+            "proFunnel": {
+                "sentiment": "neutral",
+                "bytes": [
+                    {
+                        "tag": "Maximum number of NCDs issued",
+                        "data": "300,000"
+                    },
+                    {
+                        "tag": "Face value per NCD",
+                        "data": "₹1 crore"
+                    },
+                    {
+                        "tag": "Total issuing amount",
+                        "data": "up to ₹3,000 crores"
+                    },
+                    {
+                        "tag": "Listing exchange",
+                        "data": "BSE"
+                    },
+                    {
+                        "tag": "Issue method",
+                        "data": "private placement"
+                    }
+                ],
+                "classificationJson": {
+                    "smartTag": "NCD Issuance",
+                    "importanceFlag": "Insightful",
+                    "category": "Financial Instruments",
+                    "subcategory": "Non-Convertible Debenture (NCD) Issuance",
+                    "emoji": "💰"
+                }
+            },
+            "deepDiveData": {
+                "title": "*💰 Large NCD Issuance Approved*",
+                "insight": "• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
+                "fast_fact": "The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE.",
+                "source_link": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf",
+                "deep_dive_html": "<h2>💡 Type of Securities:</h2><ul><li>The company plans to issue unsecured Non-Convertible Debentures (NCDs), i.e., loans without collateral security.</li><li>NCDs are redeemable, meaning principal will be repaid after a set time.</li><li>They are rated, indicating assessment of credit quality.</li></ul><h2>💰 Issue Size and Value:</h2><ul><li>Up to 300,000 NCDs are proposed.</li><li>Each NCD has a face value of ₹1 crore.</li><li>Total amount can reach up to ₹3,000 crores (₹30 billion).</li></ul><h2>📈 Issuance Method and Listing:</h2><ul><li>Issued on a private placement basis to select investors.</li><li>NCDs will be listed on BSE Limited, allowing trading on exchange.</li></ul><h2>📅 Terms and Details:</h2><ul><li>Terms like interest (coupon rate), maturity, and schedule depend on a Disclosure Document.</li><li>No late payment or default reported till date.</li></ul><h2>🔍 What This Means:</h2><ul><li>Raising a large debt sum suggests financing for expansion, refinancing, or corporate purposes.</li><li>Unsecured nature means higher risk but potential for higher returns for investors.</li><li>Private placement targets qualified institutional investors.</li></ul><h2>🧑💼 For Investors:</h2><ul><li>It's a significant update about the company raising debt capital.</li><li>Investors should look for Disclosure Document for interest rates and maturity.</li><li>Listing provides liquidity option for NCD holders.</li></ul><p>Overall, this update reflects the company’s strategic move to secure funds through debt via private placement of NCDs.</p>",
+                "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html",
+                "deep_dive_text": "💡 Type of Securities:<br>- The company plans to issue unsecured Non-Convertible Debentures (NCDs). These are loans taken by the company from investors without any collateral security.<br>- NCDs are \"redeemable,\" meaning the company will repay the principal after a set period.<br>- They are \"rated,\" indicating a credit quality assessment by agencies.<br><br>💰 Issue Size and Value:<br>- Up to 300,000 NCDs will be issued.<br>- Each has a face value of ₹1 crore.<br>- Total amount can go up to ₹3,000 crores (₹30 billion).<br><br>📈 Issuance Method and Listing:<br>- The issuance is on a \"private placement basis,\" which means shares will be offered to a select group of institutional or qualified investors rather than the general public.<br>- The NCDs will be listed on BSE Limited, allowing investors to trade them on the stock exchange.<br><br>📅 Terms and Details:<br>- Specifics like coupon rate (interest paid), maturity dates, payment schedule, and any charges are as per a separate Disclosure Document.<br>- As of the announcement date, no delays or defaults on paying interest or principal have been reported.<br><br>🔍 What This Means:<br>- Such a large fundraise via NCDs suggests the company is raising significant debt capital, possibly for business expansion, debt refinancing, or other corporate needs.<br>- Being unsecured means investors face higher risk relative to secured debt but may expect higher returns.<br>- Private placement limits access to qualified investors, focusing on institutional investment.<br><br>🧑💼 For Investors:<br>- This update informs that the company is undertaking a major debt issuance.<br>- Investors might watch details in the forthcoming Disclosure Document for interest rates and maturities to assess appeal.<br>- The listing of NCDs enables liquidity for investors holding them.<br><br>Overall, the news highlights a strategic financial move by the company to raise substantial funds through debt on a private placement basis. Details on terms will be key to fully understand implications.",
+                "flagNote": "Large debt fundraising approved, important for investors' financial understanding",
+                "concernFlag": ""
+            }
+        },
+        {
+            "id": "589113551676169507",
+            "title": "Paytm",
+            "description": "Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights",
+            "content": "Business Wrap: Here are the top developments of the day, Shares of Exide Industries Limited hit a record high on June 13 following company's Rs 75 crore i![Alt text](sqtest.png)nvestment in EESL. Soon after taking over as the aviation minister, Ram Mohan Naidu announced his commitment to ensuring more affordable airfares for domestic flights. Watch for more!",
+            "scripDetails": {
+                "bseScripCode": "543396",
+                "scripName": "Paytm",
+                "bseTickr": "PAYTM",
+                "nseTickr": null,
+                "isin": "INE982J01020"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/e31EG"
+            },
+            "creationTime": 1718292415,
+            "filterCategory": "MEDIA_COVERAGE"
         }
-      },
-      "deepDiveData": {
-        "title": "*💰 Large NCD Issuance Approved*",
-        "insight": "• Company approved issuing unsecured Non-Convertible Debentures (NCDs).• Up to 300,000 NCDs each valued at ₹1 crore.• Total amount up to ₹3,000 crores.• Private placement basis with listing on BSE.",
-        "fast_fact": "The company has approved issuing up to 300,000 unsecured, rated, listed, redeemable Non-Convertible Debentures with a face value of ₹1 crore each, aggregating up to ₹3,000 crores on a private placement basis, to be listed on BSE.",
-        "source_link": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/74a1e055-e4be-4fbc-abe0-2092e278bc0b.pdf",
-        "deep_dive_html": "<h2>💡 Type of Securities:</h2><ul><li>Unsecured NCDs — loans without collateral security.</li><li>Redeemable — principal repaid after a set period.</li><li>Rated — assessed for credit quality.</li></ul>",
-        "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_2026-02-25T07:29:13.2192704Z.html",
-        "deep_dive_text": "💡 Type of Securities:<br>- Unsecured NCDs without collateral security.<br>- Redeemable with principal repayment after a set period.<br>- Rated by credit quality agencies.",
-        "flagNote": "Large debt fundraising approved, important for investors' financial understanding",
-        "concernFlag": ""
-      }
-    },
-    {
-      "id": "589113551676169507",
-      "title": "Paytm",
-      "description": "Trending News - Business news: Paytm to focus on distribution of insurance products of other insurers | Biz highlights",
-      "content": "Business Wrap: Here are the top developments of the day...",
-      "scripDetails": {
-        "bseScripCode": "543396",
-        "scripName": "Paytm",
-        "bseTickr": "PAYTM",
-        "nseTickr": null,
-        "isin": "INE982J01020"
-      },
-      "linkDetail": {
-        "shortLink": "https://sqst.in/e31EG"
-      },
-      "creationTime": 1718292415,
-      "filterCategory": "MEDIA_COVERAGE"
-    }
-  ],
-  "total-items": 9984,
-  "current-page": 0,
-  "total-pages": 3328
+    ],
+     "total-items": 9984,
+     "current-page": 0,
+    "total-pages": 3328
 }
 ```
 
-This endpoint retrieves all instrument updates matching your query description. Results are returned in a paginated format.
+This endpoint retrieves all instrument updates fittng your query description. Results are returned in paginated formate.
 
 ### HTTP Request
 
@@ -266,103 +271,564 @@ This endpoint retrieves all instrument updates matching your query description. 
 
 Parameter | Default | Description
 --------- | ------- | -----------
-pageNo | 0 | Change `pageNo` for the next set of results matching your query. Zero-indexed.
-pageSize | 200 | Number of results to be returned in a single page. You can fetch more results by incrementing `pageNo`. Maximum value is `1000`.
-sortDirection | DESC | Sort order with respect to `creationTime`. `DESC` returns the latest updates at the top. Possible values: `ASC`, `DESC`.
-fromTime | - | Used when you need updates within a time range. If `toTime` is absent, it is assumed to be the current server time. Value is a Unix epoch timestamp in UTC.
-toTime | - | Used when you need updates within a time range. `fromTime` must also be present if `toTime` is specified. Value is a Unix epoch timestamp in UTC.
-messageId | - | Used to fetch messages equal to, or chronologically before/after a given `messageId`. Useful when you have processed messages up to a certain point and need to process messages after it, or when you need to look up a specific update. The `expression` parameter controls this behaviour. If `expression` is not passed, only the exact matching message is returned (i.e. `expression` defaults to `EQ`).
-expression | - | Used in conjunction with `messageId`. Controls whether you get messages created before or after the given `messageId`. Possible values: `GT` (Greater Than), `GOE` (Greater Than or Equal to), `LT` (Less Than), `LOE` (Less Than or Equal to), `EQ` (Equal To). Ignored if `messageId` is not present.
-scripIdType | - | Used when querying updates for a particular scrip. Specifies the type of identifier passed in `scripId`. Possible values: `BSE_SCRIP_CODE`, `BSE_TICKR`.
-scripId | - | The scrip identifier value. If `scripIdType` is `BSE_SCRIP_CODE`, pass the BSE scrip code (e.g. `500570` for Tata Motors). If `scripIdType` is `BSE_TICKR`, pass the ticker (e.g. `TATAMOTORS`). Refer to Instrument Masters such as Bhavcopy or Scrip Master (SCRIP.zip) from [this BSE site](https://www.bseindia.com/members/index.aspx).
-curationType | CURATED | Controls suppression of lower-importance updates. `CURATED` returns only updates classified as high-signal by ScoutQuest's internal logic — recommended for most consumer-facing applications. `NON_CURATED` includes all `CURATED` updates plus additional lower-signal updates.
+pageNo | 0 | change pageNo for next set of results fitting your query description
+pageSize | 200 | No of results to be returned in a single page. You can fetch more results by calling for the next `pageNo`. Maximum value of `pageSize` is 1000
+sortDirection | DESC | Direction for the sorting of messages wth respect to the time when the message was created. `DESC` will return the results with the latest update messages at the top. Possible values (`ASC`, `DESC`)
+fromTime | - | Used when you need updates within a time range. if `toTime` query is absent, `toTime` is assumed to be the currentTime
+toTime | - | Used when you need updates within a time range. `fromTime` query must also be present if `toTime` is mentioned
+messageId | - | Used to fetch messages equal to, or chronologically before/after a `messageId`. Useful when you have processed messages uptil a certain message and now need to process messages after it or you need to lookup a specific update based on `messagesId`. `expression` query parameter is control this behaviour. If `expression` value is not passed, By default only data for a given messageId will be passed i.e. `expression` will be considered to be `EQ`.
+expression | - | Used in conjuction with `messageId`. Controls the behviour of wether you want to get messages created after a given `messageId` or before. Possible values: (`GT`,`GOE`,`LT`,`LOE`,`EQ`); GT = Greater Than, GOE = Greater Than or Equal to, LT = Lesser Than, LOE = Lesser Than or Equal to, EQ = Equal To. If value of `expression` is passed without `messageId` , it will be ignored.
+scripIdType | - | Useful when you want to query updates for a particular scrip. This property will signify which type of ID will you be using to pass the scrip identifier. Possible values: `BSE_SCRIP_CODE`,`BSE_TICKR`
+scripId | - | Useful when you want to query updates for a particular scrip. This is where you will pass the actual ID of the scrip. If you pass `BSE_SCRIP_CODE` as the `scripIdType`, you need to pass the BSE Scrip code, in case of [Tata Motors Ltd.](https://www.bseindia.com/stock-share-price/tata-motors-ltd/tatamotors/500570/) `BSE_SCRIP_CODE` is 500570 and `BSE_TICKR` is TATAMOTORS. You can refer to Instrument Masters like Bhavcopy or Scrip master(SCRIP.zip) from [this BSE site] (https://www.bseindia.com/members/index.aspx)
+curationType | CURATED | Used to supress updates which are deemed less important by ScoutQuest. Possible values `CURATED, NON_CURATED`. Default value is `CURATED`. Updates are classified as `CURATED` based on our internal logic. Most consumer facing applications will find these updates as most relevant for presentation to end user. `NON_CURATED` updates includes `CURATED` updates + other updates.
 
 ### Response Object
+The update will have 4 main components - `title`, `description`, `content`, `linkDetail.shortLink` which can be used. `title` + `description` will give you information about the company and the type of update that is being sent. `content` will give you details about the update.
 
-The update will have 4 main components — `title`, `description`, `content`, and `linkDetail.shortLink` — which can be used directly for display. `title` + `description` identify the company and update type; `content` provides the details.
-
-**Instrument Update Message Fields**
-
-Field | Description
---------- | -----------
-id | Unique ID of the instrument update message.
-title | The full company name. May contain emoji characters.
-description | Describes the type of update. May contain emoji characters.
-content | The detail body of the update. May contain emoji characters and inline image markdown syntax (e.g. `![Alt text](url)`).
-scripDetails.bseScripCode | BSE scrip code of the company, or `null` if not available.
-scripDetails.scripName | Full scrip name as listed on BSE.
-scripDetails.bseTickr | BSE ticker symbol, or `null` if not available.
-scripDetails.nseTickr | NSE ticker symbol. May be `null` **or** an empty string `""` — treat both as absent.
-scripDetails.isin | ISIN of the company. May occasionally be stale; prefer `bseScripCode` for lookups.
-linkDetail.shortLink | Short URL for the full update page. Must be present in any update you disseminate.
-creationTime | Creation time of the update as a Unix epoch timestamp in UTC. Add 19800 seconds (+5:30) to convert to IST.
-filterCategory | Classification of the update type. See [Examples section](#examples-for-instrument-update-messages-filter-categories). Possible values: `KEY_UPDATE`, `UNCLASSIFIED`, `ANALYTICAL_UPDATE`, `EVENT_SCHEDULE`, `TECHNICAL_IDEA`, `MEDIA_COVERAGE`, `SPVMA`.
-smartTags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A concise tag that classifies each update into a predefined, actionable category.
-concernFlags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Indicators such as Red Flag or Procedural Update to highlight updates requiring investor attention.
-proFunnel <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Structured data regarding sentiment, key bytes, and classification of the update. May be absent for some update types (e.g. `MEDIA_COVERAGE`, `TECHNICAL_IDEA`).
-deepDiveData <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Detailed structured data specific to the update type (e.g. revenue/PAT in results, transaction details in block deals). The schema is dynamic and varies by update type.
-
-**Pagination Fields**
+- Instrument Update Message Related Fields
 
 Field | Description
 --------- | -----------
-total-items | Total number of updates matching the query across all pages.
-current-page | Current page number (zero-indexed).
-total-pages | Total number of available pages for the current query.
+id | ID of the instrument update message
+title | Gives the long name of the company. Can contain emojis characters.
+description | Gives the type of the update. Can contain emojis characters.
+content | This field has the details about the update. Can contain emojis characters.
+scripDetails.bseScripCode | Gives BSE scrip code of the company if present, else null
+scripDetails.scripName | Gives the long scrip name 
+scripDetails.bseTickr | Gives BSE Tickr of the company if present, else null
+scripDetails.nseTickr | Gives NSE Tickr of the company if present, else null
+scripDetails.isin | Gives ISIN the company
+linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
+creationTime | Creation time of the update in epoch format (Epoch time is always in UTC time zone, Please add +5:30 hours to get the time in IST time zone)
+filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
+smartTags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A three-word tag that classifies each update into predefined, actionable categories.
+concernFlags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Indicators such as Red Flag or Review for Concern to highlight updates requiring investor attention.
+proFunnel <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Structured data regarding sentiment, key bytes, and classification of the update.
+deepDiveData <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Provides a JSON data on the specifics of the update. Examples include revenue/PAT in results or shareholding details in large transactions. Note: The structure of this field is dynamic.
 
 <aside class="warning">
-New <code>filterCategory</code> values can be added without prior notice. Existing values will not be altered without prior notice. Design your handler to process unknown values gracefully.
+New <code>filterCategory</code> can be added without prior notice. Old <code>filterCategory</code> will not be altered without prior notice.
 </aside>
-
 <aside class="warning">
-Use <code>bseScripCode</code> as the primary instrument identifier. ISIN values may sometimes be stale and out of sync.
+Use <code>bseScripCode</code> as the primary identifier as sometmes ISIN values maybe stale and out of sync
 </aside>
-
 <aside class="warning">
-<code>title</code>, <code>description</code>, and <code>content</code> can contain emoji characters (Unicode supplementary characters). In most languages the standard String type handles this correctly, but ensure your database columns use an encoding that supports 4-byte Unicode (e.g. <code>utf8mb4</code> in MySQL).
+<code>title</code>,<code>description</code>,<code>content</code> can contain emoji characters so keep that in mind while serialising/deserialising and persisting. In most languages the String or String equivialent classes will handle it for you, but it's a gotcha to keep in mind.
 </aside>
-
 <aside class="notice">
-Only data for the last 7 days is available via the API.
+Only the data for the last 7 days is available via the API. 
 </aside>
 
 ### `proFunnel` Object Structure
 
 Field | Description
 --------- | -----------
-sentiment | The sentiment of the update. Possible values: `"positive"`, `"negative"`, `"neutral"`, `"not_known"`.
+sentiment | The sentiment of the update (possible values: "positive", "negative", "neutral", "not_known").
 bytes | An array of key data points extracted from the update.
-bytes[].tag | The label for the data point (e.g. `"Face value per NCD"`, `"Board Meeting Date"`).
-bytes[].data | The value for the data point. Always a string. Date formats are not normalised — values may appear as ISO-8601 (`"2026-05-22"`), natural language (`"20th May 2026"`), or other formats. Render as a plain display string; do not attempt programmatic date parsing.
-classificationJson | Structured classification metadata for the event.
-classificationJson.smartTag | A concise 2–4 word tag summarising the update (e.g. `"NCD Issuance"`, `"Auditor Change"`).
-classificationJson.importanceFlag | Qualitative importance level. Observed values: `"Insightful"`, `"Procedural"`. Additional values may be added.
-classificationJson.category | Broad thematic category (e.g. `"Financial Instruments"`, `"Governance & Board Updates"`).
-classificationJson.subcategory | Specific subcategory (e.g. `"Non-Convertible Debenture (NCD) Issuance"`, `"Board Meeting Scheduling"`).
-classificationJson.emoji | A single emoji character representing the update type.
+bytes[].tag | The label for the data point.
+bytes[].data | The value for the data point.
+classificationJson | Structural classification of the event.
+classificationJson.smartTag | A concise tag summarizing the update.
+classificationJson.importanceFlag | Flag indicating the importance (e.g., "Insightful", "Procedural").
+classificationJson.category | The broader category of the update.
+classificationJson.subcategory | The specific subcategory.
+classificationJson.emoji | An emoji representing the update.
 
 ### `deepDiveData` Object Structure
 
 The `deepDiveData` object provides detailed, specific insights into the update.
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g. financial results, NCD issuances, acquisitions).
+The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
 </aside>
+
+## Get Instrument Update Messages (v2)
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Get.new(url)
+request["x-api-key"] = "yourapikeyhere"
+
+response = http.request(request)
+puts response.read_body
+
+```
+
+```python
+import requests
+
+url = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC"
+
+payload = {}
+headers = {
+  'x-api-key': 'yourapikeyhere'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
+
+```
+
+```shell
+curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC' \
+--header 'x-api-key: yourapikeyhere'
+```
+
+```javascript
+const axios = require('axios');
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC',
+  headers: { 
+    'x-api-key': 'yourapikeyhere'
+  }
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
+  .method("GET", body)
+  .addHeader("x-api-key", "yourapikeyhere")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "instrumentUpdateMessages": [
+        {
+            "id": "844612012360130364",
+            "title": "Birla Precision Technologies Ltd",
+            "description": "📅 Board Meeting Scheduled for Financial Results & Dividend",
+            "content": "📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone & Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement",
+            "scripDetails": {
+                "bseScripCode": "522105",
+                "scripName": "Birla Precision Technologies Ltd",
+                "bseTickr": "BIRLAPREC",
+                "nseTickr": null,
+                "isin": "INE372E01025"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/mMHzW"
+            },
+            "creationTime": 1779207995,
+            "filterCategory": "EVENT_SCHEDULE",
+            "proFunnel": {
+                "sentiment": "neutral",
+                "bytes": [
+                    { "tag": "Board Meeting Date", "data": "2026-05-22" },
+                    { "tag": "Financial Year End Date", "data": "2026-03-31" },
+                    { "tag": "Results Approval", "data": "Audited standalone and consolidated financial results to be approved" }
+                ],
+                "classificationJson": {
+                    "smartTag": "Board Key Decisions",
+                    "importanceFlag": "Insightful",
+                    "category": "Governance & Board Updates",
+                    "subcategory": "Board Meeting Outcomes - Key Decisions",
+                    "emoji": "📃"
+                },
+                "deepdive": {
+                    "deep_dive_text": "🔍 Board Meeting Announcement<br>- The company informed the stock exchange about a board meeting scheduled for May 22, 2026...",
+                    "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html",
+                    "deep_dive_html": "<h2>🔍 Board Meeting Announcement</h2><ul><li>The company informed the stock exchange about a board meeting scheduled for May 22, 2026.</li></ul>..."
+                },
+                "concernFlag": {
+                    "flag": "📎 Procedural Update",
+                    "flagNote": "Routine board meeting notice for financial results approval"
+                },
+                "deepdiveData": {
+                    "type": "IMPACT_ANALYSIS",
+                    "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."
+                }
+            }
+        }
+    ],
+    "currentPage": 0,
+    "totalItems": 9984,
+    "totalPages": 3328
+}
+```
+
+This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (`id`, `title`, `description`, `content`, `scripDetails`, `linkDetail`, `creationTime`, `filterCategory`) are unchanged. The top-level `deepDiveData` field from v1 has been **removed**; its content has been folded into the `proFunnel` object as three new sub-objects: `deepdive`, `concernFlag`, and `deepdiveData`.
+
+### HTTP Request
+
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query`
+
+### Query Parameters
+
+Query parameters are identical to the [v1 endpoint](#get-instrument-update-messages): `pageNo`, `pageSize`, `sortDirection`, `fromTime`, `toTime`, `messageId`, `expression`, `curationType`, `scripIdType`, `scripId`.
+
+### Response Object
+
+Top-level fields outside `proFunnel` are identical to v1 and documented under the [v1 Response Object](#response-object) section. Only the `proFunnel` object differs.
+
+### `proFunnel` Object Structure (v2)
 
 Field | Description
 --------- | -----------
-title | A formatted title for the deep-dive (may include markdown bold).
-insight | A bullet-point summary of the key facts.
-fast_fact | A single-sentence plain-language summary of the core fact. Always present when `deepDiveData` exists.
-source_link | URL to the primary source document (e.g. BSE filing PDF). May be absent for some update types.
-deep_dive_html | The full deep-dive as raw HTML. Structure varies by update type — some records use `<h2>` + `<ul><li>` hierarchy; others use `<p><strong>` + `<br>` inline structure.
-deep_dive_link | URL to a hosted HTML page with the fully rendered deep-dive. Use as a "Read More" CTA link.
-deep_dive_text | Plain-text rendering of the deep-dive with `<br>` line breaks. Suitable for WhatsApp, SMS, or plain-text email.
-flagNote | A short contextual note about the update. May be present even when `concernFlag` is an empty string.
-concernFlag | A string flag label. May be an empty string `""` when no flag was raised.
+sentiment | The sentiment of the update (possible values: "positive", "negative", "neutral", "not_known").
+bytes | An array of key data points extracted from the update.
+bytes[].tag | The label for the data point.
+bytes[].data | The value for the data point.
+classificationJson | Structural classification of the event.
+classificationJson.smartTag | A concise tag summarizing the update.
+classificationJson.importanceFlag | Flag indicating the importance (e.g., "Insightful", "Procedural").
+classificationJson.category | The broader category of the update.
+classificationJson.subcategory | The specific subcategory.
+classificationJson.emoji | An emoji representing the update.
+deepdive | Object containing the long-form deep-dive content. **Not present for the `PRO_AOL` tier.** See structure below.
+deepdive.deep_dive_text | A plain-text/lightly-HTML rendering of the deep-dive analysis.
+deepdive.deep_dive_link | A link to a hosted HTML page with the full deep-dive analysis. Sourced from `deep_dive_link` in the underlying payload, or `deep_dive_url` when the payload uses that key.
+deepdive.deep_dive_html | The full deep-dive analysis as raw HTML (omitted for the `PRO_WITHOUT_DEEPDIVE_HTML` tier; **present** for `PRO_AOL`).
+concernFlag | Object indicating any concern flag attached to the update.
+concernFlag.flag | The concern flag label (e.g., "📎 Procedural Update", "🚩 Red Flag").
+concernFlag.flagNote | A short explanation of why the flag was raised.
+deepdiveData | Dynamic object with the remaining payload from the underlying additional information (e.g., `fast_fact`, plus any update-type-specific fields). Excludes anything already surfaced under `deepdive` / `concernFlag`, and also excludes `insight`, `title`, `source_link`, and `original_source_link`. Always contains a `type` discriminator field (see below).
+deepdiveData.type | A string discriminator identifying which schema variant the rest of `deepdiveData` follows. See the `deepdiveData.type` values table below.
+
+<aside class="notice">
+The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. Use <code>deepdiveData.type</code> to determine which schema to expect for the remaining keys.
+</aside>
+
+### Per-Tier Inclusion Rules (v2)
+
+Tier | proFunnel fields included
+--------- | -----------
+`STANDARD` | No `proFunnel` key at all.
+`STANDARD_WITH_FLAG_AND_SENTIMENT` | `sentiment` and `classificationJson.importanceFlag` only. No `bytes`, no other `classificationJson` fields, no `deepdive` / `concernFlag` / `deepdiveData`.
+`PRO_WITHOUT_DEEPDIVE_HTML` | Full v2 shape, but `deepdive.deep_dive_html` is omitted.
+`PRO_WITH_DEEPDIVE_HTML` | Full v2 shape — the reference shape shown in the sample above.
+`PRO_AOL` | Restricted base (`sentiment` + `classificationJson.importanceFlag`; no `bytes`, no full `classificationJson`) plus full `concernFlag` and `deepdiveData`. **No `deepdive` block** (but `deep_dive_text` / `deep_dive_link` / `deep_dive_html` are absent from the response for this tier).
+
+### `deepdiveData.type` Values
+
+The `type` field inside `proFunnel.deepdiveData` is always present when `deepdiveData` is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.
+
+`type` value | Trigger
+--------- | -----------
+`BLOCK_DEAL` | Source = `BLOCK_DEALS`
+`BULK_DEAL` | Source = `BULK_DEALS`
+`CRYSTAL_BALL` | Source = `SQ_CRYSTAL_BALL`
+`MANAGEMENT_TAKE` | Source = `SQ_MANAGEMENT_TAKE`
+`CONCALL_DECODER` | Source = `SQ_CONCALL_DECODER`
+`RESULTS_QUICK_LOOK` | Source = `CORPORATE_ANNOUNCEMENT_RESULT_IMAGE`
+`IMPACT_ANALYSIS` | Source = `CORPORATE_ANNOUNCEMENT_IMPACT_ANALYSIS`
+`SAST_NOTEWORTHY_TRANSACTION` | Source = `CORPORATE_ANNOUNCEMENT_SAST_ENRICHED`
+`CHART_WIZARD` | Source = `CHART_WIZARD`
+`BROADCAST_BRIEFING` | Source = `YOUTUBE_NEWS`
+`ANALYST_VIEW` | Source = `ANALYST_VIEWS`
+`VOLUME_SPURT` | Source = `SQ_SPVMA_INTRADAY_VOLUME_SPURT`
+`CREDIT_RATING` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 2`
+`ANALYST_MEET` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 11`
+`ACQUISITION` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 19`
+`ORDER_RECEIVED` | Source = `CORPORATE_ANNOUNCEMENT_PDF_AI_STRUCTURED` + `filterCategoryId = 24`
+`GENERIC` | Anything else with a non-empty `additionalInformation` payload.
+
+<aside class="notice">
+New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
+</aside>
+
+### `deepdiveData` Payload Examples by Type
+
+The examples below show representative `proFunnel.deepdiveData` payloads for each `type`. Examples sourced from real payloads reflect the actual field names; types marked *(illustrative)* use representative field names. Note that dates for block/bulk deals are returned as ISO strings (`"YYYY-MM-DD"`), not arrays.
+
+**`BLOCK_DEAL`**
+
+```json
+{
+  "type": "BLOCK_DEAL",
+  "date": "2026-05-08",
+  "buyDeals": [
+    {
+      "date": "2026-05-08",
+      "side": "BUY",
+      "watp": 1664,
+      "clientName": "SOCIETE GENERALE",
+      "companyName": "PB Fintech Limited",
+      "aggregatedQty": 1076200,
+      "companySymbol": "POLICYBZR"
+    },
+    {
+      "date": "2026-05-08",
+      "side": "BUY",
+      "watp": 1664,
+      "clientName": "MORGAN STANLEY ASIA SINGAPORE PTE",
+      "companyName": "PB Fintech Limited",
+      "aggregatedQty": 2140739,
+      "companySymbol": "POLICYBZR"
+    }
+  ],
+  "dealType": "BLOCK",
+  "sellDeals": [
+    {
+      "date": "2026-05-08",
+      "side": "SELL",
+      "watp": 1664,
+      "clientName": "TENCENT CLOUD EUROPE B.V.",
+      "companyName": "PB Fintech Limited",
+      "aggregatedQty": 4840439,
+      "companySymbol": "POLICYBZR"
+    }
+  ],
+  "companyName": "PB Fintech Limited",
+  "dealExchange": "NSE",
+  "totalSoldQty": 4840439,
+  "companySymbol": "POLICYBZR",
+  "totalBoughtQty": 4840439,
+  "totalSoldValue": 8054490496,
+  "totalBoughtValue": 8054490496,
+  "transactionValueInCr": "805.45 crores"
+}
+```
+
+**`BULK_DEAL`**
+
+```json
+{
+  "type": "BULK_DEAL",
+  "qty": 163200,
+  "date": "2026-04-24",
+  "side": "BUY",
+  "price": 75.5,
+  "dealType": "BULK",
+  "clientName": "NEO APEX SHARE BROKING SERVICES LLP",
+  "companyName": "Yashhtej Industries (India) Li",
+  "dealExchange": "BSE"
+}
+```
+
+**`CRYSTAL_BALL`**
+
+```json
+{
+  "type": "CRYSTAL_BALL",
+  "imageUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../2026/5/20/019e4548-da9c-765b-bcc9-72e25dd03e30_ps.png",
+  "audio_url": "https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/...",
+  "deep_dive": "📊 Financial Performance Highlights:\n- Q4 FY26 revenue grew 19.1% YoY to Rs.9,200 million...",
+  "isAudioPresent": true,
+  "isImagePresent": true,
+  "future_outlook_essence": "<ul><li><b>Growth Aspirations:</b> Plans for circa 15% annual revenue growth...</li></ul>",
+  "current_performance_essence": "<ul><li><b>Revenue Growth:</b> Q4 FY26 revenue at Rs.9,200 million, up 19.1% YoY...</li></ul>"
+}
+```
+
+**`MANAGEMENT_TAKE`** *(illustrative)*
+
+```json
+{
+  "type": "MANAGEMENT_TAKE",
+  "management_commentary": "Management indicated strong order pipeline for H1 FY27 with 40% already secured.",
+  "key_guidance": "FY27 revenue guidance maintained at INR 5,000 crore."
+}
+```
+
+**`CONCALL_DECODER`** *(illustrative)*
+
+```json
+{
+  "type": "CONCALL_DECODER",
+  "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%.",
+  "key_highlights": [
+    "Q4 FY24 pre-sales: INR 42.3 billion (40% YoY)",
+    "Net debt reduced to INR 30.1 billion"
+  ]
+}
+```
+
+**`RESULTS_QUICK_LOOK`**
+
+```json
+{
+  "type": "RESULTS_QUICK_LOOK",
+  "result_data": {
+    "qoq_rev": "25,850",
+    "yoy_rev": "24,648",
+    "confident": "yes",
+    "latest_rev": "27,589",
+    "amount_unit": "Lakhs",
+    "qoq_profits": "1,151",
+    "result_type": "standalone",
+    "yoy_profits": "1,923",
+    "latest_profits": "1,329",
+    "relevant_page_image": "https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"
+  }
+}
+```
+
+**`IMPACT_ANALYSIS`** *(illustrative)*
+
+```json
+{
+  "type": "IMPACT_ANALYSIS",
+  "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results and consider a final dividend.",
+  "impact_summary": "Moderate positive sentiment expected pending result quality.",
+  "affected_segments": ["Equity", "Dividend seekers"]
+}
+```
+
+**`SAST_NOTEWORTHY_TRANSACTION`**
+
+```json
+{
+  "type": "SAST_NOTEWORTHY_TRANSACTION",
+  "body": "➕Pri Caf Private Limited held 2.9437% before the transaction. Buyer belongs to the promoter group.",
+  "acquirer": "Pri Caf Private Limited",
+  "mediaUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e4536-186a-7706-95c2-9ae614865655_ps.png",
+  "quantity": 1071000,
+  "htmlContent": "<b>Acquirer</b>: Pri Caf Private Limited\n\n<b>Transaction</b>: Bought\n\n<b>Shares Traded</b>: 1071000 (0.1178%)\n\n<b>Company</b>: Paisalo Digital Ltd\n\n<b>Holding Before</b>: 2.9437%\n\n<b>Shareholder Type</b>: Promoter",
+  "isPromoterRaw": "yes",
+  "targetCompany": "Paisalo Digital Ltd",
+  "shareHolderType": "PROMOTER",
+  "transactionType": "buy",
+  "percentageAcquired": 0.1178,
+  "transactionTypeRaw": "buy",
+  "percentageHoldingBeforeAcquisition": 2.9437
+}
+```
+
+**`CHART_WIZARD`**
+
+```json
+{
+  "type": "CHART_WIZARD",
+  "view": "bullish",
+  "imageUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e451d-1927-751e-94d8-210d6cf9777c_ps.png",
+  "interval": "1W (weekly)",
+  "rationale": "Weekly breakout above long-term horizontal resistance with a strong bullish candle and volume spike. Price trading above the rising trendline and the moving average while Bollinger Bands expand, indicating renewed bullish momentum and likely trend continuation.",
+  "chartIndicatorAndPatterns": "ascending triangle breakout,weekly bullish candle,volume spike,price above moving average,rising trendline,Bollinger Bands expansion"
+}
+```
+
+**`BROADCAST_BRIEFING`**
+
+```json
+{
+  "type": "BROADCAST_BRIEFING",
+  "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e44e9-88b1-70b0-9a55-27f22fa91113_ps.png",
+  "isImagePresent": true,
+  "broadcast_briefings_title": "📈 Hindalco Surges 4% as Sensex Gains 118 Points, Nifty Crosses 23,650",
+  "broadcast_briefings_body": "<ul><li><b>Market Recovery:</b> Sensex closed 118 points higher; Nifty above 23,650.</li><li><b>Broad Market Breadth:</b> 128 F&O stocks gained vs. 85 in decline.</li><li><b>Top Gainers:</b> Hindalco (+4%), Reliance Industries (+3%), Godawari Power (+4.25%).</li></ul>"
+}
+```
+
+**`ANALYST_VIEW`**
+
+```json
+{
+  "type": "ANALYST_VIEW",
+  "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e4553-1378-7078-ba88-e4c128941651_ps.png",
+  "isImagePresent": true
+}
+```
+
+**`VOLUME_SPURT`** *(illustrative)*
+
+```json
+{
+  "type": "VOLUME_SPURT",
+  "volume_today": 12500000,
+  "avg_volume_20d": 3200000,
+  "volume_multiple": 3.9,
+  "price_change_pct": 4.2,
+  "trigger_time": "10:35 IST"
+}
+```
+
+**`CREDIT_RATING`**
+
+```json
+{
+  "type": "CREDIT_RATING",
+  "current_rating_and_previous_rating": "Current: CARE A-; Previous: unknown",
+  "short_description_of_credit_rating_related_details": "CARE Ratings Limited assigned a 'CARE A-' rating with a Stable outlook on May 19, 2026, for Transindia Real Estate Ltd's long-term bank facilities of ₹250 crore. No prior rating disclosed in the filing."
+}
+```
+
+**`ANALYST_MEET`**
+
+```json
+{
+  "type": "ANALYST_MEET",
+  "name(s)_of_investors": "analysts, investors",
+  "short_description_of_the_sceduled_meeting": "Excel Industries Limited will host an earnings call on May 25, 2026, at 4:00 PM IST for analysts and investors to discuss operational and financial performance for Q4 and FY ended March 31, 2026.",
+  "name_of_the_meeting_organizer_and_event_type": "Excel Industries Limited, earnings call (conference call)"
+}
+```
+
+**`ACQUISITION`**
+
+```json
+{
+  "type": "ACQUISITION",
+  "target_company": "MTK Quantum Green Energy Pvt. Ltd.",
+  "extent_of_acquisition": "26% paid-up equity capital",
+  "consideration_type_and_quantum": "Cash consideration of Rs. 4,33,22,500/- in one or more tranches",
+  "short_description_of_the_transaction": "Vodafone Idea Ltd. to acquire 26% equity stake in MTK Quantum Green Energy Pvt. Ltd., a renewable energy company, by investing Rs. 4.33 crore to set up captive solar and wind power plants for regulatory compliance and cost-effective energy procurement.",
+  "business_of_target_and_object_of_acquisition": "Renewable energy company setting up solar & wind power plants for generating and distributing captive power to comply with Electricity Act regulations and procure cost-effective renewable energy."
+}
+```
+
+**`ORDER_RECEIVED`**
+
+```json
+{
+  "type": "ORDER_RECEIVED",
+  "size_of_order": "INR 20.27 Crore (inclusive of GST)",
+  "type_of_order_flag": "business_order",
+  "short_description_of_order_details": "Refex Industries Ltd received an order from a leading Miniratna Company for logistics and material handling services in the infrastructure and mining sector to be executed over ~6 months."
+}
+```
+
+**`GENERIC`**
+
+When `type` is `GENERIC`, the remaining keys in `deepdiveData` are source-specific and should be treated as opaque JSON.
+
+```json
+{
+  "type": "GENERIC",
+  "fast_fact": "Company announced a buyback at a 15% premium to market price."
+}
+```
 
 
 ## Get Assessment for an Instrument Update
+
+<aside class="notice">
+This endpoint is available on <strong>both v1 and v2</strong> with the same response shape. Use whichever base path matches the rest of your integration:
+<ul>
+<li><code>GET /hive/api/v1/instrumentUpdates/assessment</code></li>
+<li><code>GET /hive/api/v2/instrumentUpdates/assessment</code></li>
+</ul>
+The code samples below use the v1 URL for illustration. Swap <code>v1</code> for <code>v2</code> if you are migrating clients to the v2 path.
+</aside>
 
 ```ruby
 require "uri"
@@ -376,6 +842,7 @@ request["x-api-key"] = "yourapikeyhere"
 
 response = http.request(request)
 puts response.read_body
+
 ```
 
 ```python
@@ -389,7 +856,9 @@ headers = {
 }
 
 response = requests.request("GET", url, headers=headers, data=payload)
+
 print(response.text)
+
 ```
 
 ```shell
@@ -404,7 +873,7 @@ let config = {
   method: 'get',
   maxBodyLength: Infinity,
   url: 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment?instrumentUpdateId=818768429104481561',
-  headers: {
+  headers: { 
     'x-api-key': 'yourapikeyhere'
   }
 };
@@ -416,9 +885,11 @@ axios.request(config)
 .catch((error) => {
   console.log(error);
 });
+
 ```
 
 ```java
+
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("text/plain");
@@ -429,6 +900,7 @@ Request request = new Request.Builder()
   .addHeader("x-api-key", "yourapikeyhere")
   .build();
 Response response = client.newCall(request).execute();
+
 ```
 
 
@@ -443,7 +915,7 @@ Response response = client.newCall(request).execute();
   "why_this_matters": [
     "Cash commitment is sizeable but affordable: ₹1,100 Cr represents ~1.06% of reported market cap (₹1,03,944 Cr) and ~39.6% of reported Cash & Bank (₹2,782 Cr).",
     "Buyback price (~₹1,150) is ≈11.3% premium to current price (₹1,033), creating a direct near-term upside incentive for holders to tender.",
-    "Supply reduction is modest (0.95% of shares) — unlikely to materially change float or EPS by itself, though selective tendering (e.g. promoter participation) can alter effective benefit to public holders.",
+    "Supply reduction is modest (0.95% of shares) — unlikely to materially change float or EPS by itself, though selective tendering (eg. promoter participation) can alter effective benefit to public holders.",
     "Company appears to have strong cash-generation: latest operating cash flow ₹6,777 Cr (rising), supporting the payout without straining operations.",
     "Signal on capital allocation: buyback + proposed dividend indicates management prefers buybacks/dividends over other uses — positive for return-focused investors given healthy ROE/ROCE (21.2% / 24.3%)."
   ],
@@ -458,32 +930,36 @@ Response response = client.newCall(request).execute();
 }
 ```
 
-This endpoint retrieves the AI-generated assessment for a specific instrument update, providing structured analysis of the corporate event and its investor implications.
+This endpoint retrieves the assessment data for a specific instrument update.
 
 ### HTTP Request
 
 `GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment`
 
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/assessment`
+
+Both paths accept the same query parameters and return the same response.
+
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-instrumentUpdateId | - | The `id` of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the instrument update query endpoint.
+instrumentUpdateId | - | The ID of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the [v1](#get-instrument-update-messages) / [v2](#get-instrument-update-messages-v2) instrument-updates endpoints.
 
 ### Response Object
 
 Field | Description
 --------- | -----------
-stock | Name of the company / stock for which the assessment was generated.
-event_type | The type of corporate event being assessed (e.g. `Share Buyback (board-approved)`, `Earnings`, `M&A`).
+stock | Name of the company / stock for which the assessment has been generated.
+event_type | The type of corporate event being assessed (e.g., `Share Buyback (board-approved)`, `Earnings`, `M&A`).
 significance | Overall significance of the event. Possible values: `Low`, `Medium`, `High`.
 what_happened | A concise factual summary of the event in plain language.
-why_this_matters | An array of strings, each a bullet-point explaining the rationale behind the assessment — financial impact, comparisons with relevant metrics, and structural implications.
-investor_impact | An object describing the expected impact across multiple time horizons.
+why_this_matters | An array of bullet points explaining the rationale behind the assessment — financial impact, comparisons with relevant metrics, and structural implications.
+investor_impact | An object describing the expected impact on investors across multiple time horizons.
 investor_impact.short_term | Expected impact in the short term (typically days to weeks around the event).
 investor_impact.medium_term | Expected impact in the medium term (typically months).
 investor_impact.long_term | Expected structural / long-term impact.
-risk_reward_outlook | A qualitative outlook label. Possible values: `Strong Negative`, `Moderate Negative`, `Neutral`, `Moderate Positive`, `Strong Positive`.
+risk_reward_outlook | A qualitative outlook label. Possible values include `Strong Negative`, `Moderate Negative`, `Neutral`, `Moderate Positive`, `Strong Positive`.
 risk_reward_score | A numeric score from `1` (least favourable) to `10` (most favourable) representing the risk/reward profile of the event.
 ITI | A base64-encoded string intended to be fed directly into an LLM of the client's choice for further analysis or chat-style interaction over the assessment.
 
@@ -492,32 +968,40 @@ The set of fields in the assessment response may evolve over time as the underly
 </aside>
 
 <aside class="notice">
-Access to this endpoint requires a separate assessment entitlement. You can request access by mailing us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20access%20to%20the%20Assessment%20API%20for%20SQ%20Hive">WhatsApp at 918779170796</a>.
+Access to this endpoint requires a separate assessment entitlement. You can request access by mailing us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20for%20access%20to%20the%20Assessment%20API%20for%20SQ%20Hive">whatsapp at 918779170796</a>.
 </aside>
+
+- Pagination Related fields
+
+Field | Description
+--------- | -----------
+currentPage | Current Page No, starts with 0
+totalItems | Total items(instrumentUpdateMessages) available for the given query 
+totalPages | Total pages for the available result
+
 
 ### Postman
 
-View these calls [in Postman](https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&entityType=collection).
+View these calls [in postman](https://elements.getpostman.com/redirect?entityId=6164887-d8da8efe-16a4-4405-9abb-e685f9f0f85a&entityType=collection)
 
 
 # Webhooks
 
 
 ## Introduction to SQ Hive Webhooks
-Webhooks are how services notify each other of events. At their core they are just a `POST` request to a pre-determined endpoint. The endpoint can be whatever you want, and you can just [add them from the UI](#adding-an-endpoint). You normally use one endpoint per service, and that endpoint listens to all of the event types. For example, if you receive webhooks from Acme Inc., you can structure your URL like: `https://www.example.com/acme/webhooks/`.
+Webhooks are how services notify each other of events. At their core they are just a  `POST`  request to a pre-determined endpoint. The endpoint can be whatever you want, and you can just  [add them from the UI](#adding-an-endpoint). You normally use one endpoint per service, and that endpoint listens to all of the event types. For example, if you receive webhooks from Acme Inc., you can structure your URL like:  `https://www.example.com/acme/webhooks/`.
 
-The way to indicate that a webhook has been processed is by returning a `2xx` (status code `200-299`) response to the webhook message within a reasonable time-frame (15s). It's also important to disable `CSRF` protection for this endpoint if the framework you use enables it by default.
+The way to indicate that a webhook has been processed is by returning a  `2xx`  (status code  `200-299`) response to the webhook message within a reasonable time-frame (15s). It's also important to disable  `CSRF`  protection for this endpoint if the framework you use enables them by default.
 
-Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the [webhook signature verification](#webhook-signature-verification) section.
+Another important aspect of handling webhooks is to verify the signature and timestamp when processing them. You can learn more about it in the  [webhook signature verification](#webhook-signature-verification).
 
 <aside class="notice">
-You can request webhook access by mailing us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">WhatsApp at 918779170796</a>, if you don't already have it.
+You can request for webhook access by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">whatsapp at 918779170796</a>, if you don't already have it.
 </aside>
 
 
-## Instrument Update Created — Webhook Event
-
-We have a variety of event types you can subscribe to. One such event is `v1.instrument_update.created`, fired whenever a new instrument update is published.
+## Instrument Update Created Message - Webhook Events
+We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. The `payload` shape is identical to the [Get Instrument Update Messages (v2)](#get-instrument-update-messages-v2) response item — `deepDiveData` is no longer at the top level; instead it has been folded into `proFunnel` as `deepdive`, `concernFlag`, and `deepdiveData`. Per-tier inclusion rules match the v2 API.
 
 > Here is a sample payload for `v1.instrument_update.created`:
 
@@ -568,27 +1052,16 @@ We have a variety of event types you can subscribe to. One such event is `v1.ins
         "flagNote": "Strong operating performance with margin expansion"
       },
       "deepdiveData": {
-        "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%.",
-        "source_link": "https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"
+        "type": "CONCALL_DECODER",
+        "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%."
       }
     }
   }
 }
 ```
 
-**Webhook Envelope Fields**
-
-Field | Description
---------- | -----------
-creationTimestamp | Unix epoch timestamp (UTC) of when the webhook event was created.
-eventId | Unique identifier for this webhook event. Use for deduplication.
-eventType | The event type string. Instrument update events use SCREAMING_SNAKE_CASE (e.g. `V1_INSTRUMENT_UPDATE_CREATED`). User events use dot notation (e.g. `v1.user.created`).
-payload | The instrument update message object.
-
-
-## Instrument Update Modified — Webhook Event
-
-In case there is a revision to an already-sent instrument update, we send the updated message using the `v1.instrument_update.modified` event. The `payload` shape is identical to the `v1.instrument_update.created` event above.
+## Instrument Update Modified Message - Webhook Events
+In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. The `payload` shape is the same as for `v1.instrument_update.created` above — identical to the [Get Instrument Update Messages (v2)](#get-instrument-update-messages-v2) response item, with per-tier inclusion rules matching the v2 API.
 
 > Here is a sample payload for `v1.instrument_update.modified`:
 
@@ -637,8 +1110,8 @@ In case there is a revision to an already-sent instrument update, we send the up
         "flagNote": "Strong operating performance with margin expansion"
       },
       "deepdiveData": {
-        "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%.",
-        "source_link": "https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"
+        "type": "CONCALL_DECODER",
+        "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%."
       }
     }
   }
@@ -646,9 +1119,8 @@ In case there is a revision to an already-sent instrument update, we send the up
 ```
 
 
-## User Created — Webhook Event
-
-If you as a business would like to keep track of users who have signed up using your business code, you can subscribe to this webhook.
+## User Created - Webhook Events
+If you as a business would like to keep track of users who have signed up using your business code you can subscribe to the this webhook.
 
 > Here is a sample payload for `v1.user.created`:
 
@@ -671,24 +1143,11 @@ If you as a business would like to keep track of users who have signed up using 
 }
 ```
 
-**Payload Fields**
+## User Modified - Webhook Events
+You can also subscribe to user modified webhook events which are sent when user related attributes are modified.
+Supported attributes whose modification which trigger an event are:
+1. When user updates their whatsapp consent
 
-Field | Description
---------- | -----------
-countryCode | International dialling code of the user (e.g. `"+91"`).
-creationTime | Unix epoch timestamp (UTC) of when the user was created.
-messageContent | The first message the user sent when signing up (e.g. via WhatsApp bot).
-messageId | Internal message ID of the sign-up trigger message.
-mobileNo | User's mobile number (without country code).
-referralOrigin | The channel through which the user signed up (e.g. `"whatsapp-tellephant-bot"`).
-referralSource | Your business code / referral identifier as configured during onboarding.
-userId | Unique user identifier assigned by SQ Hive (prefixed `usr_`).
-userSignupChannel | The channel used for sign-up. Possible values: `WHATSAPP`.
-
-
-## User Modified — Webhook Event
-
-You can also subscribe to user modified webhook events, which are sent when user-related attributes change. Currently triggered when a user updates their WhatsApp consent.
 
 > Here is a sample payload for `v1.user.modified`:
 
@@ -698,7 +1157,7 @@ You can also subscribe to user modified webhook events, which are sent when user
   "eventId": "evt_5d303a23-ada3-4b38-b3ea-e23dc29ece3a",
   "eventType": "v1.user.modified",
   "payload": {
-    "consentStatus": "OPT_IN",
+    "consentStatus": "OPT_IN/OPT_OUT",
     "countryCode": "+91",
     "creationTime": 1735731295,
     "lastModificationTime": 1740599471,
@@ -708,181 +1167,147 @@ You can also subscribe to user modified webhook events, which are sent when user
 }
 ```
 
-**Payload Fields**
-
-Field | Description
---------- | -----------
-consentStatus | The user's updated consent status. Possible values: `OPT_IN`, `OPT_OUT`.
-countryCode | International dialling code of the user.
-creationTime | Unix epoch timestamp (UTC) of when the user was originally created.
-lastModificationTime | Unix epoch timestamp (UTC) of this modification event.
-mobileNo | User's mobile number (without country code).
-userId | Unique user identifier assigned by SQ Hive (prefixed `usr_`).
-
-
 ## Adding an Endpoint
+In order to start listening to messages webhook messages sent by SQ Hive, you will need to configure your  **endpoints**.
 
-In order to start listening to webhook messages sent by SQ Hive, you will need to configure your **endpoints**.
+Adding an endpoint is as simple as providing a URL that you control and a list of  **event types**  that you want to listen to.
 
-Adding an endpoint is as simple as providing a URL that you control and a list of **event types** that you want to listen to.
-
-You can add your endpoint from your [webhooks dashboard](#dashboard).
+You can add your endpoint from your [webhooks dashboard](#dashboard)
 
 ![add endpoint](https://docs.svix.com/assets/images/add-endpoint-6cbcc00b62087f2774cd90b965a3d197.png)
+
 
 <aside class="notice">
 Helpful Tip!
 <br>
-If you don't have a URL or your service isn't quite ready to start receiving events, press the <code>Svix Play</code> button to have a unique URL generated for you.
+    If you don't have a URL or your service isn't quite ready to start receiving events just yet, just press the with <code>Svix Play</code> button to have a unique URL generated for you.
 <br>
-You'll be able to view and inspect all webhook messages sent to your Svix Play URL, making it effortless to get started.
+You'll be able to view and inspect all operational webhooks sent to your Svix Play URL, making it effortless to get started.
 <br>
-You can also use a service like <code>ngrok</code> to start receiving webhooks locally.
+You can also use service like <code>ngrok</code> to start recieving webhooks.
 </aside>
 
-If you don't specify any event types, by default your endpoint will receive all events, regardless of type. This can be helpful for getting started and testing, but we recommend narrowing to a subset later on to avoid receiving unexpected messages.
+If you don't specify any event types, by default, your endpoint will receive all events, regardless of type. This can be helpful for getting started and for testing, but we recommend changing this to a subset later on to avoid receiving unexpected messages.
 
 ### Testing your Endpoint
-
-The easiest way to gain confidence in your endpoint configuration is to start receiving events as quickly as possible.
+The easiest way to be more confident in your endpoint configuration is to start receiving events as quickly as possible.
 
 That's why we have a "Testing" tab for you to send example events to your endpoint.
 
 ![testing endpoint](https://docs.svix.com/assets/images/testing-endpoint-3f325ed4f08a4b9c57c49a3dd8ef2e9f.png)
 
-After sending an example event, you can click into the message to view the message payload, all of the message attempts, and whether each attempt succeeded or failed.
-
+After sending an example event, you can click into the message to view the message payload, all of the message attempts, and whether it succeeded or failed.
 
 ## Webhook Signature Verification
-
-Webhook signatures are your way to verify that webhook messages are genuinely sent by us. For a more detailed explanation, check out this article on [why you should verify webhooks](https://docs.svix.com/receiving/verifying-payloads/why).
+Webhook signatures is your way to verify that webhook messages are sent by us. For a more detailed explanation, check out this article on [why you should verify webhooks](https://docs.svix.com/receiving/verifying-payloads/why).
 
 ### How to verify webhooks with Svix Libraries
+You can use a set of useful libraries by developed by our webhook partner Svix that make verifying webhooks very simple. Here is a an example using Javascript:
 
-You can use useful libraries developed by our webhook partner Svix that make verifying webhooks very simple. Here is an example using JavaScript:
-
-```javascript
+```
 import { Webhook } from "svix";
 
 const secret = "whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw";
 
 // These were all sent from the server
 const headers = {
-  "svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
-  "svix-timestamp": "1614265330",
-  "svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
+"svix-id": "msg_p5jXN8AQM9LWM0D4loKWxJek",
+"svix-timestamp": "1614265330",
+"svix-signature": "v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=",
 };
 const payload = '{"test": 2432232314}';
 
 const wh = new Webhook(secret);
 // Throws on error, returns the verified content on success
-const verifiedPayload = wh.verify(payload, headers);
+const payload = wh.verify(payload, headers);
 ```
-
 For more instructions and examples of how to verify signatures, check out their [webhook verification documentation](https://docs.svix.com/receiving/verifying-payloads/how).
 
-
 ## Dashboard
-
-You can set up webhooks via the portal. Your username and password will be shared with you during onboarding.
-
-You can access the portal at [dashboard.hive.scoutquest.in](https://dashboard.hive.scoutquest.in).
+You can setup webhook, via the portal.
+To access the webportal, user name and password will be shared with you during onboarding.
+You can access the portal using this link [dashboard.hive.scoutquest.in](https://dashboard.hive.scoutquest.in)
 
 ### Demo Dashboard Access
-
-You can explore the dashboard using demo credentials: visit [dashboard.hive.scoutquest.in](https://dashboard.hive.scoutquest.in) with `username` — `sq-hive-demo` and `password` — `sq-hive-demo`.
+You can access a demo dashboard by visiting: [dashboard.hive.scoutquest.in](https://dashboard.hive.scoutquest.in) with `username` - `sq-hive-demo` and `password` - `sq-hive-demo`. This demo dashboard will let you explore the functionalities.
 
 <aside class="notice">
-The demo dashboard is for viewing and introductory purposes only. Your actual credentials will be shared with you during onboarding.
+The demo dashboard is only for viewing and introductory purpose. Your actual credentials will be shared with you during your onboarding. 
 </aside>
 
-
 ## Retries
-
 SQ Hive attempts to deliver each webhook message based on a retry schedule with exponential backoff.
 
 ### The schedule
+Each message is attempted based on the following schedule, where each period is started following the failure of the preceding attempt:
 
-Each message is attempted based on the following schedule, where each period starts following the failure of the preceding attempt:
+-   Immediately
+-   5 seconds
+-   5 minutes
+-   30 minutes
+-   2 hours
+-   5 hours
+-   10 hours
+-   10 hours (in addition to the previous)
 
-- Immediately
-- 5 seconds
-- 5 minutes
-- 30 minutes
-- 2 hours
-- 5 hours
-- 10 hours
-- 10 hours (in addition to the previous)
-
-If an endpoint is removed or disabled, delivery attempts to that endpoint will also stop.
+If an endpoint is removed or disabled delivery attempts to the endpoint will be disabled as well.
 
 For example, an attempt that fails three times before eventually succeeding will be delivered roughly 35 minutes and 5 seconds following the first attempt.
 
 ### Manual retries
-
 You can also use the application portal to manually retry each message at any time, or automatically retry ("Recover") all failed messages starting from a given date.
 
-
 ## Troubleshooting Tips
-
-There are some common reasons why your webhook endpoint may be failing:
+There are some common reasons why your webhook endpoint is failing:
 
 ### Not using the raw payload body
-
 This is the most common issue. When generating the signed content, we use the raw string body of the message payload.
 
-If you convert JSON payloads into strings using methods like `stringify`, different implementations may produce different string representations of the JSON object, which can lead to discrepancies when verifying the signature. It's crucial to verify the payload exactly as it was sent, byte-for-byte or string-for-string.
+If you convert JSON payloads into strings using methods like stringify, different implementations may produce different string representations of the JSON object, which can lead to discrepancies when verifying the signature. It's crucial to verify the payload exactly as it was sent, byte-for-byte or string-for-string, to ensure accurate verification.
 
 ### Missing the secret key
-
-From time to time we see people using the wrong secret key. Remember that keys are unique to endpoints.
+From time to time we see people simple using the wrong secret key. Remember that keys are unique to endpoints.
 
 ### Sending the wrong response codes
-
-When we receive a response with a `2xx` status code, we interpret that as a successful delivery even if you indicate a failure in the response payload. Make sure to use the correct response status codes so we know when messages are supposed to succeed vs. fail.
+When we receive a response with a 2xx status code, we interpret that as a successful delivery even if you indicate a failure in the response payload. Make sure to use the right response status codes so we know when message are supposed to succeed vs fail.
 
 ### Responses timing out
+We will consider any message that fails to send a response within {timeout duration} a failed message. If your endpoint is also processing complicated workflows, it may timeout and result in failed messages.
 
-We will consider any message that fails to send a response within the timeout duration a failed message. If your endpoint is processing complicated workflows, it may time out and result in failed messages.
-
-We recommend having your endpoint simply receive the message and add it to a queue for asynchronous processing, so you can respond promptly and avoid timeouts.
-
+We suggest having your endpoint simply receive the message and add it to a queue to be processed asynchronously so you can respond promptly and avoiding getting timed out.
 
 ## Failure Recovery
 
 ### Re-enable a disabled endpoint
-
-If all attempts to a specific endpoint fail for a period of 5 days, the endpoint will be disabled. To re-enable it, go to the webhook dashboard, find the endpoint from the list, and select "Enable Endpoint".
+If all attempts to a specific endpoint fail for a period of 5 days, the endpoint will be disabled. To re-enable a disabled endpoint, go to the webhook dashboard, find the endpoint from the list and select "Enable Endpoint".
 
 ### Recovering/Resending failed messages
 
 #### Why Replay
 
-- If your service has downtime
-- If your endpoint was misconfigured
+-   If your service has downtime
+-   If your endpoint was misconfigured
 
-If you want to replay a single event, find the message from the UI and click the options menu next to any of the attempts.
+If you want to replay a single event, you can find the message from the UI and click the options menu next to any of the attempts.
 
 ![resend message](https://docs.svix.com/assets/images/resend-single-a4fb6e65f27f27e5700becb523135c2f.png)
 
-From there, click "resend" to have the same message sent to your endpoint again.
+From there, click "resend" to have the same message send to your endpoint again.
 
-If you need to recover from a service outage and want to replay all the events since a given time, you can do so from the Endpoint page. On an endpoint's details page, click `Options > Recover Failed Messages`.
+If you need to recover from a service outage and want to replay all the events since a given time, you can do so from the Endpoint page. On an endpoint's details page, click  `Options > Recover Failed Messages`.
 
 ![recover modal](https://docs.svix.com/assets/images/replay-modal-fa510bd82e4eccbbb01df28581ad8901.png)
 
 From there, you can choose a time window to recover from.
 
-For more granular recovery — for example, if you know the exact timestamp you want to recover from — you can click the options menu on any message from the endpoint page, then click "Replay..." and choose "Replay all failed messages since this time."
-
+For a more granular recovery - for example, if you know the exact timestamp that you want to recover from - you can click the options menu on any message from the endpoint page. From there, you can click "Replay..." and choose to "Replay all failed messages since this time."
 
 # Examples for Instrument Update Messages Filter Categories
 
-## KEY_UPDATE — filterCategory
+## KEY_UPDATE - filterCategory:
+Example for Filter Category - KEY_UPDATE
 
-Significant corporate events such as block deals, large institutional transactions, material regulatory disclosures, auditor appointments, and insider trading disclosures.
-
-> Example for Filter Category — KEY_UPDATE
+> Example for Filter Category - KEY_UPDATE
 
 ```json
 {
@@ -903,20 +1328,19 @@ Significant corporate events such as block deals, large institutional transactio
   "creationTime": 1718714125,
   "filterCategory": "KEY_UPDATE"
 }
-```
+```  
 
 
-## ANALYTICAL_UPDATE — filterCategory
+## ANALYTICAL_UPDATE - filterCategory:
+Example for Filter Category - ANALYTICAL_UPDATE
 
-Broker research reports, analyst ratings, buy/sell/hold recommendations with target prices. The `content` field typically contains an AI-generated interpretation of the broker note.
-
-> Example for Filter Category — ANALYTICAL_UPDATE
+> Example for Filter Category : ANALYTICAL_UPDATE
 
 ```json
 {
   "id": "589832824574705351",
   "title": "Zomato Ltd.",
-  "description": "SBI Securities has published a Buy report on Zomato Ltd.. (CMP: 186.20 As on 14 Jun 24 | 16:00 )",
+  "description": "SBI Securities has published a  Buy report on Zomato Ltd.. (CMP: 186.20 As on 14 Jun 24 | 16:00 )",
   "content": "🤖 AI interpretation: Zomato Ltd. is recommended as a `BUY` with a 12-month target price of 214.0/-. The basis for this recommendation includes its diversified business model, strong brand, expanding product offerings, presence in 800+ cities, strong financial performance, and plans to double the store count. The stock's current valuation is considered premium but well supported by earnings growth. Key risk factors include any consumption slowdown and high competition.",
   "scripDetails": {
     "bseScripCode": "543320",
@@ -931,21 +1355,15 @@ Broker research reports, analyst ratings, buy/sell/hold recommendations with tar
   "creationTime": 1718463903,
   "filterCategory": "ANALYTICAL_UPDATE"
 }
-```
+```  
 
-<aside class="notice">
-Note that <code>nseTickr</code> is an empty string <code>""</code> in this example, not <code>null</code>. Both <code>null</code> and <code>""</code> indicate the ticker is unavailable. Always treat both as absent when building display logic.
-</aside>
+## MEDIA_COVERAGE - filterCategory:
+Example for Filter Category - MEDIA_COVERAGE
 
-
-## MEDIA_COVERAGE — filterCategory
-
-TV video feeds, news article mentions, and YouTube coverage of the company. `proFunnel` is typically absent for this category.
-
-> Example for Filter Category — MEDIA_COVERAGE
+> Example for Filter Category - MEDIA_COVERAGE
 
 ```json
-{
+ {
   "id": "590874291145537518",
   "title": "M&M",
   "description": "Video feed - CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
@@ -963,20 +1381,17 @@ TV video feeds, news article mentions, and YouTube coverage of the company. `pro
   "creationTime": 1718712208,
   "filterCategory": "MEDIA_COVERAGE"
 }
-```
+```  
 
+## SPVMA - filterCategory
 
-## SPVMA — filterCategory
-
-Significant Price and Volume Movement Alert. Triggered when trading volume exceeds a multiple of the recent average (e.g. 9.99× the 2-week average daily volume).
-
-> Example for Filter Category — SPVMA
+> Example for Filter Category : SPVMA
 
 ```json
-{
+ {
   "id": "590834457848837239",
   "title": "Kalpataru Projects International Limited",
-  "description": "🔥 Unusually high trading activity - Trading volume as of 02:54PM is  9.99 times of the average daily volume (2 week avg.) \n34 Lakh shares (Value: Rs. 413 Crores)  traded on NSE as of 02:54PM.",
+  "description": "🔥 Unusually high trading activity - Trading volume as of 02:54PM is  9.99 times of the average daily volume (2 week avg.) \n34 Lakh shares (Value: Rs. 413 Crores)  traded on NSE as of 02:54PM.",
   "content": "🏷️ CMP @ 02:54PM: 1173.7 (Chg %: -3.81)",
   "scripDetails": {
     "bseScripCode": "522287",
@@ -994,11 +1409,10 @@ Significant Price and Volume Movement Alert. Triggered when trading volume excee
 ```
 
 
-## EVENT_SCHEDULE — filterCategory
+## EVENT_SCHEDULE - filterCategory:
+Example for Filter Category - EVENT_SCHEDULE
 
-Scheduled corporate events such as board meetings, AGMs, analyst/institutional meets, earnings calls, and trading window closures.
-
-> Example for Filter Category — EVENT_SCHEDULE
+> Example for Filter Category - EVENT_SCHEDULE
 
 ```json
 {
@@ -1019,17 +1433,15 @@ Scheduled corporate events such as board meetings, AGMs, analyst/institutional m
   "creationTime": 1718712158,
   "filterCategory": "EVENT_SCHEDULE"
 }
-```
+```  
 
+## TECHNICAL_IDEA - filterCategory
+Example for Filter Category - TECHNICAL_IDEA
 
-## TECHNICAL_IDEA — filterCategory
-
-Chart pattern signals and technical analysis ideas. `proFunnel` is typically absent for this category.
-
-> Example for Filter Category — TECHNICAL_IDEA
+> Example for Filter Category : TECHNICAL_IDEA
 
 ```json
-{
+ {
   "id": "583227559222362559",
   "title": "COROMANDEL",
   "description": "Long",
@@ -1047,17 +1459,16 @@ Chart pattern signals and technical analysis ideas. `proFunnel` is typically abs
   "creationTime": 1716889085,
   "filterCategory": "TECHNICAL_IDEA"
 }
-```
+```  
 
 
-## UNCLASSIFIED — filterCategory
+## UNCLASSIFIED - filterCategory
+Example for Filter Category - UNCLASSIFIED
 
-Updates that do not fit into any of the above categories — including NCLT orders, restructuring notices, and other miscellaneous exchange filings.
-
-> Example for Filter Category — UNCLASSIFIED
+> Example for Filter Category : UNCLASSIFIED
 
 ```json
-{
+ {
   "id": "589113559821504865",
   "title": "Amber Enterprises India Ltd",
   "description": "Restructuring",
@@ -1075,4 +1486,4 @@ Updates that do not fit into any of the above categories — including NCLT orde
   "creationTime": 1718292417,
   "filterCategory": "UNCLASSIFIED"
 }
-```
+```  
