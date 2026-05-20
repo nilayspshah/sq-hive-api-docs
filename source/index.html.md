@@ -89,6 +89,10 @@ You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.c
 
 ## Get Instrument Update Messages
 
+<aside class="notice">
+A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
+</aside>
+
 ```ruby
 require "uri"
 require "net/http"
@@ -352,7 +356,201 @@ The `deepDiveData` object provides detailed, specific insights into the update.
 The structure and fields within <code>deepDiveData</code> are dynamic. The schema will vary based on the specific type of update (e.g., financial results, NCD issuances, acquisitions).
 </aside>
 
+## Get Instrument Update Messages (v2)
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Get.new(url)
+request["x-api-key"] = "yourapikeyhere"
+
+response = http.request(request)
+puts response.read_body
+
+```
+
+```python
+import requests
+
+url = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC"
+
+payload = {}
+headers = {
+  'x-api-key': 'yourapikeyhere'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
+
+```
+
+```shell
+curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC' \
+--header 'x-api-key: yourapikeyhere'
+```
+
+```javascript
+const axios = require('axios');
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC',
+  headers: { 
+    'x-api-key': 'yourapikeyhere'
+  }
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+```
+
+```java
+
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
+  .method("GET", body)
+  .addHeader("x-api-key", "yourapikeyhere")
+  .build();
+Response response = client.newCall(request).execute();
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "instrumentUpdateMessages": [
+        {
+            "id": "844612012360130364",
+            "title": "Birla Precision Technologies Ltd",
+            "description": "📅 Board Meeting Scheduled for Financial Results & Dividend",
+            "content": "📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone & Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement",
+            "scripDetails": {
+                "bseScripCode": "522105",
+                "scripName": "Birla Precision Technologies Ltd",
+                "bseTickr": "BIRLAPREC",
+                "nseTickr": null,
+                "isin": "INE372E01025"
+            },
+            "linkDetail": {
+                "shortLink": "https://sqst.in/mMHzW"
+            },
+            "creationTime": 1779207995,
+            "filterCategory": "EVENT_SCHEDULE",
+            "proFunnel": {
+                "sentiment": "neutral",
+                "bytes": [
+                    { "tag": "Board Meeting Date", "data": "2026-05-22" },
+                    { "tag": "Financial Year End Date", "data": "2026-03-31" },
+                    { "tag": "Results Approval", "data": "Audited standalone and consolidated financial results to be approved" }
+                ],
+                "classificationJson": {
+                    "smartTag": "Board Key Decisions",
+                    "importanceFlag": "Insightful",
+                    "category": "Governance & Board Updates",
+                    "subcategory": "Board Meeting Outcomes - Key Decisions",
+                    "emoji": "📃"
+                },
+                "deepdive": {
+                    "deep_dive_text": "🔍 Board Meeting Announcement<br>- The company informed the stock exchange about a board meeting scheduled for May 22, 2026...",
+                    "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html",
+                    "deep_dive_html": "<h2>🔍 Board Meeting Announcement</h2><ul><li>The company informed the stock exchange about a board meeting scheduled for May 22, 2026.</li></ul>..."
+                },
+                "concernFlag": {
+                    "flag": "📎 Procedural Update",
+                    "flagNote": "Routine board meeting notice for financial results approval"
+                },
+                "deepdiveData": {
+                    "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend.",
+                    "source_link": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/8be200dd-c308-4da3-a6dc-563a30aeb498.pdf"
+                }
+            }
+        }
+    ],
+    "currentPage": 0,
+    "totalItems": 9984,
+    "totalPages": 3328
+}
+```
+
+This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (`id`, `title`, `description`, `content`, `scripDetails`, `linkDetail`, `creationTime`, `filterCategory`) are unchanged. The top-level `deepDiveData` field from v1 has been **removed**; its content has been folded into the `proFunnel` object as three new sub-objects: `deepdive`, `concernFlag`, and `deepdiveData`. The v1 STANDARD_WITH_FLAG_AND_SENTIMENT top-level `sentiment` and `concernFlags` fields have also been folded into `proFunnel`.
+
+### HTTP Request
+
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query`
+
+### Query Parameters
+
+Query parameters are identical to the [v1 endpoint](#get-instrument-update-messages): `pageNo`, `pageSize`, `sortDirection`, `fromTime`, `toTime`, `messageId`, `expression`, `curationType`, `scripIdType`, `scripId`.
+
+### Response Object
+
+Top-level fields outside `proFunnel` are identical to v1 and documented under the [v1 Response Object](#response-object) section. Only the `proFunnel` object differs.
+
+### `proFunnel` Object Structure (v2)
+
+Field | Description
+--------- | -----------
+sentiment | The sentiment of the update (possible values: "positive", "negative", "neutral", "not_known").
+bytes | An array of key data points extracted from the update.
+bytes[].tag | The label for the data point.
+bytes[].data | The value for the data point.
+classificationJson | Structural classification of the event.
+classificationJson.smartTag | A concise tag summarizing the update.
+classificationJson.importanceFlag | Flag indicating the importance (e.g., "Insightful", "Procedural").
+classificationJson.category | The broader category of the update.
+classificationJson.subcategory | The specific subcategory.
+classificationJson.emoji | An emoji representing the update.
+deepdive | Object containing the long-form deep-dive content. See structure below.
+deepdive.deep_dive_text | A plain-text/lightly-HTML rendering of the deep-dive analysis.
+deepdive.deep_dive_link | A link to a hosted HTML page with the full deep-dive analysis. Sourced from `deep_dive_link` in the underlying payload, or `deep_dive_url` when the payload uses that key.
+deepdive.deep_dive_html | The full deep-dive analysis as raw HTML (omitted for the `PRO_WITHOUT_DEEPDIVE_HTML` tier).
+concernFlag | Object indicating any concern flag attached to the update.
+concernFlag.flag | The concern flag label (e.g., "📎 Procedural Update", "🚩 Red Flag").
+concernFlag.flagNote | A short explanation of why the flag was raised.
+deepdiveData | Dynamic object with the remaining payload from the underlying additional information (e.g., `fast_fact`, `source_link`, plus any update-type-specific fields). Excludes anything already surfaced under `deepdive` / `concernFlag`, and also excludes `insight` and `title`.
+
+<aside class="notice">
+The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. The schema will vary based on the specific type of update.
+</aside>
+
+### Per-Tier Inclusion (v2)
+
+Tier | `proFunnel` content
+--------- | -----------
+`STANDARD` | absent — no `proFunnel` field in the response
+`STANDARD_WITH_FLAG_AND_SENTIMENT` | only `sentiment` and `classificationJson.importanceFlag`
+`PRO_WITHOUT_DEEPDIVE_HTML` | full v2 `proFunnel`, but `deepdive.deep_dive_html` is omitted
+`PRO_WITH_DEEPDIVE_HTML` | full v2 `proFunnel` including `deepdive.deep_dive_html`
+`PRO_AOL` | restricted base (`sentiment` + `classificationJson.importanceFlag`; no `bytes`, no other `classificationJson` fields) + full `deepdive` (including `deep_dive_html`), `concernFlag`, and `deepdiveData`
+
 ## Get Assessment for an Instrument Update
+
+<aside class="notice">
+This endpoint is available on <strong>both v1 and v2</strong> with the same response shape. Use whichever base path matches the rest of your integration:
+<ul>
+<li><code>GET /hive/api/v1/instrumentUpdates/assessment</code></li>
+<li><code>GET /hive/api/v2/instrumentUpdates/assessment</code></li>
+</ul>
+The code samples below use the v1 URL for illustration. Swap <code>v1</code> for <code>v2</code> if you are migrating clients to the v2 path.
+</aside>
 
 ```ruby
 require "uri"
@@ -460,11 +658,15 @@ This endpoint retrieves the assessment data for a specific instrument update.
 
 `GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment`
 
+`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/assessment`
+
+Both paths accept the same query parameters and return the same response.
+
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-instrumentUpdateId | - | The ID of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the [Get Instrument Update Messages](#get-instrument-update-messages) endpoint.
+instrumentUpdateId | - | The ID of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the [v1](#get-instrument-update-messages) / [v2](#get-instrument-update-messages-v2) instrument-updates endpoints.
 
 ### Response Object
 
@@ -521,7 +723,7 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
 
 
 ## Instrument Update Created Message - Webhook Events
-We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
+We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. The `payload` shape is identical to the [Get Instrument Update Messages (v2)](#get-instrument-update-messages-v2) response item — `deepDiveData` is no longer at the top level; instead it has been folded into `proFunnel` as `deepdive`, `concernFlag`, and `deepdiveData`. Per-tier inclusion rules match the v2 API.
 
 > Here is a sample payload for `v1.instrument_update.created`:
 
@@ -531,29 +733,57 @@ We have a variety of event types that you can subscribe to. For example, one suc
   "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
   "eventType": "V1_INSTRUMENT_UPDATE_CREATED",
   "payload": {
-    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
-    "creationTime": 1717247895,
-    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
-    "filterCategory": "ANALYTICAL_UPDATE",
     "id": "584732514325722439",
-    "lastUpdateTime": 0,
+    "title": "Macrotech Developers Limited",
+    "description": "📊 Macrotech Developers Limited Earnings Conference Call Q4FY24",
+    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. ...",
+    "scripDetails": {
+      "bseScripCode": "543287",
+      "scripName": "Macrotech Developers Limited",
+      "bseTickr": "LODHA",
+      "nseTickr": "LODHA",
+      "isin": "INE670K01029"
+    },
     "linkDetail": {
       "shortLink": "https://sqst.in/F08qo"
     },
-    "scripDetails": {
-      "bseScripCode": "543287",
-      "bseTickr": "LODHA",
-      "isin": "INE670K01029",
-      "nseTickr": "LODHA",
-      "scripName": "Macrotech Developers Limited"
-    },
-    "title": "Macrotech Developers Limited"
+    "creationTime": 1717247895,
+    "filterCategory": "ANALYTICAL_UPDATE",
+    "proFunnel": {
+      "sentiment": "positive",
+      "bytes": [
+        { "tag": "Q4 FY24 Pre-sales", "data": "INR 42.3 billion" },
+        { "tag": "FY24 Pre-sales", "data": "INR 145.2 billion" },
+        { "tag": "FY24 EBITDA margin", "data": "~30%" },
+        { "tag": "Net Debt", "data": "INR 30.1 billion" }
+      ],
+      "classificationJson": {
+        "smartTag": "Quarterly Earnings Report",
+        "importanceFlag": "Insightful",
+        "category": "Financial Performance",
+        "subcategory": "Earnings Reports",
+        "emoji": "📊"
+      },
+      "deepdive": {
+        "deep_dive_text": "🔍 Q4 FY24 highlights...",
+        "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_Macrotech_2024.html",
+        "deep_dive_html": "<h2>🔍 Q4 FY24 highlights</h2><ul><li>Record pre-sales of INR 42.3 billion</li></ul>..."
+      },
+      "concernFlag": {
+        "flag": "💡 Insightful Update",
+        "flagNote": "Strong operating performance with margin expansion"
+      },
+      "deepdiveData": {
+        "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%.",
+        "source_link": "https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"
+      }
+    }
   }
 }
 ```
 
 ## Instrument Update Modified Message - Webhook Events
-In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. Here is a sample payload for `v1.instrument_update.modified`. This is identical to the `Instrument Update Message` that you can fetch via the [API](#get-instrument-update-messages):
+In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. The `payload` shape is the same as for `v1.instrument_update.created` above — identical to the [Get Instrument Update Messages (v2)](#get-instrument-update-messages-v2) response item, with per-tier inclusion rules matching the v2 API.
 
 > Here is a sample payload for `v1.instrument_update.modified`:
 
@@ -563,23 +793,49 @@ In case there is a revision to an already sent instrument update, we send the up
   "eventId": "evt_cdab7cfe-043c-4d4a-99c1-258c0a60f4b8",
   "eventType": "V1_INSTRUMENT_UPDATE_MODIFIED",
   "payload": {
-    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. - Robust operating cash flow: INR 57.2 billion for FY24 and INR 20.5 billion in Q4 FY24. - Reduced debt: Net debt at INR 30.1 billion, 0.34x debt-to-equity ratio before March 2024 capital raise. - Improved credit rating: Rated AA- (Stable) by ICRA. - Lower cost of funds: Average cost decreased by 10 basis points to ~9.4%. - Increased dividend: Dividend payout increased by 125% to INR 2.25 per share for FY24. - New project additions: Exceeded full-year guidance by adding INR 203 billion of GDV in new projects during FY24. - Geographic expansion: Successfully launched two projects in Bangalore, achieving INR 12 billion in sales within two quarters. - Pune market growth: Pune pre-sales reached nearly",
-    "creationTime": 1717247895,
-    "description": "Macrotech Developers Limited Earnings Conference Call Q4FY24 - https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf",
-    "filterCategory": "ANALYTICAL_UPDATE",
     "id": "584732514325722439",
-    "lastUpdateTime": 0,
+    "title": "Macrotech Developers Limited",
+    "description": "📊 Macrotech Developers Limited Earnings Conference Call Q4FY24 (Revised)",
+    "content": "- Record pre-sales: Q4 FY24 at INR 42.3 billion (40% YoY growth) and FY24 at INR 145.2 billion (20% YoY growth). - Strong EBITDA margin: ~30% for FY24 and ~31% for Q4 FY24. ...",
+    "scripDetails": {
+      "bseScripCode": "543287",
+      "scripName": "Macrotech Developers Limited",
+      "bseTickr": "LODHA",
+      "nseTickr": "LODHA",
+      "isin": "INE670K01029"
+    },
     "linkDetail": {
       "shortLink": "https://sqst.in/F08qo"
     },
-    "scripDetails": {
-      "bseScripCode": "543287",
-      "bseTickr": "LODHA",
-      "isin": "INE670K01029",
-      "nseTickr": "LODHA",
-      "scripName": "Macrotech Developers Limited"
-    },
-    "title": "Macrotech Developers Limited"
+    "creationTime": 1717247895,
+    "filterCategory": "ANALYTICAL_UPDATE",
+    "proFunnel": {
+      "sentiment": "positive",
+      "bytes": [
+        { "tag": "Q4 FY24 Pre-sales", "data": "INR 42.3 billion" },
+        { "tag": "FY24 Pre-sales", "data": "INR 145.2 billion" }
+      ],
+      "classificationJson": {
+        "smartTag": "Quarterly Earnings Report",
+        "importanceFlag": "Insightful",
+        "category": "Financial Performance",
+        "subcategory": "Earnings Reports",
+        "emoji": "📊"
+      },
+      "deepdive": {
+        "deep_dive_text": "🔍 Q4 FY24 highlights (revised)...",
+        "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive_Macrotech_2024.html",
+        "deep_dive_html": "<h2>🔍 Q4 FY24 highlights (revised)</h2>..."
+      },
+      "concernFlag": {
+        "flag": "💡 Insightful Update",
+        "flagNote": "Strong operating performance with margin expansion"
+      },
+      "deepdiveData": {
+        "fast_fact": "Macrotech reported record FY24 pre-sales of INR 145.2 billion (20% YoY) with EBITDA margin of ~30%.",
+        "source_link": "https://scoutquest.blob.core.windows.net/sq-public-container/concalltranscript_MacrotechDevelopersLimited2024-04-25T09:01:48.3862513Z.pdf"
+      }
+    }
   }
 }
 ```
