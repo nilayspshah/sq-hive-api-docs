@@ -996,7 +996,7 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
     </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (<code>id</code>, <code>title</code>, <code>description</code>, <code>content</code>, <code>scripDetails</code>, <code>linkDetail</code>, <code>creationTime</code>, <code>filterCategory</code>) are unchanged. The top-level <code>deepDiveData</code> field from v1 has been <strong>removed</strong>; its content has been folded into the <code>proFunnel</code> object as three new sub-objects: <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>. The v1 STANDARD_WITH_FLAG_AND_SENTIMENT top-level <code>sentiment</code> and <code>concernFlags</code> fields have also been folded into <code>proFunnel</code>.</p>
+<p>This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (<code>id</code>, <code>title</code>, <code>description</code>, <code>content</code>, <code>scripDetails</code>, <code>linkDetail</code>, <code>creationTime</code>, <code>filterCategory</code>) are unchanged. The top-level <code>deepDiveData</code> field from v1 has been <strong>removed</strong>; its content has been folded into the <code>proFunnel</code> object as three new sub-objects: <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>. </p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
@@ -1087,34 +1087,6 @@ The structure and fields within <code>deepDiveData</code> are dynamic. The schem
 <aside class="notice">
 The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. The schema will vary based on the specific type of update.
 </aside>
-<h3 id='per-tier-inclusion-v2'>Per-Tier Inclusion (v2)</h3>
-<table><thead>
-<tr>
-<th>Tier</th>
-<th><code>proFunnel</code> content</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>STANDARD</code></td>
-<td>absent — no <code>proFunnel</code> field in the response</td>
-</tr>
-<tr>
-<td><code>STANDARD_WITH_FLAG_AND_SENTIMENT</code></td>
-<td>only <code>sentiment</code> and <code>classificationJson.importanceFlag</code></td>
-</tr>
-<tr>
-<td><code>PRO_WITHOUT_DEEPDIVE_HTML</code></td>
-<td>full v2 <code>proFunnel</code>, but <code>deepdive.deep_dive_html</code> is omitted</td>
-</tr>
-<tr>
-<td><code>PRO_WITH_DEEPDIVE_HTML</code></td>
-<td>full v2 <code>proFunnel</code> including <code>deepdive.deep_dive_html</code></td>
-</tr>
-<tr>
-<td><code>PRO_AOL</code></td>
-<td>restricted base (<code>sentiment</code> + <code>classificationJson.importanceFlag</code>; no <code>bytes</code>, no other <code>classificationJson</code> fields) + full <code>deepdive</code> (including <code>deep_dive_html</code>), <code>concernFlag</code>, and <code>deepdiveData</code></td>
-</tr>
-</tbody></table>
 <h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2>
 <aside class="notice">
 This endpoint is available on <strong>both v1 and v2</strong> with the same response shape. Use whichever base path matches the rest of your integration:
