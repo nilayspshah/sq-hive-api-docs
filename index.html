@@ -338,9 +338,6 @@
                     <a href="#get-instrument-update-messages" class="toc-h2 toc-link" data-title="Get Instrument Update Messages">Get Instrument Update Messages</a>
                   </li>
                   <li>
-                    <a href="#get-instrument-update-messages-v2" class="toc-h2 toc-link" data-title="Get Instrument Update Messages (v2)">Get Instrument Update Messages (v2)</a>
-                  </li>
-                  <li>
                     <a href="#get-assessment-for-an-instrument-update" class="toc-h2 toc-link" data-title="Get Assessment for an Instrument Update">Get Assessment for an Instrument Update</a>
                   </li>
               </ul>
@@ -441,7 +438,11 @@
 <li>For Each update the CTA / More Details Link should be the <em>shortLink</em> provided in the update message.</li>
 <li>Any other attribution format mentioned during the signed contract</li>
 </ol>
-<h1 id='api'>API</h1><h2 id='base-urls'>Base URLs:</h2>
+<h1 id='api'>API</h1>
+<aside class="warning">
+<strong>⚠️ v1 is deprecated.</strong> Please migrate to the v2 API. Full v2 documentation is available at <a href="https://fundsmapsq.github.io/sq-hive-docs/">https://fundsmapsq.github.io/sq-hive-docs/</a>.
+</aside>
+<h2 id='base-urls'>Base URLs:</h2>
 <p>Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a></p>
 
 <p>Live: <a href="http://scoutquest-backend-service-production.fundsmap.com">http://scoutquest-backend-service-production.fundsmap.com</a></p>
@@ -460,7 +461,7 @@ You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.c
 </aside>
 <h2 id='get-instrument-update-messages'>Get Instrument Update Messages</h2>
 <aside class="warning">
-A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
+<strong>v1 is deprecated.</strong> Migrate to the v2 API. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for the updated endpoint and response shape.
 </aside>
 <div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"net/http"</span>
@@ -836,432 +837,11 @@ Only the data for the last 7 days is available via the API.
 <p>The <code>deepDiveData</code> object provides detailed, specific insights into the update.</p>
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. In <a href="#get-instrument-update-messages-v2">API v2</a>, this payload has been formalised into typed schemas — each response includes a <code>deepdiveData.type</code> discriminator that identifies the schema variant, enabling clients to parse the payload deterministically.
+The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. The v2 API formalises this into typed schemas with a <code>deepdiveData.type</code> discriminator. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for details.
 </aside>
-<h2 id='get-instrument-update-messages-v2'>Get Instrument Update Messages (v2)</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
-<span class="nb">require</span> <span class="s2">"net/http"</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="p">)</span>
-
-<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">);</span>
-<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">request</span><span class="p">[</span><span class="s2">"x-api-key"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"yourapikeyhere"</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span>
-
-<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'yourapikeyhere'</span>
-<span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'x-api-key: yourapikeyhere'</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
-  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="dl">'</span><span class="s1">x-api-key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">yourapikeyhere</span><span class="dl">'</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-<span class="p">});</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>
-<span class="nc">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-<span class="nc">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="nc">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
-<span class="nc">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="nc">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
-<span class="nc">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&amp;pageSize=200&amp;sortDirection=DESC"</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-api-key"</span><span class="o">,</span> <span class="s">"yourapikeyhere"</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-<span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
-
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"instrumentUpdateMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"844612012360130364"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📅 Board Meeting Scheduled for Financial Results &amp; Dividend"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone &amp; Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"522105"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birla Precision Technologies Ltd"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"bseTickr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIRLAPREC"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"nseTickr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"isin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INE372E01025"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"linkDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"shortLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sqst.in/mMHzW"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1779207995</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"filterCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT_SCHEDULE"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"proFunnel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"sentiment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"neutral"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"bytes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-22"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Financial Year End Date"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-03-31"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="p">{</span><span class="w"> </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Results Approval"</span><span class="p">,</span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Audited standalone and consolidated financial results to be approved"</span><span class="w"> </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"classificationJson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"smartTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Key Decisions"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"importanceFlag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Insightful"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Governance &amp; Board Updates"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"subcategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Board Meeting Outcomes - Key Decisions"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📃"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"deepdive"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"deep_dive_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🔍 Board Meeting Announcement&lt;br&gt;- The company informed the stock exchange about a board meeting scheduled for May 22, 2026..."</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"deep_dive_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"deep_dive_html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;h2&gt;🔍 Board Meeting Announcement&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;The company informed the stock exchange about a board meeting scheduled for May 22, 2026.&lt;/li&gt;&lt;/ul&gt;..."</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"concernFlag"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📎 Procedural Update"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"flagNote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Routine board meeting notice for financial results approval"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"deepdiveData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPACT_ANALYSIS"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalItems"</span><span class="p">:</span><span class="w"> </span><span class="mi">9984</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">3328</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (<code>id</code>, <code>title</code>, <code>description</code>, <code>content</code>, <code>scripDetails</code>, <code>linkDetail</code>, <code>creationTime</code>, <code>filterCategory</code>) are unchanged. The top-level <code>deepDiveData</code> field from v1 has been <strong>removed</strong>; its content has been folded into the <code>proFunnel</code> object as three new sub-objects: <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
-<p>Query parameters are identical to the <a href="#get-instrument-update-messages">v1 endpoint</a>: <code>pageNo</code>, <code>pageSize</code>, <code>sortDirection</code>, <code>fromTime</code>, <code>toTime</code>, <code>messageId</code>, <code>expression</code>, <code>curationType</code>, <code>scripIdType</code>, <code>scripId</code>.</p>
-<h3 id='response-object-2'>Response Object</h3>
-<p>Top-level fields outside <code>proFunnel</code> are identical to v1 and documented under the <a href="#response-object">v1 Response Object</a> section. Only the <code>proFunnel</code> object differs.</p>
-<h3 id='profunnel-object-structure-v2'><code>proFunnel</code> Object Structure (v2)</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>sentiment</td>
-<td>The sentiment of the update (possible values: &quot;positive&quot;, &quot;negative&quot;, &quot;neutral&quot;, &quot;not_known&quot;).</td>
-</tr>
-<tr>
-<td>bytes</td>
-<td>An array of key data points extracted from the update.</td>
-</tr>
-<tr>
-<td>bytes[].tag</td>
-<td>The label for the data point.</td>
-</tr>
-<tr>
-<td>bytes[].data</td>
-<td>The value for the data point.</td>
-</tr>
-<tr>
-<td>classificationJson</td>
-<td>Structural classification of the event.</td>
-</tr>
-<tr>
-<td>classificationJson.smartTag</td>
-<td>A concise tag summarizing the update.</td>
-</tr>
-<tr>
-<td>classificationJson.importanceFlag</td>
-<td>Flag indicating the importance (e.g., &quot;Insightful&quot;, &quot;Procedural&quot;).</td>
-</tr>
-<tr>
-<td>classificationJson.category</td>
-<td>The broader category of the update.</td>
-</tr>
-<tr>
-<td>classificationJson.subcategory</td>
-<td>The specific subcategory.</td>
-</tr>
-<tr>
-<td>classificationJson.emoji</td>
-<td>An emoji representing the update.</td>
-</tr>
-<tr>
-<td>deepdive</td>
-<td>Object containing the long-form deep-dive content.</td>
-</tr>
-<tr>
-<td>deepdive.deep_dive_text</td>
-<td>A plain-text/lightly-HTML rendering of the deep-dive analysis.</td>
-</tr>
-<tr>
-<td>deepdive.deep_dive_link</td>
-<td>A link to a hosted HTML page with the full deep-dive analysis.</td>
-</tr>
-<tr>
-<td>deepdive.deep_dive_html</td>
-<td>The full deep-dive analysis as raw HTML</td>
-</tr>
-<tr>
-<td>concernFlag</td>
-<td>Object indicating any concern flag attached to the update.</td>
-</tr>
-<tr>
-<td>concernFlag.flag</td>
-<td>The concern flag label (e.g., &quot;📎 Procedural Update&quot;, &quot;🚩 Red Flag&quot;).</td>
-</tr>
-<tr>
-<td>concernFlag.flagNote</td>
-<td>A short explanation of why the flag was raised.</td>
-</tr>
-<tr>
-<td>deepdiveData</td>
-<td>Dynamic object with the remaining payload from the underlying additional information (e.g., <code>fast_fact</code>, plus any update-type-specific fields). Excludes anything already surfaced under <code>deepdive</code> / <code>concernFlag</code>, and also excludes <code>insight</code>, <code>title</code>, <code>source_link</code>, and <code>original_source_link</code>. Always contains a <code>type</code> discriminator field (see below).</td>
-</tr>
-<tr>
-<td>deepdiveData.type</td>
-<td>A string discriminator identifying which schema variant the rest of <code>deepdiveData</code> follows. See the <code>deepdiveData.type</code> values table below.</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. Use <code>deepdiveData.type</code> to determine which schema to expect for the remaining keys.
-</aside>
-<h3 id='deepdivedata-type-values'><code>deepdiveData.type</code> Values</h3>
-<p>The <code>type</code> field inside <code>proFunnel.deepdiveData</code> is always present when <code>deepdiveData</code> is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.</p>
-
-<p>Possible values: <code>BLOCK_DEAL</code>, <code>BULK_DEAL</code>, <code>CRYSTAL_BALL</code>, <code>MANAGEMENT_TAKE</code>, <code>CONCALL_DECODER</code>, <code>RESULTS_QUICK_LOOK</code>, <code>IMPACT_ANALYSIS</code>, <code>SAST_NOTEWORTHY_TRANSACTION</code>, <code>CHART_WIZARD</code>, <code>BROADCAST_BRIEFING</code>, <code>ANALYST_VIEW</code>, <code>VOLUME_SPURT</code>, <code>TWEET</code>, <code>CREDIT_RATING</code>, <code>ANALYST_MEET</code>, <code>ACQUISITION</code>, <code>ORDER_RECEIVED</code>, <code>GENERIC</code>.</p>
-
-<aside class="notice">
-New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
-</aside>
-<h3 id='deepdivedata-payload-examples-by-type'><code>deepdiveData</code> Payload Examples by Type</h3>
-<p>The examples below show representative <code>proFunnel.deepdiveData</code> payloads for each <code>type</code>, sourced from real payloads. Note that dates for block/bulk deals are returned as ISO strings (<code>&quot;YYYY-MM-DD&quot;</code>), not arrays.</p>
-
-<p><strong><code>BLOCK_DEAL</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLOCK_DEAL"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-08"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"buyDeals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-08"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"watp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1664</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"clientName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOCIETE GENERALE"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"companyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB Fintech Limited"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"aggregatedQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">1076200</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"companySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLICYBZR"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-08"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"watp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1664</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"clientName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MORGAN STANLEY ASIA SINGAPORE PTE"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"companyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB Fintech Limited"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"aggregatedQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2140739</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"companySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLICYBZR"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"dealType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLOCK"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sellDeals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-08"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"watp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1664</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"clientName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TENCENT CLOUD EUROPE B.V."</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"companyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB Fintech Limited"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"aggregatedQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840439</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"companySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLICYBZR"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"companyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PB Fintech Limited"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"dealExchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NSE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalSoldQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840439</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"companySymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POLICYBZR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalBoughtQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4840439</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalSoldValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">8054490496</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalBoughtValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">8054490496</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transactionValueInCr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"805.45 crores"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>BULK_DEAL</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULK_DEAL"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"qty"</span><span class="p">:</span><span class="w"> </span><span class="mi">163200</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-04-24"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">75.5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"dealType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULK"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clientName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEO APEX SHARE BROKING SERVICES LLP"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"companyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yashhtej Industries (India) Li"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"dealExchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSE"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>CRYSTAL_BALL</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRYSTAL_BALL"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"imageUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../2026/5/20/019e4548-da9c-765b-bcc9-72e25dd03e30_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"audio_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/..."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deep_dive"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📊 Financial Performance Highlights:</span><span class="se">\n</span><span class="s2">- Q4 FY26 revenue grew 19.1% YoY to Rs.9,200 million..."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isAudioPresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"future_outlook_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Growth Aspirations:&lt;/b&gt; Plans for circa 15% annual revenue growth...&lt;/li&gt;&lt;/ul&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"current_performance_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Revenue Growth:&lt;/b&gt; Q4 FY26 revenue at Rs.9,200 million, up 19.1% YoY...&lt;/li&gt;&lt;/ul&gt;"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>MANAGEMENT_TAKE</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MANAGEMENT_TAKE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"imageUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e463d-d9da-7605-9a77-9fd12c4de414_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"audio_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/amioXmTD.mp3"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isAudioPresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"future_outlook_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Virtual Console Launch:&lt;/b&gt; Launch planned within two weeks on Flipkart, priced under INR 5,000 with subscription.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Growth Target:&lt;/b&gt; Aims for gaming MRR of USD 3 million within 15–18 months.&lt;/li&gt;&lt;/ul&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"current_performance_essence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;EBITDA Growth:&lt;/b&gt; FY26 EBITDA surged 110.6% to INR 297 million through cost optimizations.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Revenue Trends:&lt;/b&gt; FY26 revenue declined 10.2% YoY to INR 5,245 million.&lt;/li&gt;&lt;/ul&gt;"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>RESULTS_QUICK_LOOK</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RESULTS_QUICK_LOOK"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"result_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"qoq_rev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25,850"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"yoy_rev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24,648"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"confident"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"latest_rev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27,589"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"amount_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lakhs"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"qoq_profits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1,151"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"result_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standalone"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"yoy_profits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1,923"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"latest_profits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1,329"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"relevant_page_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>IMPACT_ANALYSIS</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPACT_ANALYSIS"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fast_fact"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The company approved FY26 audited financial results showing a net profit of ₹4,104.61 Lakh on ₹77,165.74 Lakh revenue. A final dividend of ₹1.50 per share was recommended and several director and auditor appointments were made. The Annual General Meeting is set for 12 August 2026."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>SAST_NOTEWORTHY_TRANSACTION</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAST_NOTEWORTHY_TRANSACTION"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"➕Pri Caf Private Limited held 2.9437% before the transaction. Buyer belongs to the promoter group."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"acquirer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pri Caf Private Limited"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"mediaUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e4536-186a-7706-95c2-9ae614865655_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1071000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"htmlContent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;b&gt;Acquirer&lt;/b&gt;: Pri Caf Private Limited</span><span class="se">\n\n</span><span class="s2">&lt;b&gt;Transaction&lt;/b&gt;: Bought</span><span class="se">\n\n</span><span class="s2">&lt;b&gt;Shares Traded&lt;/b&gt;: 1071000 (0.1178%)</span><span class="se">\n\n</span><span class="s2">&lt;b&gt;Company&lt;/b&gt;: Paisalo Digital Ltd</span><span class="se">\n\n</span><span class="s2">&lt;b&gt;Holding Before&lt;/b&gt;: 2.9437%</span><span class="se">\n\n</span><span class="s2">&lt;b&gt;Shareholder Type&lt;/b&gt;: Promoter"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isPromoterRaw"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"targetCompany"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paisalo Digital Ltd"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"shareHolderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROMOTER"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transactionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"percentageAcquired"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1178</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transactionTypeRaw"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"percentageHoldingBeforeAcquisition"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.9437</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>CHART_WIZARD</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHART_WIZARD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"view"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bullish"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"imageUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e451d-1927-751e-94d8-210d6cf9777c_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1W (weekly)"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"rationale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weekly breakout above long-term horizontal resistance with a strong bullish candle and volume spike. Price trading above the rising trendline and the moving average while Bollinger Bands expand, indicating renewed bullish momentum and likely trend continuation."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"chartIndicatorAndPatterns"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ascending triangle breakout,weekly bullish candle,volume spike,price above moving average,rising trendline,Bollinger Bands expansion"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>BROADCAST_BRIEFING</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BROADCAST_BRIEFING"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e44e9-88b1-70b0-9a55-27f22fa91113_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"broadcast_briefings_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"📈 Hindalco Surges 4% as Sensex Gains 118 Points, Nifty Crosses 23,650"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"broadcast_briefings_body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Market Recovery:&lt;/b&gt; Sensex closed 118 points higher; Nifty above 23,650.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Broad Market Breadth:&lt;/b&gt; 128 F&amp;O stocks gained vs. 85 in decline.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Top Gainers:&lt;/b&gt; Hindalco (+4%), Reliance Industries (+3%), Godawari Power (+4.25%).&lt;/li&gt;&lt;/ul&gt;"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>ANALYST_VIEW</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYST_VIEW"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e4553-1378-7078-ba88-e4c128941651_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>CREDIT_RATING</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREDIT_RATING"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"current_rating_and_previous_rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Current: CARE A-; Previous: unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"short_description_of_credit_rating_related_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CARE Ratings Limited assigned a 'CARE A-' rating with a Stable outlook on May 19, 2026, for Transindia Real Estate Ltd's long-term bank facilities of ₹250 crore. No prior rating disclosed in the filing."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>ANALYST_MEET</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANALYST_MEET"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name(s)_of_investors"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analysts, investors"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"short_description_of_the_sceduled_meeting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Excel Industries Limited will host an earnings call on May 25, 2026, at 4:00 PM IST for analysts and investors to discuss operational and financial performance for Q4 and FY ended March 31, 2026."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name_of_the_meeting_organizer_and_event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Excel Industries Limited, earnings call (conference call)"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>ACQUISITION</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACQUISITION"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"target_company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MTK Quantum Green Energy Pvt. Ltd."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"extent_of_acquisition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26% paid-up equity capital"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"consideration_type_and_quantum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cash consideration of Rs. 4,33,22,500/- in one or more tranches"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"short_description_of_the_transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vodafone Idea Ltd. to acquire 26% equity stake in MTK Quantum Green Energy Pvt. Ltd., a renewable energy company, by investing Rs. 4.33 crore to set up captive solar and wind power plants for regulatory compliance and cost-effective energy procurement."</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"business_of_target_and_object_of_acquisition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Renewable energy company setting up solar &amp; wind power plants for generating and distributing captive power to comply with Electricity Act regulations and procure cost-effective renewable energy."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>ORDER_RECEIVED</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDER_RECEIVED"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size_of_order"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR 20.27 Crore (inclusive of GST)"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type_of_order_flag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business_order"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"short_description_of_order_details"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Refex Industries Ltd received an order from a leading Miniratna Company for logistics and material handling services in the infrastructure and mining sector to be executed over ~6 months."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>TWEET</code></strong></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TWEET"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://renders.urlbox.com/ub-temp-renders/renders/.../019e463a-6c4a-7773-81b2-6a7a5f95414b_ps.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isImagePresent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><code>GENERIC</code></strong></p>
-
-<p><code>GENERIC</code> is returned for update sources that do not map to any of the named types above. The fields within <code>deepdiveData</code> for a <code>GENERIC</code> payload are entirely source-dependent — no specific schema is guaranteed. Clients should treat the remaining keys as opaque JSON.</p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERIC"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2>
-<aside class="notice">
-This endpoint is available on <strong>both v1 and v2</strong> with the same response shape. Use whichever base path matches the rest of your integration:
-<ul>
-<li><code>GET /hive/api/v1/instrumentUpdates/assessment</code></li>
-<li><code>GET /hive/api/v2/instrumentUpdates/assessment</code></li>
-</ul>
-The code samples below use the v1 URL for illustration. Swap <code>v1</code> for <code>v2</code> if you are migrating clients to the v2 path.
+<h2 id='get-assessment-for-an-instrument-update'>Get Assessment for an Instrument Update</h2>
+<aside class="warning">
+<strong>v1 is deprecated.</strong> This endpoint is also available on the v2 API. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a>.
 </aside>
 <div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"net/http"</span>
@@ -1348,13 +928,9 @@ The code samples below use the v1 URL for illustration. Swap <code>v1</code> for
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves the assessment data for a specific instrument update.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment</code></p>
-
-<p><code>GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/assessment</code></p>
-
-<p>Both paths accept the same query parameters and return the same response.</p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1365,10 +941,10 @@ The code samples below use the v1 URL for illustration. Swap <code>v1</code> for
 <tr>
 <td>instrumentUpdateId</td>
 <td>-</td>
-<td>The ID of the instrument update for which the assessment is to be retrieved. This is the same <code>id</code> field returned by the <a href="#get-instrument-update-messages">v1</a> / <a href="#get-instrument-update-messages-v2">v2</a> instrument-updates endpoints.</td>
+<td>The ID of the instrument update for which the assessment is to be retrieved. This is the same <code>id</code> field returned by the <a href="#get-instrument-update-messages">Get Instrument Update Messages</a> endpoint.</td>
 </tr>
 </tbody></table>
-<h3 id='response-object-3'>Response Object</h3>
+<h3 id='response-object-2'>Response Object</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1444,15 +1020,15 @@ Access to this endpoint requires a separate assessment entitlement. You can requ
 </tr>
 </thead><tbody>
 <tr>
-<td>currentPage</td>
+<td>current-page</td>
 <td>Current Page No, starts with 0</td>
 </tr>
 <tr>
-<td>totalItems</td>
+<td>total-items</td>
 <td>Total items(instrumentUpdateMessages) available for the given query</td>
 </tr>
 <tr>
-<td>totalPages</td>
+<td>total-pages</td>
 <td>Total pages for the available result</td>
 </tr>
 </tbody></table>
@@ -1469,7 +1045,7 @@ Access to this endpoint requires a separate assessment entitlement. You can requ
 You can request for webhook access by mailing to us at <a href="mailto:sq@fundsmap.com">sq@fundsmap.com</a> or by sending us a <a href="https://api.whatsapp.com/send/?phone=918779170796&text=I%20would%20like%20to%20request%20webhook%20access%20for%20SQ%20Hive">whatsapp at 918779170796</a>, if you don't already have it.
 </aside>
 <h2 id='instrument-update-created-message-webhook-events'>Instrument Update Created Message - Webhook Events</h2>
-<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>. The <code>payload</code> shape is identical to the <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> response item — <code>deepDiveData</code> is no longer at the top level; instead it has been folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>. Per-tier inclusion rules match the v2 API.</p>
+<p>We have a variety of event types that you can subscribe to. For example, one such event is <code>v1.instrument_update.created</code>. Here is a sample payload for <code>v1.instrument_update.created</code>. The <code>payload</code> shape follows the v2 API structure — <code>deepDiveData</code> is no longer at the top level; instead it has been folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for full payload schema details.</p>
 
 <blockquote>
 <p>Here is a sample payload for <code>v1.instrument_update.created</code>:</p>
@@ -1527,7 +1103,7 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='instrument-update-modified-message-webhook-events'>Instrument Update Modified Message - Webhook Events</h2>
-<p>In case there is a revision to an already sent instrument update, we send the updated instrument message using the <code>v1.instrument_update.modified</code> event. The <code>payload</code> shape is the same as for <code>v1.instrument_update.created</code> above — identical to the <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> response item, with per-tier inclusion rules matching the v2 API.</p>
+<p>In case there is a revision to an already sent instrument update, we send the updated instrument message using the <code>v1.instrument_update.modified</code> event. The <code>payload</code> shape is the same as for <code>v1.instrument_update.created</code> above — following the v2 API structure. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for full payload schema details.</p>
 
 <blockquote>
 <p>Here is a sample payload for <code>v1.instrument_update.modified</code>:</p>
@@ -1797,8 +1373,8 @@ The demo dashboard is only for viewing and introductory purpose. Your actual cre
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"590874291145537518"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M&amp;M"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Video feed - CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CNBC TV18 Newsmakers | M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Video feed - M&amp;M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M&amp;M: Best Performing Nifty Stock 2002-2024"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"scripDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bseScripCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509196"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"scripName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M&amp;M"</span><span class="p">,</span><span class="w">
