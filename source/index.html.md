@@ -27,7 +27,7 @@ generator: widdershins v4.0.1
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
 <aside class="warning">
-<strong>This is the v1 API documentation. v1 is deprecated and will be discontinued in a future release.</strong> All integrations should migrate to the v2 API at the earliest convenience. The v2 documentation is available at <a href="https://fundsmapsq.github.io/sq-hive-docs/">https://fundsmapsq.github.io/sq-hive-docs/</a>.
+<strong>This API documentation is deprecated.</strong> Please refer to the updated documentation at <a href="https://fundsmapsq.github.io/sq-hive-docs/">https://fundsmapsq.github.io/sq-hive-docs/</a>.
 </aside>
 
 ## Introduction
@@ -77,10 +77,6 @@ You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.c
 
 
 ## Get Instrument Update Messages
-
-<aside class="warning">
-<strong>v1 is deprecated.</strong> Migrate to the v2 API. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for the updated endpoint and response shape.
-</aside>
 
 ```ruby
 require "uri"
@@ -342,14 +338,10 @@ classificationJson.emoji | An emoji representing the update.
 The `deepDiveData` object provides detailed, specific insights into the update.
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. The v2 API formalises this into typed schemas with a <code>deepdiveData.type</code> discriminator. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for details.
+The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update.
 </aside>
 
 ## Get Assessment for an Instrument Update
-
-<aside class="warning">
-<strong>v1 is deprecated.</strong> This endpoint is also available on the v2 API. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a>.
-</aside>
 
 ```ruby
 require "uri"
@@ -518,7 +510,7 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
 
 
 ## Instrument Update Created Message - Webhook Events
-We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. The `payload` shape follows the v2 API structure — `deepDiveData` is no longer at the top level; instead it has been folded into `proFunnel` as `deepdive`, `concernFlag`, and `deepdiveData`. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for full payload schema details.
+We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`.
 
 > Here is a sample payload for `v1.instrument_update.created`:
 
@@ -578,7 +570,7 @@ We have a variety of event types that you can subscribe to. For example, one suc
 ```
 
 ## Instrument Update Modified Message - Webhook Events
-In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. The `payload` shape is the same as for `v1.instrument_update.created` above — following the v2 API structure. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for full payload schema details.
+In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. The `payload` shape is the same as for `v1.instrument_update.created` above.
 
 > Here is a sample payload for `v1.instrument_update.modified`:
 
@@ -883,8 +875,8 @@ Example for Filter Category - MEDIA_COVERAGE
  {
   "id": "590874291145537518",
   "title": "M&M",
-  "description": "M&M: Best Performing Nifty Stock 2002-2024",
-  "content": "M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive",
+  "description": "Video feed -  M&M: Best Performing Nifty Stock 2002-2024",
+  "content": "M&M: Best Performing Nifty Stock 2002-2024",
   "scripDetails": {
     "bseScripCode": "509196",
     "scripName": "M&M",
