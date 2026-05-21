@@ -50,6 +50,10 @@ Use case is upto you, however it is mandatory to attribute ScoutQuest
 
 # API
 
+<aside class="warning">
+<strong>⚠️ v1 is deprecated.</strong> Please migrate to the v2 API. Full v2 documentation is available at <a href="https://fundsmapsq.github.io/sq-hive-docs/">https://fundsmapsq.github.io/sq-hive-docs/</a>.
+</aside>
+
 ## Base URLs:
 
 Staging: <a href="http://scoutquest-backend-service-staging.fundsmap.com">http://scoutquest-backend-service-staging.fundsmap.com</a>
@@ -76,7 +80,7 @@ You can request for an API Key by mailing to us at <a href="mailto:sq@fundsmap.c
 ## Get Instrument Update Messages
 
 <aside class="warning">
-A newer <code>v2</code> of this endpoint is available with a restructured <code>proFunnel</code> object (top-level <code>deepDiveData</code> is folded into <code>proFunnel</code> as <code>deepdive</code>, <code>concernFlag</code>, and <code>deepdiveData</code>). See <a href="#get-instrument-update-messages-v2">Get Instrument Update Messages (v2)</a> when you are ready to migrate. The <code>v1</code> endpoint below remains available with its current shape.
+<strong>v1 is deprecated.</strong> Migrate to the v2 API. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for the updated endpoint and response shape.
 </aside>
 
 ```ruby
@@ -339,453 +343,13 @@ classificationJson.emoji | An emoji representing the update.
 The `deepDiveData` object provides detailed, specific insights into the update.
 
 <aside class="notice">
-The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. In <a href="#get-instrument-update-messages-v2">API v2</a>, this payload has been formalised into typed schemas — each response includes a <code>deepdiveData.type</code> discriminator that identifies the schema variant, enabling clients to parse the payload deterministically.
+The structure and fields within <code>deepDiveData</code> are dynamic and vary based on the nature of the update. The v2 API formalises this into typed schemas with a <code>deepdiveData.type</code> discriminator. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for details.
 </aside>
-
-## Get Instrument Update Messages (v2)
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
-request["x-api-key"] = "yourapikeyhere"
-
-response = http.request(request)
-puts response.read_body
-
-```
-
-```python
-import requests
-
-url = "http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC"
-
-payload = {}
-headers = {
-  'x-api-key': 'yourapikeyhere'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
-
-```
-
-```shell
-curl --location 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC' \
---header 'x-api-key: yourapikeyhere'
-```
-
-```javascript
-const axios = require('axios');
-
-let config = {
-  method: 'get',
-  maxBodyLength: Infinity,
-  url: 'http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC',
-  headers: { 
-    'x-api-key': 'yourapikeyhere'
-  }
-};
-
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
-
-```
-
-```java
-
-OkHttpClient client = new OkHttpClient().newBuilder()
-        .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-        .url("http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query?pageNo=0&pageSize=200&sortDirection=DESC")
-        .method("GET", body)
-        .addHeader("x-api-key", "yourapikeyhere")
-        .build();
-Response response = client.newCall(request).execute();
-
-```
-
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "instrumentUpdateMessages": [
-    {
-      "id": "844612012360130364",
-      "title": "Birla Precision Technologies Ltd",
-      "description": "📅 Board Meeting Scheduled for Financial Results & Dividend",
-      "content": "📍Key Insight:  Board meeting on May 22, 2026; Approved Audited Standalone & Consolidated results for FY ending March 31, 2026; Final dividend recommendation to be discussed; Trading window closed from March 27, 2026 until 48 hours post results announcement",
-      "scripDetails": {
-        "bseScripCode": "522105",
-        "scripName": "Birla Precision Technologies Ltd",
-        "bseTickr": "BIRLAPREC",
-        "nseTickr": null,
-        "isin": "INE372E01025"
-      },
-      "linkDetail": {
-        "shortLink": "https://sqst.in/mMHzW"
-      },
-      "creationTime": 1779207995,
-      "filterCategory": "EVENT_SCHEDULE",
-      "proFunnel": {
-        "sentiment": "neutral",
-        "bytes": [
-          { "tag": "Board Meeting Date", "data": "2026-05-22" },
-          { "tag": "Financial Year End Date", "data": "2026-03-31" },
-          { "tag": "Results Approval", "data": "Audited standalone and consolidated financial results to be approved" }
-        ],
-        "classificationJson": {
-          "smartTag": "Board Key Decisions",
-          "importanceFlag": "Insightful",
-          "category": "Governance & Board Updates",
-          "subcategory": "Board Meeting Outcomes - Key Decisions",
-          "emoji": "📃"
-        },
-        "deepdive": {
-          "deep_dive_text": "🔍 Board Meeting Announcement<br>- The company informed the stock exchange about a board meeting scheduled for May 22, 2026...",
-          "deep_dive_link": "https://scoutquest.blob.core.windows.net/sq-public-container/deepdive__2026-05-19T16:26:19.5460133Z.html",
-          "deep_dive_html": "<h2>🔍 Board Meeting Announcement</h2><ul><li>The company informed the stock exchange about a board meeting scheduled for May 22, 2026.</li></ul>..."
-        },
-        "concernFlag": {
-          "flag": "📎 Procedural Update",
-          "flagNote": "Routine board meeting notice for financial results approval"
-        },
-        "deepdiveData": {
-          "type": "IMPACT_ANALYSIS",
-          "fast_fact": "The company has scheduled a board meeting on May 22, 2026 to approve audited financial results for the year ending March 31, 2026, and to consider recommending a final dividend."
-        }
-      }
-    }
-  ],
-  "currentPage": 0,
-  "totalItems": 9984,
-  "totalPages": 3328
-}
-```
-
-This endpoint returns the same set of instrument updates as the v1 endpoint but with a restructured response shape. The top-level fields (`id`, `title`, `description`, `content`, `scripDetails`, `linkDetail`, `creationTime`, `filterCategory`) are unchanged. The top-level `deepDiveData` field from v1 has been **removed**; its content has been folded into the `proFunnel` object as three new sub-objects: `deepdive`, `concernFlag`, and `deepdiveData`.
-
-### HTTP Request
-
-`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/query`
-
-### Query Parameters
-
-Query parameters are identical to the [v1 endpoint](#get-instrument-update-messages): `pageNo`, `pageSize`, `sortDirection`, `fromTime`, `toTime`, `messageId`, `expression`, `curationType`, `scripIdType`, `scripId`.
-
-### Response Object
-
-Top-level fields outside `proFunnel` are identical to v1 and documented under the [v1 Response Object](#response-object) section. Only the `proFunnel` object differs.
-
-### `proFunnel` Object Structure (v2)
-
-Field | Description
---------- | -----------
-sentiment | The sentiment of the update (possible values: "positive", "negative", "neutral", "not_known").
-bytes | An array of key data points extracted from the update.
-bytes[].tag | The label for the data point.
-bytes[].data | The value for the data point.
-classificationJson | Structural classification of the event.
-classificationJson.smartTag | A concise tag summarizing the update.
-classificationJson.importanceFlag | Flag indicating the importance (e.g., "Insightful", "Procedural").
-classificationJson.category | The broader category of the update.
-classificationJson.subcategory | The specific subcategory.
-classificationJson.emoji | An emoji representing the update.
-deepdive | Object containing the long-form deep-dive content. 
-deepdive.deep_dive_text | A plain-text/lightly-HTML rendering of the deep-dive analysis.
-deepdive.deep_dive_link | A link to a hosted HTML page with the full deep-dive analysis.
-deepdive.deep_dive_html | The full deep-dive analysis as raw HTML 
-concernFlag | Object indicating any concern flag attached to the update.
-concernFlag.flag | The concern flag label (e.g., "📎 Procedural Update", "🚩 Red Flag").
-concernFlag.flagNote | A short explanation of why the flag was raised.
-deepdiveData | Dynamic object with the remaining payload from the underlying additional information (e.g., `fast_fact`, plus any update-type-specific fields). Excludes anything already surfaced under `deepdive` / `concernFlag`, and also excludes `insight`, `title`, `source_link`, and `original_source_link`. Always contains a `type` discriminator field (see below).
-deepdiveData.type | A string discriminator identifying which schema variant the rest of `deepdiveData` follows. See the `deepdiveData.type` values table below.
-
-<aside class="notice">
-The structure and fields within <code>proFunnel.deepdiveData</code> are dynamic. Use <code>deepdiveData.type</code> to determine which schema to expect for the remaining keys.
-</aside>
-
-
-### `deepdiveData.type` Values
-
-The `type` field inside `proFunnel.deepdiveData` is always present when `deepdiveData` is non-empty. It signals which kind of update produced the payload, so clients can select the right schema for the remaining keys.
-
-Possible values: `BLOCK_DEAL`, `BULK_DEAL`, `CRYSTAL_BALL`, `MANAGEMENT_TAKE`, `CONCALL_DECODER`, `RESULTS_QUICK_LOOK`, `IMPACT_ANALYSIS`, `SAST_NOTEWORTHY_TRANSACTION`, `CHART_WIZARD`, `BROADCAST_BRIEFING`, `ANALYST_VIEW`, `VOLUME_SPURT`, `TWEET`, `CREDIT_RATING`, `ANALYST_MEET`, `ACQUISITION`, `ORDER_RECEIVED`, `GENERIC`.
-
-<aside class="notice">
-New <code>type</code> values may be added as new update sources are introduced. Clients should handle unknown <code>type</code> values gracefully by treating the rest of <code>deepdiveData</code> as opaque JSON.
-</aside>
-
-### `deepdiveData` Payload Examples by Type
-
-The examples below show representative `proFunnel.deepdiveData` payloads for each `type`, sourced from real payloads. Note that dates for block/bulk deals are returned as ISO strings (`"YYYY-MM-DD"`), not arrays.
-
-**`BLOCK_DEAL`**
-
-```json
-{
-  "type": "BLOCK_DEAL",
-  "date": "2026-05-08",
-  "buyDeals": [
-    {
-      "date": "2026-05-08",
-      "side": "BUY",
-      "watp": 1664,
-      "clientName": "SOCIETE GENERALE",
-      "companyName": "PB Fintech Limited",
-      "aggregatedQty": 1076200,
-      "companySymbol": "POLICYBZR"
-    },
-    {
-      "date": "2026-05-08",
-      "side": "BUY",
-      "watp": 1664,
-      "clientName": "MORGAN STANLEY ASIA SINGAPORE PTE",
-      "companyName": "PB Fintech Limited",
-      "aggregatedQty": 2140739,
-      "companySymbol": "POLICYBZR"
-    }
-  ],
-  "dealType": "BLOCK",
-  "sellDeals": [
-    {
-      "date": "2026-05-08",
-      "side": "SELL",
-      "watp": 1664,
-      "clientName": "TENCENT CLOUD EUROPE B.V.",
-      "companyName": "PB Fintech Limited",
-      "aggregatedQty": 4840439,
-      "companySymbol": "POLICYBZR"
-    }
-  ],
-  "companyName": "PB Fintech Limited",
-  "dealExchange": "NSE",
-  "totalSoldQty": 4840439,
-  "companySymbol": "POLICYBZR",
-  "totalBoughtQty": 4840439,
-  "totalSoldValue": 8054490496,
-  "totalBoughtValue": 8054490496,
-  "transactionValueInCr": "805.45 crores"
-}
-```
-
-**`BULK_DEAL`**
-
-```json
-{
-  "type": "BULK_DEAL",
-  "qty": 163200,
-  "date": "2026-04-24",
-  "side": "BUY",
-  "price": 75.5,
-  "dealType": "BULK",
-  "clientName": "NEO APEX SHARE BROKING SERVICES LLP",
-  "companyName": "Yashhtej Industries (India) Li",
-  "dealExchange": "BSE"
-}
-```
-
-**`CRYSTAL_BALL`**
-
-```json
-{
-  "type": "CRYSTAL_BALL",
-  "imageUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../2026/5/20/019e4548-da9c-765b-bcc9-72e25dd03e30_ps.png",
-  "audio_url": "https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/...",
-  "deep_dive": "📊 Financial Performance Highlights:\n- Q4 FY26 revenue grew 19.1% YoY to Rs.9,200 million...",
-  "isAudioPresent": true,
-  "isImagePresent": true,
-  "future_outlook_essence": "<ul><li><b>Growth Aspirations:</b> Plans for circa 15% annual revenue growth...</li></ul>",
-  "current_performance_essence": "<ul><li><b>Revenue Growth:</b> Q4 FY26 revenue at Rs.9,200 million, up 19.1% YoY...</li></ul>"
-}
-```
-
-**`MANAGEMENT_TAKE`**
-
-```json
-{
-  "type": "MANAGEMENT_TAKE",
-  "imageUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e463d-d9da-7605-9a77-9fd12c4de414_ps.png",
-  "audio_url": "https://scoutquest-autoexpiry-qa.s3.ap-south-1.amazonaws.com/amioXmTD.mp3",
-  "isAudioPresent": true,
-  "isImagePresent": true,
-  "future_outlook_essence": "<ul><li><b>Virtual Console Launch:</b> Launch planned within two weeks on Flipkart, priced under INR 5,000 with subscription.</li><li><b>Growth Target:</b> Aims for gaming MRR of USD 3 million within 15–18 months.</li></ul>",
-  "current_performance_essence": "<ul><li><b>EBITDA Growth:</b> FY26 EBITDA surged 110.6% to INR 297 million through cost optimizations.</li><li><b>Revenue Trends:</b> FY26 revenue declined 10.2% YoY to INR 5,245 million.</li></ul>"
-}
-```
-
-**`RESULTS_QUICK_LOOK`**
-
-```json
-{
-  "type": "RESULTS_QUICK_LOOK",
-  "result_data": {
-    "qoq_rev": "25,850",
-    "yoy_rev": "24,648",
-    "confident": "yes",
-    "latest_rev": "27,589",
-    "amount_unit": "Lakhs",
-    "qoq_profits": "1,151",
-    "result_type": "standalone",
-    "yoy_profits": "1,923",
-    "latest_profits": "1,329",
-    "relevant_page_image": "https://eu-central.storage.cloudconvert.com/tasks/.../image-7.jpg"
-  }
-}
-```
-
-**`IMPACT_ANALYSIS`**
-
-```json
-{
-  "type": "IMPACT_ANALYSIS",
-  "fast_fact": "The company approved FY26 audited financial results showing a net profit of ₹4,104.61 Lakh on ₹77,165.74 Lakh revenue. A final dividend of ₹1.50 per share was recommended and several director and auditor appointments were made. The Annual General Meeting is set for 12 August 2026."
-}
-```
-
-**`SAST_NOTEWORTHY_TRANSACTION`**
-
-```json
-{
-  "type": "SAST_NOTEWORTHY_TRANSACTION",
-  "body": "➕Pri Caf Private Limited held 2.9437% before the transaction. Buyer belongs to the promoter group.",
-  "acquirer": "Pri Caf Private Limited",
-  "mediaUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e4536-186a-7706-95c2-9ae614865655_ps.png",
-  "quantity": 1071000,
-  "htmlContent": "<b>Acquirer</b>: Pri Caf Private Limited\n\n<b>Transaction</b>: Bought\n\n<b>Shares Traded</b>: 1071000 (0.1178%)\n\n<b>Company</b>: Paisalo Digital Ltd\n\n<b>Holding Before</b>: 2.9437%\n\n<b>Shareholder Type</b>: Promoter",
-  "isPromoterRaw": "yes",
-  "targetCompany": "Paisalo Digital Ltd",
-  "shareHolderType": "PROMOTER",
-  "transactionType": "buy",
-  "percentageAcquired": 0.1178,
-  "transactionTypeRaw": "buy",
-  "percentageHoldingBeforeAcquisition": 2.9437
-}
-```
-
-**`CHART_WIZARD`**
-
-```json
-{
-  "type": "CHART_WIZARD",
-  "view": "bullish",
-  "imageUrl": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e451d-1927-751e-94d8-210d6cf9777c_ps.png",
-  "interval": "1W (weekly)",
-  "rationale": "Weekly breakout above long-term horizontal resistance with a strong bullish candle and volume spike. Price trading above the rising trendline and the moving average while Bollinger Bands expand, indicating renewed bullish momentum and likely trend continuation.",
-  "chartIndicatorAndPatterns": "ascending triangle breakout,weekly bullish candle,volume spike,price above moving average,rising trendline,Bollinger Bands expansion"
-}
-```
-
-**`BROADCAST_BRIEFING`**
-
-```json
-{
-  "type": "BROADCAST_BRIEFING",
-  "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e44e9-88b1-70b0-9a55-27f22fa91113_ps.png",
-  "isImagePresent": true,
-  "broadcast_briefings_title": "📈 Hindalco Surges 4% as Sensex Gains 118 Points, Nifty Crosses 23,650",
-  "broadcast_briefings_body": "<ul><li><b>Market Recovery:</b> Sensex closed 118 points higher; Nifty above 23,650.</li><li><b>Broad Market Breadth:</b> 128 F&O stocks gained vs. 85 in decline.</li><li><b>Top Gainers:</b> Hindalco (+4%), Reliance Industries (+3%), Godawari Power (+4.25%).</li></ul>"
-}
-```
-
-**`ANALYST_VIEW`**
-
-```json
-{
-  "type": "ANALYST_VIEW",
-  "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e4553-1378-7078-ba88-e4c128941651_ps.png",
-  "isImagePresent": true
-}
-```
-
-**`CREDIT_RATING`**
-
-```json
-{
-  "type": "CREDIT_RATING",
-  "current_rating_and_previous_rating": "Current: CARE A-; Previous: unknown",
-  "short_description_of_credit_rating_related_details": "CARE Ratings Limited assigned a 'CARE A-' rating with a Stable outlook on May 19, 2026, for Transindia Real Estate Ltd's long-term bank facilities of ₹250 crore. No prior rating disclosed in the filing."
-}
-```
-
-**`ANALYST_MEET`**
-
-```json
-{
-  "type": "ANALYST_MEET",
-  "name(s)_of_investors": "analysts, investors",
-  "short_description_of_the_sceduled_meeting": "Excel Industries Limited will host an earnings call on May 25, 2026, at 4:00 PM IST for analysts and investors to discuss operational and financial performance for Q4 and FY ended March 31, 2026.",
-  "name_of_the_meeting_organizer_and_event_type": "Excel Industries Limited, earnings call (conference call)"
-}
-```
-
-**`ACQUISITION`**
-
-```json
-{
-  "type": "ACQUISITION",
-  "target_company": "MTK Quantum Green Energy Pvt. Ltd.",
-  "extent_of_acquisition": "26% paid-up equity capital",
-  "consideration_type_and_quantum": "Cash consideration of Rs. 4,33,22,500/- in one or more tranches",
-  "short_description_of_the_transaction": "Vodafone Idea Ltd. to acquire 26% equity stake in MTK Quantum Green Energy Pvt. Ltd., a renewable energy company, by investing Rs. 4.33 crore to set up captive solar and wind power plants for regulatory compliance and cost-effective energy procurement.",
-  "business_of_target_and_object_of_acquisition": "Renewable energy company setting up solar & wind power plants for generating and distributing captive power to comply with Electricity Act regulations and procure cost-effective renewable energy."
-}
-```
-
-**`ORDER_RECEIVED`**
-
-```json
-{
-  "type": "ORDER_RECEIVED",
-  "size_of_order": "INR 20.27 Crore (inclusive of GST)",
-  "type_of_order_flag": "business_order",
-  "short_description_of_order_details": "Refex Industries Ltd received an order from a leading Miniratna Company for logistics and material handling services in the infrastructure and mining sector to be executed over ~6 months."
-}
-```
-
-**`TWEET`**
-
-```json
-{
-  "type": "TWEET",
-  "image_url": "https://renders.urlbox.com/ub-temp-renders/renders/.../019e463a-6c4a-7773-81b2-6a7a5f95414b_ps.png",
-  "isImagePresent": true
-}
-```
-
-**`GENERIC`**
-
-`GENERIC` is returned for update sources that do not map to any of the named types above. The fields within `deepdiveData` for a `GENERIC` payload are entirely source-dependent — no specific schema is guaranteed. Clients should treat the remaining keys as opaque JSON.
-
-```json
-{
-  "type": "GENERIC"
-}
-```
-
 
 ## Get Assessment for an Instrument Update
 
-<aside class="notice">
-This endpoint is available on <strong>both v1 and v2</strong> with the same response shape. Use whichever base path matches the rest of your integration:
-<ul>
-<li><code>GET /hive/api/v1/instrumentUpdates/assessment</code></li>
-<li><code>GET /hive/api/v2/instrumentUpdates/assessment</code></li>
-</ul>
-The code samples below use the v1 URL for illustration. Swap <code>v1</code> for <code>v2</code> if you are migrating clients to the v2 path.
+<aside class="warning">
+<strong>v1 is deprecated.</strong> This endpoint is also available on the v2 API. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a>.
 </aside>
 
 ```ruby
@@ -894,15 +458,11 @@ This endpoint retrieves the assessment data for a specific instrument update.
 
 `GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v1/instrumentUpdates/assessment`
 
-`GET http://scoutquest-backend-service-staging.fundsmap.com/hive/api/v2/instrumentUpdates/assessment`
-
-Both paths accept the same query parameters and return the same response.
-
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-instrumentUpdateId | - | The ID of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the [v1](#get-instrument-update-messages) / [v2](#get-instrument-update-messages-v2) instrument-updates endpoints.
+instrumentUpdateId | - | The ID of the instrument update for which the assessment is to be retrieved. This is the same `id` field returned by the [Get Instrument Update Messages](#get-instrument-update-messages) endpoint.
 
 ### Response Object
 
@@ -933,9 +493,9 @@ Access to this endpoint requires a separate assessment entitlement. You can requ
 
 Field | Description
 --------- | -----------
-currentPage | Current Page No, starts with 0
-totalItems | Total items(instrumentUpdateMessages) available for the given query 
-totalPages | Total pages for the available result
+current-page | Current Page No, starts with 0
+total-items | Total items(instrumentUpdateMessages) available for the given query 
+total-pages | Total pages for the available result
 
 
 ### Postman
@@ -959,7 +519,7 @@ You can request for webhook access by mailing to us at <a href="mailto:sq@fundsm
 
 
 ## Instrument Update Created Message - Webhook Events
-We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. The `payload` shape is identical to the [Get Instrument Update Messages (v2)](#get-instrument-update-messages-v2) response item — `deepDiveData` is no longer at the top level; instead it has been folded into `proFunnel` as `deepdive`, `concernFlag`, and `deepdiveData`. Per-tier inclusion rules match the v2 API.
+We have a variety of event types that you can subscribe to. For example, one such event is `v1.instrument_update.created`. Here is a sample payload for `v1.instrument_update.created`. The `payload` shape follows the v2 API structure — `deepDiveData` is no longer at the top level; instead it has been folded into `proFunnel` as `deepdive`, `concernFlag`, and `deepdiveData`. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for full payload schema details.
 
 > Here is a sample payload for `v1.instrument_update.created`:
 
@@ -1019,7 +579,7 @@ We have a variety of event types that you can subscribe to. For example, one suc
 ```
 
 ## Instrument Update Modified Message - Webhook Events
-In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. The `payload` shape is the same as for `v1.instrument_update.created` above — identical to the [Get Instrument Update Messages (v2)](#get-instrument-update-messages-v2) response item, with per-tier inclusion rules matching the v2 API.
+In case there is a revision to an already sent instrument update, we send the updated instrument message using the `v1.instrument_update.modified` event. The `payload` shape is the same as for `v1.instrument_update.created` above — following the v2 API structure. See the <a href="https://fundsmapsq.github.io/sq-hive-docs/">v2 documentation</a> for full payload schema details.
 
 > Here is a sample payload for `v1.instrument_update.modified`:
 
@@ -1324,8 +884,8 @@ Example for Filter Category - MEDIA_COVERAGE
  {
   "id": "590874291145537518",
   "title": "M&M",
-  "description": "Video feed - CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
-  "content": "CNBC TV18 Newsmakers | M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive | N18V",
+  "description": "Video feed - M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive",
+  "content": "M&M: Best Performing Nifty Stock 2002-2024",
   "scripDetails": {
     "bseScripCode": "509196",
     "scripName": "M&M",
