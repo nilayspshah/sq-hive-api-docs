@@ -26,6 +26,9 @@ generator: widdershins v4.0.1
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
+<aside class="warning">
+<strong>This is the v1 API documentation. v1 is deprecated and will be discontinued in a future release.</strong> All integrations should migrate to the v2 API at the earliest convenience. The v2 documentation is available at <a href="https://fundsmapsq.github.io/sq-hive-docs/">https://fundsmapsq.github.io/sq-hive-docs/</a>.
+</aside>
 
 ## Introduction
 SQ hive allows developers to access ScoutQuest’s AI powered high quality, actionable and de-noised capital market insights at lightning fast speeds.
@@ -49,10 +52,6 @@ Use case is upto you, however it is mandatory to attribute ScoutQuest
 3. Any other attribution format mentioned during the signed contract
 
 # API
-
-<aside class="warning">
-<strong>⚠️ v1 is deprecated.</strong> Please migrate to the v2 API. Full v2 documentation is available at <a href="https://fundsmapsq.github.io/sq-hive-docs/">https://fundsmapsq.github.io/sq-hive-docs/</a>.
-</aside>
 
 ## Base URLs:
 
@@ -884,8 +883,8 @@ Example for Filter Category - MEDIA_COVERAGE
  {
   "id": "590874291145537518",
   "title": "M&M",
-  "description": "Video feed - M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive",
-  "content": "M&M: Best Performing Nifty Stock 2002-2024",
+  "description": "M&M: Best Performing Nifty Stock 2002-2024",
+  "content": "M&M: Best Performing Nifty Stock 2002-2024 | Mega Exclusive",
   "scripDetails": {
     "bseScripCode": "509196",
     "scripName": "M&M",
