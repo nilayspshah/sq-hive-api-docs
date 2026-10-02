@@ -184,6 +184,7 @@ Response response = client.newCall(request).execute();
       },
       "creationTime": 1773046405,
       "filterCategory": "UNCLASSIFIED",
+      "semanticDuplicate": false,
       "proFunnel": {
         "sentiment": "neutral",
         "bytes": [
@@ -244,7 +245,8 @@ Response response = client.newCall(request).execute();
         "shortLink": "https://sqst.in/e31EG"
       },
       "creationTime": 1718292415,
-      "filterCategory": "MEDIA_COVERAGE"
+      "filterCategory": "MEDIA_COVERAGE",
+      "semanticDuplicate": false
     }
   ],
   "total-items": 9984,
@@ -300,6 +302,7 @@ scripDetails.isin | Gives ISIN the company
 linkDetail.shortLink | Gives the link where user can know more about the update. This link needs to be present for any update that you disseminate / publish
 creationTime | Creation time of the update in epoch format (Epoch time is always in UTC time zone, Please add +5:30 hours to get the time in IST time zone)
 filterCategory | This field can be used to filter out certain kinds of update. Possible Values: `KEY_UPDATE, UNCLASSIFIED, ANALYTICAL_UPDATE, EVENT_SCHEDULE, TECHNICAL_IDEA, MEDIA_COVERAGE, SPVMA`.  Read More in the [Examples section](#examples-for-instrument-update-messages-filter-categories). 
+semanticDuplicate | `true` when ScoutQuest's semantic duplicate detection finds that this update repeats a story already published for the same company, for example the same news covered on several channels. `false` otherwise. Always present, on every plan. Use it to skip repeats in your own feed.
 smartTags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | A three-word tag that classifies each update into predefined, actionable categories.
 concernFlags <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Indicators such as Red Flag or Review for Concern to highlight updates requiring investor attention.
 proFunnel <span style="background:#FFD700; color:#222; border-radius:4px; padding:2px 8px; font-weight:bold; font-size:90%; margin-left:6px;">Hive Pro</span> | Structured data regarding sentiment, key bytes, and classification of the update.
@@ -536,6 +539,7 @@ We have a variety of event types that you can subscribe to. For example, one suc
     },
     "creationTime": 1717247895,
     "filterCategory": "ANALYTICAL_UPDATE",
+    "semanticDuplicate": false,
     "proFunnel": {
       "sentiment": "positive",
       "bytes": [
@@ -596,6 +600,7 @@ In case there is a revision to an already sent instrument update, we send the up
     },
     "creationTime": 1717247895,
     "filterCategory": "ANALYTICAL_UPDATE",
+    "semanticDuplicate": false,
     "proFunnel": {
       "sentiment": "positive",
       "bytes": [
@@ -835,7 +840,8 @@ Example for Filter Category - KEY_UPDATE
     "shortLink": "https://sqst.in/PCxmR"
   },
   "creationTime": 1718714125,
-  "filterCategory": "KEY_UPDATE"
+  "filterCategory": "KEY_UPDATE",
+  "semanticDuplicate": false
 }
 ```  
 
@@ -862,7 +868,8 @@ Example for Filter Category - ANALYTICAL_UPDATE
     "shortLink": "https://sqst.in/hyONA"
   },
   "creationTime": 1718463903,
-  "filterCategory": "ANALYTICAL_UPDATE"
+  "filterCategory": "ANALYTICAL_UPDATE",
+  "semanticDuplicate": false
 }
 ```  
 
@@ -888,7 +895,8 @@ Example for Filter Category - MEDIA_COVERAGE
     "shortLink": "https://sqst.in/d1d04"
   },
   "creationTime": 1718712208,
-  "filterCategory": "MEDIA_COVERAGE"
+  "filterCategory": "MEDIA_COVERAGE",
+  "semanticDuplicate": false
 }
 ```  
 
@@ -913,7 +921,8 @@ Example for Filter Category - MEDIA_COVERAGE
     "shortLink": "https://sqst.in/CaKY8"
   },
   "creationTime": 1718702711,
-  "filterCategory": "SPVMA"
+  "filterCategory": "SPVMA",
+  "semanticDuplicate": false
 }
 ```
 
@@ -940,7 +949,8 @@ Example for Filter Category - EVENT_SCHEDULE
     "shortLink": "https://sqst.in/GixAV"
   },
   "creationTime": 1718712158,
-  "filterCategory": "EVENT_SCHEDULE"
+  "filterCategory": "EVENT_SCHEDULE",
+  "semanticDuplicate": false
 }
 ```  
 
@@ -966,7 +976,8 @@ Example for Filter Category - TECHNICAL_IDEA
     "shortLink": "https://sqst.in/qZcls"
   },
   "creationTime": 1716889085,
-  "filterCategory": "TECHNICAL_IDEA"
+  "filterCategory": "TECHNICAL_IDEA",
+  "semanticDuplicate": false
 }
 ```  
 
@@ -993,6 +1004,7 @@ Example for Filter Category - UNCLASSIFIED
     "shortLink": "https://sqst.in/SIKoq"
   },
   "creationTime": 1718292417,
-  "filterCategory": "UNCLASSIFIED"
+  "filterCategory": "UNCLASSIFIED",
+  "semanticDuplicate": false
 }
 ```  
